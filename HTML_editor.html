@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HTML constructor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="src/style/main.css">
+    <script src="src/controllers/main.js"></script>
+</head>
+
+<body>
+    <!--Header start-->
+    <header>
+        <h1>HTML constructor</h1>
+    </header>
+    <!--Header end-->
+
+    <!--Main start-->
+    <main>
+
+        <!--Display section start-->
+        <section class="display">
+            <section class="display-size"><p>360 px</p></section>
+            <section class="display-device">
+                <article class="display-device__content">
+                </article>
+            </section>
+            <button class="display-button__download">Download HTML</button>
+        </section>
+        <!--Display section end-->
+
+        <!--Tools section start-->
+        <section class="tools">
+            <nav class="tools-nav">
+                <ul class="tools-nav__categoryes">
+                    <li class="tools-nav__categoryes--text">Text</li>
+                    <li class="tools-nav__categoryes--img">Images</li>
+                    <li class="tools-nav__categoryes--option" value="Tables">Tables</li>
+                    <li class="tools-nav__categoryes--links" value="Links">Links</li>
+                    <li class="tools-nav__categoryes--option" value="Icons">Icons</li>
+                    <li class="tools-nav__categoryes--option" value="Templates">Templates</li>
+                </ul>
+            </nav>
+            <section class="tools-options">
+                <section class="tools-options__text">
+                    <select class="tools-options__text--items">
+                        <option value="Header">Header</option>
+                        <option value="Simple text" selected>Simple text</option>
+                        <option value="Simple bold text">Simple bold text</option>
+                        </select>    
+                    <textarea class="tools-options__text--input" type="text"  placeholder="Type or paste your text"></textarea>
+                    <button class="tools-options__button" id="add_text">Add</button>
+                </section>
+                <section class="tools-options__images">
+                    <select class="tools-options__img--items">
+                        <option value="Whole screen size" selected>Whole screen size</option>
+                        <option value="Centered">Centered</option>
+                    </select>    
+                    <input class="tools-options__img--input" type="text"  placeholder="Paste URL to your image"/>
+                    <button class="tools-options__button" id="add_img">Add</button>
+                </section>
+                <section class="tools-options__links">
+                    <!--Links type select-->
+                    <select class="tools-options__links--items">
+                        <option value="More details" id="more-details" selected>More details</option>
+                        <option value="Links to markets" id="links-to__market">Links to markets</option>
+                    </select>
+                    <!--Language select-->
+                    <select class="tools-options__links--lang">
+                        <option value="UKR" selected>UKR</option>
+                        <option value="RUS">RUS</option>
+                        <option value="ENG">ENG</option>
+                    </select>
+                    <!--Input for more datails-->    
+                    <input class="tools-options__links--details" type="text"  placeholder="Paste 'more details' URL"/>
+                    <!--Input for markets-->
+                    <input class="tools-options__links--android" type="text"  placeholder="URL to your app at Play Market (Android)"/>
+                    <input class="tools-options__links--ios" type="text"  placeholder="URL to your app at App Store (iOS)"/>
+                    <!--Button for more datails-->
+                    <button class="tools-options__button" id="add_more-details">Add</button>
+                    <!--Button for markets-->
+                    <button class="tools-options__button" id="add_markets">Add</button>
+                </section>
+
+                
+
+                
+
+
+            </section>
+        </section>
+        <!--Tools section end-->
+
+    </main>
+    <!--Main end-->
+
+    <!--Footer start-->
+    <footer>
+        <section class="author">
+            <h4>@ Created by Denis Golubev</h4>
+        </section>
+    </footer>
+    <!--Footer end-->
+
+</body>
+</html>

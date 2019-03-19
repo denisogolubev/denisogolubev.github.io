@@ -1,0 +1,389 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+body {
+    display: grid;
+    margin: 0;
+    background-color: #17212b;
+    font-family: 'Montserrat', sans-serif;
+    color: #e9e8e8;
+}
+
+header {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+main {
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    overflow-x: hidden;
+    grid-template-areas: "display tools";
+}
+
+.display {
+    border: 0.2rem solid #242f3d;
+    box-sizing: border-box;
+    grid-area: display;
+    display: grid;
+    grid-template-rows: 5% 85% 10%;
+    grid-template-areas: "size"
+                         "device"
+                         "button";
+    justify-items: center;
+    align-items: center;
+}
+
+.display-device {
+    width: 375px;
+    height: 667px;
+    background-color: #F4F4F4;
+    grid-area: device;
+    outline: none;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
+}
+
+.display-device::-webkit-scrollbar {
+    width: 0rem;
+}
+
+.display-device::-webkit-scrollbar-thumb { 
+    max-height: 3rem; 
+    background-color: rgba(51, 51, 51, 0.5); 
+    border-radius: 1rem;
+}
+
+
+
+
+
+/*Классы для выгрузки НАЧАЛО*/
+
+.content-header {
+    margin: 0.5rem 1rem 1rem 1rem;
+    font-size: 1.2rem;
+}
+
+.content-simpletext {
+    margin: 0.5rem 1rem 1rem 1rem;
+    font-size: 1rem;
+}
+
+.screen {
+    width: 100%;
+}
+
+.full-screen__container {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+
+.centered-screen__container {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    width: 50%;
+}
+
+.separator {
+    border-top: 0.06rem solid #333;
+    margin: 0 16px;
+}
+
+.more-details {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.more-details__link {
+    margin: 0 16px;
+    padding: 10px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.download-list {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.dwn-header {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.download-list a {
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+}
+
+.download-list a img {
+    padding: 0.3rem 1rem;
+    width: 9.5rem;
+}
+
+
+
+/*Классы для выгрузки КОНЕЦ*/
+
+.display-button__download {
+    grid-area: button;
+    padding: 0 0.5rem;
+    height: 70%;
+    border: 0.1rem solid #e9e8e8;
+    border-radius: 0.2rem;
+    background-color: #0e1621;
+    color: #e9e8e8;
+    font-size: 1.3rem;
+    outline: none;
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.display-button__download:hover {
+    background-color: #2b5278;
+    border-color: #e9e8e8;
+    height: 72%;
+    padding: 0 0.7rem;
+    letter-spacing: 0.05rem;
+}
+
+.tools {
+    background-color: #0e1621;
+    border: 0.2rem solid #242f3d;
+    box-sizing: border-box;
+    border-left: none;
+    grid-area: tools;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    grid-template-areas: "nav options";
+}
+
+.tools-nav {
+    border-right: 0.2rem solid #242f3d;
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+    color: #e9e8e8;
+    grid-area: nav;
+}
+
+.tools-nav ul {
+    margin: 0 auto;
+    padding: 0.5rem 0 0 0;
+}
+
+.tools-nav ul li {
+    margin: auto;
+    list-style: none;
+    padding: 0.2rem 0;
+    font-size: 0.9rem;
+    color: #e9e8e8;
+    width: 80%;
+    transition: 300ms;
+    display: grid;
+    justify-items: center;
+}
+
+.tools-nav ul li:hover {
+    background-color: #2b5278;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.tools-options__text {
+    display: none;
+    grid-area: options;
+    margin: 1rem;
+    grid-template-areas: "selection"
+                         "textarea"
+                         "button";
+
+}
+
+.tools-options__text--items {
+    grid-area: selection;
+    width: 20rem;
+    outline: none;
+    height: 2rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    background-color: #242f3d;
+    color: #e9e8e8;
+    padding-left: 0.5rem;
+}
+
+.tools-options__img--items {
+    grid-area: selection;
+    width: 20rem;
+    outline: none;
+    height: 2rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    background-color: #242f3d;
+    color: #e9e8e8;
+    padding-left: 0.5rem;
+}
+
+select:hover {
+    background-color: #2b5278;
+}
+
+textarea {
+    grid-area: textarea;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
+    min-height: 15rem;
+    max-height: 65vh;
+    background-color: #242f3d;
+    color: #e9e8e8;
+    border: 0.05rem solid #e9e8e8;
+}
+
+textarea:focus {
+    outline-color: #e9e8e8;
+    border: 0.05rem solid #2b5278;
+    outline: none;
+}
+
+.tools-options__images {
+    display: none;
+    grid-area: options;
+    margin: 1rem;
+    grid-template-areas: "selection"
+                         "textarea"
+                         "button";
+
+}
+
+input {
+    grid-area: textarea;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    background-color: #242f3d;
+    color: #e9e8e8;
+    border: 0.05rem solid #e9e8e8;
+}
+
+input:focus {
+    outline-color: #e9e8e8;
+    border: 0.05rem solid #2b5278;
+    outline: none;
+}
+
+.tools-options__links {
+    display: none;
+    grid-area: options;
+    margin: 1rem;
+    grid-template-areas: "selection_one" 
+                         "selection_two"
+                         "input_one"
+                         "input_two"
+                         "button";
+}
+
+.tools-options__links--items {
+    grid-area: selection_one;
+    width: 20rem;
+    outline: none;
+    height: 2rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    background-color: #242f3d;
+    color: #e9e8e8;
+    padding-left: 0.5rem;
+
+}
+
+.tools-options__links--lang {
+    grid-area: selection_two;
+    margin-top: 1rem;
+    width: 20rem;
+    outline: none;
+    height: 2rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    background-color: #242f3d;
+    color: #e9e8e8;
+    padding-left: 0.5rem;
+}
+
+.tools-options__links--details {
+    grid-area: input_one;
+    display: none;
+}
+
+.tools-options__links--android {
+    grid-area: input_one;
+    display: none;
+}
+
+.tools-options__links--ios {
+    grid-area: input_two;
+    margin-top: 0;
+    display: none;
+}
+
+#add_more-details {
+    display: block;
+}
+
+#add_markets {
+    display: none;
+}
+
+.tools-options__button {
+    grid-area: button;
+    padding: 0 0.5rem;
+    height: 3rem;
+    width: 7rem;
+    border: 0.05rem solid #e9e8e8;
+    border-radius: 0.2rem;
+    background-color: #0e1621;
+    color: #e9e8e8;
+    font-size: 1.1rem;
+    outline: none;
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.tools-options__button:hover {
+    background-color: #2b5278;
+    border-color: #e9e8e8;
+    font-size: 1.3rem;
+}
+
+footer {
+    height: 5vh;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.author h4 {
+    margin: 0;
+}
