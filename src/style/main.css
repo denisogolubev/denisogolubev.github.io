@@ -62,9 +62,28 @@ main {
     border-radius: 1rem;
 }
 
+.editor {
+    display: block;
+}
 
+.item__delete--btn {
+    margin: 0.2rem;
+    font-size: 1.5rem;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+    color: #F4F4F4;
+    background: #0e1621;
+    border: none;
+    display: none;
+    outline: none;
+    cursor: pointer;
+    align-self: center;
+    
+}
 
-
+.editor:hover .item__delete--btn {
+    display: block;
+} 
 
 /*Классы для выгрузки НАЧАЛО*/
 
@@ -141,8 +160,9 @@ main {
 }
 
 
-
 /*Классы для выгрузки КОНЕЦ*/
+
+
 
 .display-button__download {
     grid-area: button;
