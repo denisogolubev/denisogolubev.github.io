@@ -159,6 +159,9 @@ main {
     width: 9.5rem;
 }
 
+.item__delete--btn {
+    display: none;
+}
 
 /*Классы для выгрузки КОНЕЦ*/
 
