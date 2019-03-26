@@ -124,7 +124,8 @@ var UIController = function () {
         linksButtonMoreDet: 'add_more-details',
         linksButtonMarkets: 'add_markets',
         linksLang: '.tools-options__links--lang',
-        deleteElButton: '.item__delete--btn'
+        deleteElButton: '.item__delete--btn',
+        editContentHeader: '.content-header'
 
 
        
@@ -143,20 +144,36 @@ var UIController = function () {
             var html, newHtml;
 
             if (type === 'Header') {
-                html = '<section class="editor" id="%id%"><h3 class="content-header">%content%</h3><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>'; 
+                html = '<section class="editor" id="%id%" value="%value%"><h3 class="content-header">%content%</h3><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>'; 
             } else if (type === 'Simple text') {
-                html = '<section class="editor" id="%id%"><p class="content-simpletext">%content%</p><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>';
+                html = '<section class="editor" id="%id%" value="%value%"><p class="content-simpletext">%content%</p><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>';
             } else if (type === 'Simple bold text') {
-                html = '<section class="editor" id="%id%"><p class="content-simpletext"><b>%content%</b></p><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>';
+                html = '<section class="editor" id="%id%" value="%value%"><p class="content-simpletext"><b>%content%</b></p><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>';
             } else {
                 console.log('This type can\'t be used.');
             }
 
             newHtml = html.replace('%id%', obj.id);
+            newHtml = newHtml.replace('%value%', type);
             newHtml = newHtml.replace('%content%', obj.content);
 
             document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
         },
+
+        /*
+        editItem: function(type) {
+
+            if (type === 'Header') {
+                var getValue, editor, option;
+                getValue = document.querySelector(DOMStrings.editContentHeader).value;
+                option = document.querySelector(DOMStrings.textOptions);
+                editor = document.querySelector(DOMStrings.textInput);
+
+                editor.value = getValue;
+                option.value = type;
+
+            }
+        },*/
 
 
         getImgCategory: function() {
@@ -278,7 +295,7 @@ var UIController = function () {
     
             startHtml = '<html><head><meta charset="UTF-8"><meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">';
     
-            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "Roboto", sans-serif; margin: 0;line-height: 1.5rem;color: #333;} .content-header {margin: 0.5rem 1rem 1rem 1rem;font-size: 1.2rem;}.content-simpletext {margin: 0.5rem 1rem 1rem 1rem;font-size: 1rem;}.screen {width: 100%;}.full-screen__container {display: block;margin: 0 auto;padding: 0;width: 100%;}.centered-screen__container {display: block;margin: 0 auto;padding: 0;width: 50%;}.separator {border-top: 0.06rem solid #333;margin: 0 16px;}.more-details {display: flex;align-items: center;text-decoration: none;}.more-details__link {margin: 0 16px;padding: 10px 0;color: #333;font-size: 16px;}.download-list {display: flex;list-style: none;justify-content: center;align-items: center;padding: 0;}.dwn-header {font-size: 1rem;font-weight: bold;text-align: center;}.download-list a {padding: 0;margin: 0;line-height: 0;}.download-list a img {padding: 0.3rem 1rem;width: 9.5rem;}.item__delete--btn{display: none;}</style><body>';
+            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "Roboto", sans-serif; margin: 0;line-height: 1.5rem;color: #333;} .content-header {margin: 0.5rem 1rem 1rem 1rem;font-size: 1.2rem;}.content-simpletext {margin: 0.5rem 1rem 1rem 1rem;font-size: 1rem;}.screen {width: 100%;}.full-screen__container {display: block;margin: 0 auto;padding: 0;width: 100%;}.centered-screen__container {display: block;margin: 0 auto;padding: 0;width: 50%;}.separator {border-top: 0.06rem solid #333;margin: 0 16px;}.more-details {display: flex;align-items: center;text-decoration: none;}.more-details__link {margin: 0 16px;padding: 10px 0;color: #333;font-size: 16px;}.download-list {display: flex;list-style: none;justify-content: center;align-items: center;padding: 0;}.dwn-header {font-size: 1rem;font-weight: bold;text-align: center;}.download-list a {padding: 0;margin: 0;line-height: 0;}.download-list a img {padding: 0.3rem 1rem;width: 9.5rem;}</style><body>';
             endHtml = '</body></html>';
     
             file = new Blob([startHtml, styleHtml, document.querySelector(DOMStrings.generatedContent).innerHTML, endHtml], {type: "text/plain;charset=utf-8"});
@@ -468,9 +485,27 @@ var combiController = (function (editCtrl, UICtrl) {
             }
         }
     };
+    /*
+    var ctrlEditItem = function(event) {
+        var itemValue;
+
+        itemValue = event.target.parentNode.value;
+        if (itemValue === "" || itemValue !=='Header' || itemValue !=='Simple text' || itemValue !== 'Simple bold text') {
+            itemValue = event.target.parentNode.parentNode.value;
+        } 
+        
+        if (itemValue === "" || itemValue !=='Header' || itemValue !=='Simple text' || itemValue !== 'Simple bold text') {
+            itemValue = event.target.parentNode.parentNode.parentNode.value;
+        }
+
+        if(itemValue) {
+            UIController.editItem(itemValue);
+        }
+
+    };*/
 
     var ctrlDeleteItem = function(event) {
-        var itemID, ID, buttonID;
+        var itemID, ID;
             
         itemID = event.target.parentNode.id;
         if (itemID === "") {
