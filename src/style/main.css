@@ -33,12 +33,18 @@ main {
     box-sizing: border-box;
     grid-area: display;
     display: grid;
-    grid-template-rows: 5% 85% 10%;
+    grid-template-rows: 8% 82% 10%;
     grid-template-areas: "size"
                          "device"
                          "button";
     justify-items: center;
     align-items: center;
+}
+
+.display-size p {
+    text-align: center;
+    line-height: 1.5rem;
+    margin: 0;
 }
 
 .display-device {
@@ -102,11 +108,18 @@ main {
 .content-header {
     margin: 0.5rem 1rem 1rem 1rem;
     font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .content-simpletext {
     margin: 0.5rem 1rem 1rem 1rem;
     font-size: 1rem;
+}
+
+.content-simpletext__bold {
+    margin: 0.5rem 1rem 1rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
 }
 
 .screen {
@@ -391,7 +404,8 @@ input:focus {
     display: none;
 }
 
-.tools-options__button {
+.tools-options__button,
+.tools-options__button--save {
     grid-area: button;
     padding: 0 0.5rem;
     height: 3rem;
@@ -404,6 +418,11 @@ input:focus {
     outline: none;
     transition: 300ms;
     cursor: pointer;
+    display: block;
+}
+
+.tools-options__button--save {
+    display: none;
 }
 
 .tools-options__button:hover {

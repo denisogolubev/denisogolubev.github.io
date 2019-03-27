@@ -127,8 +127,8 @@ var UIController = function () {
         deleteElButton: '.item__delete--btn',
         edit: 'ion-edit',
         delete: 'ion-ios-trash',
-        editContentHeader: 'content-header'
-
+        editContentHeader: '.content-header',
+        saveTextButton: 'save_text'
 
        
     };
@@ -146,11 +146,11 @@ var UIController = function () {
             var html, newHtml;
 
             if (type === 'Header') {
-                html = '<section class="editor" id="%id%"><h3 class="content-header">%content%</h3><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i></div></section>'; 
+                html = '<section class="editor" id="%id%"><p class="content-header">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i></div></section>'; 
             } else if (type === 'Simple text') {
-                html = '<section class="editor" id="%id%"><p class="content-simpletext">%content%</p><i class="ion-ios-trash text"></i></section>';
+                html = '<section class="editor" id="%id%"><p class="content-simpletext">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i></div></section>';
             } else if (type === 'Simple bold text') {
-                html = '<section class="editor" id="%id%"><p class="content-simpletext"><b>%content%</b></p><i class="ion-ios-trash text"></i></section>';
+                html = '<section class="editor" id="%id%"><p class="content-simpletext__bold">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i></div></section>';
             } else {
                 console.log('This type can\'t be used.');
             }
@@ -163,17 +163,29 @@ var UIController = function () {
 
         editItem: function(cls, content) {
 
-            if (cls === DOMStrings.editContentHeader) {
+            if (cls === 'content-header') {
                 var editor, option;
                 option = document.querySelector(DOMStrings.textOptions);
                 editor = document.querySelector(DOMStrings.textInput);
 
                 editor.value = content;
                 option.value = 'Header';
+            } else if (cls === 'content-simpletext') {
+                var editor, option;
+                option = document.querySelector(DOMStrings.textOptions);
+                editor = document.querySelector(DOMStrings.textInput);
 
+                editor.value = content;
+                option.value = 'Simple text';
+            } else if (cls === 'content-simpletext__bold') {
+                var editor, option;
+                option = document.querySelector(DOMStrings.textOptions);
+                editor = document.querySelector(DOMStrings.textInput);
+
+                editor.value = content;
+                option.value = 'Simple bold text';
             }
         },
-
 
         getImgCategory: function() {
             return {
@@ -343,6 +355,13 @@ var UIController = function () {
             el.parentNode.removeChild(el);
         },
 
+        setAddBtnBlock: function() {
+            document.getElementById(DOMStrings.addContentButton).style.display = 'block';
+            document.getElementById(DOMStrings.addImgButton).style.display = 'block';
+            document.getElementById(DOMStrings.linksButtonMoreDet).style.display = 'block';
+            document.getElementById(DOMStrings.linksButtonMarkets).style.display = 'block';
+        },
+
         clearFields: function() {
             var fields, fieldsArray;
 
@@ -353,6 +372,20 @@ var UIController = function () {
             fieldsArray.forEach(function(cur){
                 cur.value = "";
             });
+            UIController.setAddBtnBlock();
+            
+        },
+
+        displayTextCategory: function() {
+            document.querySelector(DOMStrings.textCategory).style.display = 'grid';
+        },
+
+        displayImgCategory: function() {
+            document.querySelector(DOMStrings.imgCategory).style.display = 'grid';
+        },
+
+        displayLinksCategory: function() {
+            document.querySelector(DOMStrings.linksCategory).style.display = 'grid';
         },
 
         getDOMStrings: function() {
@@ -366,8 +399,8 @@ var UIController = function () {
 }();
 
 var combiController = (function (editCtrl, UICtrl) {
-
-    var DOM = UICtrl.getDOMStrings();
+    var DOM, curID;
+    DOM = UICtrl.getDOMStrings();
 
     var setEventListeners = function() {
         
@@ -382,7 +415,7 @@ var combiController = (function (editCtrl, UICtrl) {
             /*Tools options for text category*/
             document.querySelector(DOM.toolsCategoryesText).addEventListener("click", function() {
                 setDisplayNone();
-                document.querySelector(DOM.textCategory).style.display = 'grid';
+                UIController.displayTextCategory();
             });
 
             document.getElementById(DOM.addContentButton).addEventListener('click', ctrlAddTextItem);
@@ -390,14 +423,15 @@ var combiController = (function (editCtrl, UICtrl) {
             /*Tools options for image category*/
             document.querySelector(DOM.toolsCategoryesImg).addEventListener("click", function() {
                 setDisplayNone();        
-                document.querySelector(DOM.imgCategory).style.display = 'grid';});
+                UIController.displayImgCategory();
+            });
 
             document.getElementById(DOM.addImgButton).addEventListener("click", ctrlAddImgItem);    
             
             /*Tools options for links category*/    
             document.querySelector(DOM.toolsCategoryesLinks).addEventListener("click", function() {
                 setDisplayNone();        
-                document.querySelector(DOM.linksCategory).style.display = 'grid';
+                UIController.displayLinksCategory();
                 ctrlChangeLinksInt();
             });
 
@@ -412,6 +446,7 @@ var combiController = (function (editCtrl, UICtrl) {
                 }
             });
 
+            
             document.querySelector(DOM.generatedContent).addEventListener('click', function(event) {
                 var param;
                 if (event.target.classList[0] === DOM.delete) {
@@ -422,7 +457,8 @@ var combiController = (function (editCtrl, UICtrl) {
                     ctrlEditItem(param);
                 }
             });
-
+            
+            document.getElementById(DOM.saveTextButton).addEventListener('click', saveItem);
 
             };
             
@@ -497,19 +533,42 @@ var combiController = (function (editCtrl, UICtrl) {
     var ctrlEditItem = function(param) {
 
         if (param === 'text' || param === "img") {
-            var cls, content;
+            var cls, content, id;
+            curID = event.target.parentNode.parentNode.id;
             cls = event.target.parentNode.parentNode.childNodes[0].classList[0]
-            content = event.target.parentNode.parentNode.childNodes[0].innerText;
-
-            UIController.editItem(cls, content);   
+            content = event.target.parentNode.parentNode.childNodes[0].innerHTML;
+            setDisplayNone();
+            UIController.displayTextCategory();
+            UIController.editItem(cls, content);
+            setBtnDisplayNone();
+            document.getElementById(DOM.saveTextButton).style.display = 'block';   
         } else if (param === "links-detail" || param === "links-markets") {
             itemValue = event.target.parentNode.parentNode.id;
-        } 
-
-        
-        
-
+        }
     };
+
+    var saveItem = function() {
+        var input, type;
+        input = UICtrl.getInputTextCategory();
+        if (input.type === 'Header') {
+            type = 'content-header';
+        } else if (input.type === 'Simple text') {
+            type = 'content-simpletext';
+        } else if (input.type === 'Simple bold text') {
+            type = 'content-simpletext__bold';
+        }   
+
+        document.getElementById(curID).childNodes[0].className = type;
+        document.getElementById(curID).childNodes[0].innerHTML = "";
+        document.getElementById(curID).childNodes[0].innerHTML = input.content;
+
+        setBtnDisplayNone();
+        UICtrl.clearFields();
+        
+        
+    };
+
+    
 
     var ctrlDeleteItem = function(param) {
         var itemID, ID;
@@ -541,6 +600,11 @@ var combiController = (function (editCtrl, UICtrl) {
         document.querySelector(DOM.textCategory).style.display = 'none';
         document.querySelector(DOM.linksCategory).style.display = 'none';
         
+    };
+
+    var setBtnDisplayNone = function() {
+        document.getElementById(DOM.addContentButton).style.display = 'none';
+        document.getElementById(DOM.saveTextButton).style.display = 'none';
     }
 
     return {
