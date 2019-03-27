@@ -125,7 +125,9 @@ var UIController = function () {
         linksButtonMarkets: 'add_markets',
         linksLang: '.tools-options__links--lang',
         deleteElButton: '.item__delete--btn',
-        editContentHeader: '.content-header'
+        edit: 'ion-edit',
+        delete: 'ion-ios-trash',
+        editContentHeader: 'content-header'
 
 
        
@@ -144,36 +146,33 @@ var UIController = function () {
             var html, newHtml;
 
             if (type === 'Header') {
-                html = '<section class="editor" id="%id%" value="%value%"><h3 class="content-header">%content%</h3><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>'; 
+                html = '<section class="editor" id="%id%"><h3 class="content-header">%content%</h3><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i></div></section>'; 
             } else if (type === 'Simple text') {
-                html = '<section class="editor" id="%id%" value="%value%"><p class="content-simpletext">%content%</p><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>';
+                html = '<section class="editor" id="%id%"><p class="content-simpletext">%content%</p><i class="ion-ios-trash text"></i></section>';
             } else if (type === 'Simple bold text') {
-                html = '<section class="editor" id="%id%" value="%value%"><p class="content-simpletext"><b>%content%</b></p><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>';
+                html = '<section class="editor" id="%id%"><p class="content-simpletext"><b>%content%</b></p><i class="ion-ios-trash text"></i></section>';
             } else {
                 console.log('This type can\'t be used.');
             }
 
             newHtml = html.replace('%id%', obj.id);
-            newHtml = newHtml.replace('%value%', type);
             newHtml = newHtml.replace('%content%', obj.content);
 
             document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
         },
 
-        /*
-        editItem: function(type) {
+        editItem: function(cls, content) {
 
-            if (type === 'Header') {
-                var getValue, editor, option;
-                getValue = document.querySelector(DOMStrings.editContentHeader).value;
+            if (cls === DOMStrings.editContentHeader) {
+                var editor, option;
                 option = document.querySelector(DOMStrings.textOptions);
                 editor = document.querySelector(DOMStrings.textInput);
 
-                editor.value = getValue;
-                option.value = type;
+                editor.value = content;
+                option.value = 'Header';
 
             }
-        },*/
+        },
 
 
         getImgCategory: function() {
@@ -187,9 +186,9 @@ var UIController = function () {
             var html, newHtml;
 
             if (type === 'Whole screen size') {
-                html = '<section class="editor" id="%id%"><section class="full-screen__container" id="%id%"><img src="%url%" alt="screen" class="screen"></section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>'; 
+                html = '<section class="editor" id="%id%"><section class="full-screen__container" id="%id%"><img src="%url%" alt="screen" class="screen"></section><i class="ion-ios-trash img"></i></section>'; 
             } else if (type === 'Centered') {
-                html = '<section class="editor" id="%id%"><section class="centered-screen__container" id="%id%"><img src="%url%" alt="screen" class="screen"></section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section>';
+                html = '<section class="editor" id="%id%"><section class="centered-screen__container" id="%id%"><img src="%url%" alt="screen" class="screen"></section><i class="ion-ios-trash img"></i></section>';
             } else {
                 console.log('This type can\'t be used.');
             }
@@ -254,19 +253,19 @@ var UIController = function () {
             
             if (type === 'More details') {
                 if (lang === 'UKR') {
-                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальніше</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section></section>'; 
+                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальніше</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><i class="ion-ios-trash links-detail"></i></section></section>'; 
                 } else if (lang === 'RUS') {
-                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальнее</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section></section>'; 
+                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальнее</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><i class="ion-ios-trash links-detail"></i></section></section>'; 
                 } else if (lang === 'ENG') {
-                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section></section>'; 
+                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><i class="ion-ios-trash links-detail"></i></section></section>'; 
                 }    
             } else if (type === 'Links to markets') {
                 if (lang === 'UKR') {
-                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Завантажити додаток</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section></section>'; 
+                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Завантажити додаток</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><section><i class="ion-ios-trash links-markets"></i></section></section>'; 
                 } else if (lang === 'RUS') {
-                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Загрузить приложение</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section></section>'; 
+                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Загрузить приложение</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><section><i class="ion-ios-trash links-markets"></i></section></section>'; 
                 } else if (lang === 'ENG') {
-                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Dowload the app</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><section><button class="item__delete--btn"><i class="ion-ios-trash"></i></button></section></section>'; 
+                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Dowload the app</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><section><i class="ion-ios-trash links-markets"></i></section></section>'; 
                 }    
             } else {
                 console.log('This type can\'t be used.');
@@ -413,7 +412,16 @@ var combiController = (function (editCtrl, UICtrl) {
                 }
             });
 
-            document.querySelector(DOM.generatedContent).addEventListener('click',ctrlDeleteItem);
+            document.querySelector(DOM.generatedContent).addEventListener('click', function(event) {
+                var param;
+                if (event.target.classList[0] === DOM.delete) {
+                    param = event.target.classList[1];
+                    ctrlDeleteItem(param);
+                } else if (event.target.classList[0] === DOM.edit) {
+                    param = event.target.classList[1];
+                    ctrlEditItem(param);
+                }
+            });
 
 
             };
@@ -485,36 +493,32 @@ var combiController = (function (editCtrl, UICtrl) {
             }
         }
     };
-    /*
-    var ctrlEditItem = function(event) {
-        var itemValue;
 
-        itemValue = event.target.parentNode.value;
-        if (itemValue === "" || itemValue !=='Header' || itemValue !=='Simple text' || itemValue !== 'Simple bold text') {
-            itemValue = event.target.parentNode.parentNode.value;
+    var ctrlEditItem = function(param) {
+
+        if (param === 'text' || param === "img") {
+            var cls, content;
+            cls = event.target.parentNode.parentNode.childNodes[0].classList[0]
+            content = event.target.parentNode.parentNode.childNodes[0].innerText;
+
+            UIController.editItem(cls, content);   
+        } else if (param === "links-detail" || param === "links-markets") {
+            itemValue = event.target.parentNode.parentNode.id;
         } 
+
         
-        if (itemValue === "" || itemValue !=='Header' || itemValue !=='Simple text' || itemValue !== 'Simple bold text') {
-            itemValue = event.target.parentNode.parentNode.parentNode.value;
-        }
+        
 
-        if(itemValue) {
-            UIController.editItem(itemValue);
-        }
+    };
 
-    };*/
-
-    var ctrlDeleteItem = function(event) {
+    var ctrlDeleteItem = function(param) {
         var itemID, ID;
             
-        itemID = event.target.parentNode.id;
-        if (itemID === "") {
+        if (param === 'text' || param === "img") {
             itemID = event.target.parentNode.parentNode.id;
-        } 
-        
-        if (itemID === "") {
+        } else if (param === "links-detail" || param === "links-markets") {
             itemID = event.target.parentNode.parentNode.parentNode.id;
-        }
+        } 
             
             
         

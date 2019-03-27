@@ -66,23 +66,35 @@ main {
     display: block;
 }
 
-.item__delete--btn {
-    margin: 0.2rem;
-    font-size: 1.5rem;
-    min-height: 2.5rem;
-    min-width: 2.5rem;
-    color: #F4F4F4;
-    background: #0e1621;
-    border: none;
+.buttons {
     display: none;
-    outline: none;
-    cursor: pointer;
-    align-self: center;
-    
+    margin: 0rem 1rem;
 }
 
-.editor:hover .item__delete--btn {
+.ion-ios-trash {
     display: block;
+    color: #242f3d;
+    font-size: 1.8rem;
+    margin: 0;
+    width: 2rem;
+    cursor: pointer;
+    text-align: center;
+    align-self: center;
+}
+
+.ion-edit {
+    display: block;
+    color: #242f3d;
+    font-size: 1.55rem;
+    margin: 0;
+    width: 2rem;
+    cursor: pointer;
+    text-align: center;
+    align-self: center;
+}
+
+.editor:hover .buttons {
+    display: flex;
 } 
 
 /*Классы для выгрузки НАЧАЛО*/
@@ -159,7 +171,7 @@ main {
     width: 9.5rem;
 }
 
-.item__delete--btn {
+.buttons {
     display: none;
 }
 
