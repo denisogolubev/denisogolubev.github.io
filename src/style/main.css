@@ -77,7 +77,13 @@ main {
     margin: 0rem 1rem;
 }
 
-.ion-ios-trash {
+.editor:hover .buttons {
+    display: flex;
+} 
+
+.ion-ios-trash,
+.ion-arrow-down-c,
+.ion-arrow-up-c {
     display: block;
     color: #242f3d;
     font-size: 1.8rem;
@@ -99,9 +105,9 @@ main {
     align-self: center;
 }
 
-.editor:hover .buttons {
-    display: flex;
-} 
+
+
+
 
 /*Классы для выгрузки НАЧАЛО*/
 
@@ -264,6 +270,7 @@ main {
     grid-area: options;
     margin: 1rem;
     grid-template-areas: "selection"
+                         "options"
                          "textarea"
                          "button";
 
@@ -295,6 +302,33 @@ main {
 
 select:hover {
     background-color: #2b5278;
+}
+
+.tools-options__text--options {
+    grid-area: options;
+    margin-top: 1rem;
+
+}
+
+.edit-buttons {
+    padding: 0 0.5rem;
+    height: 2rem;
+    width: 2rem;
+    border: 0.05rem solid #e9e8e8;
+    border-radius: 0.2rem;
+    background-color: #0e1621;
+    color: #e9e8e8;
+    font-size: 1rem;
+    outline: none;
+    transition: 300ms;
+    cursor: pointer;
+    display: block;
+}
+
+.edit-buttons:hover {
+    background-color: #2b5278;
+    border-color: #e9e8e8;
+    font-size: 1.2rem;
 }
 
 textarea {
