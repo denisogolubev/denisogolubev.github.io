@@ -118,6 +118,8 @@ var UIController = function () {
         addImgButton: 'add_img',
         linksCategory: '.tools-options__links',
         linksType: '.tools-options__links--items',
+        linksItemMarket: 'links-to__market',
+        linksItemDet: 'more-details',
         linksInputDetails: '.tools-options__links--details',
         linksInputAndroid: '.tools-options__links--android',
         linksInputios: '.tools-options__links--ios',
@@ -131,6 +133,7 @@ var UIController = function () {
         saveTextButton: 'save_text',
         saveImgButton: 'save_img',
         saveLinksButton: 'save_links'
+        
 
        
     };
@@ -600,6 +603,7 @@ var combiController = (function (editCtrl, UICtrl) {
             UIController.editItem(cls, content, lang);
             setBtnDisplayNone();
             document.getElementById(DOM.saveLinksButton).style.display = 'block';
+            document.getElementById(DOM.linksItemMarket).setAttribute('disabled', 'disabled');
             
         } else if (param === "links-markets") {
             cls = el.childNodes[1].classList[0];
@@ -612,6 +616,8 @@ var combiController = (function (editCtrl, UICtrl) {
             UIController.editItem(cls, "", lang, urlAndroid, urlIos);
             setBtnDisplayNone();
             document.getElementById(DOM.saveLinksButton).style.display = 'block';
+            document.getElementById(DOM.linksItemDet).setAttribute('disabled', 'disabled');
+
         }
     };
 
@@ -682,8 +688,10 @@ var combiController = (function (editCtrl, UICtrl) {
             input = UIController.getLinksCategory();
             if (input.type === 'More details') {                
                 saveDetails();
+                document.getElementById(DOM.linksItemMarket).removeAttribute('disabled', 'disabled');
             } else if (input.type === 'Links to markets') {
                 saveMarkets();
+                document.getElementById(DOM.linksItemDet).removeAttribute('disabled', 'disabled');
             }
             
         } 
