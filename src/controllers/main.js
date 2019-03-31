@@ -128,7 +128,9 @@ var UIController = function () {
         edit: 'ion-edit',
         delete: 'ion-ios-trash',
         editContentHeader: '.content-header',
-        saveTextButton: 'save_text'
+        saveTextButton: 'save_text',
+        saveImgButton: 'save_img',
+        saveLinksButton: 'save_links'
 
        
     };
@@ -161,32 +163,6 @@ var UIController = function () {
             document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
         },
 
-        editItem: function(cls, content) {
-
-            if (cls === 'content-header') {
-                var editor, option;
-                option = document.querySelector(DOMStrings.textOptions);
-                editor = document.querySelector(DOMStrings.textInput);
-
-                editor.value = content;
-                option.value = 'Header';
-            } else if (cls === 'content-simpletext') {
-                var editor, option;
-                option = document.querySelector(DOMStrings.textOptions);
-                editor = document.querySelector(DOMStrings.textInput);
-
-                editor.value = content;
-                option.value = 'Simple text';
-            } else if (cls === 'content-simpletext__bold') {
-                var editor, option;
-                option = document.querySelector(DOMStrings.textOptions);
-                editor = document.querySelector(DOMStrings.textInput);
-
-                editor.value = content;
-                option.value = 'Simple bold text';
-            }
-        },
-
         getImgCategory: function() {
             return {
                 type: document.querySelector(DOMStrings.imgOptions).value,
@@ -197,7 +173,7 @@ var UIController = function () {
         addImgItem: function(obj, type) {
             var html, newHtml;
 
-            if (type === 'Whole screen size') {
+            if (type === 'Full screen') {
                 html = '<section class="editor" id="%id%"><section class="full-screen__container" id="%id%"><img src="%url%" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i></div></section>'; 
             } else if (type === 'Centered') {
                 html = '<section class="editor" id="%id%"><section class="centered-screen__container" id="%id%"><img src="%url%" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i></div></section>';
@@ -265,19 +241,19 @@ var UIController = function () {
             
             if (type === 'More details') {
                 if (lang === 'UKR') {
-                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальніше</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i></div></section></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальніше</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i></div></section></section>'; 
                 } else if (lang === 'RUS') {
-                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальнее</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i></div></section></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">Детальнее</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i></div></section></section>'; 
                 } else if (lang === 'ENG') {
-                    html = '<section class="editor" id="%id%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i></div></section></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><div class="separator"></div><section><a href="%url%" class="more-details""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i></div></section></section>'; 
                 }    
             } else if (type === 'Links to markets') {
                 if (lang === 'UKR') {
-                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Завантажити додаток</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header"><b>Завантажити додаток</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i></div></section>'; 
                 } else if (lang === 'RUS') {
-                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Загрузить приложение</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header"><b>Загрузить приложение</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i></div></section>'; 
                 } else if (lang === 'ENG') {
-                    html = '<section class="editor" id="%id%"><p class="dwn-header"><b>Dowload the app</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header"><b>Dowload the app</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i></div></section>'; 
                 }    
             } else {
                 console.log('This type can\'t be used.');
@@ -286,12 +262,14 @@ var UIController = function () {
 
             if (type === 'More details') {
                 newHtml = html.replace('%id%', obj.id);
+                newHtml = newHtml.replace('%lang%', lang);
                 newHtml = newHtml.replace('%url%', obj.url);
 
                 document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
 
             } else if (type === 'Links to markets') {
                 newHtml = html.replace('%id%', obj.id);
+                newHtml = newHtml.replace('%lang%', lang);
                 newHtml = newHtml.replace('%url-android%', obj.urlAndroid);
                 newHtml = newHtml.replace('%url-ios%', obj.urlIos);
     
@@ -341,6 +319,46 @@ var UIController = function () {
                 range.collapse(false);
                 range.text = text;
                 range.select();
+            }
+        },
+
+        editItem: function(cls, content, lang, urlAndroid, urlIos) {
+            if (cls === 'content-header') {
+                document.querySelector(DOMStrings.textOptions).value = 'Header';
+                document.querySelector(DOMStrings.textInput).value = content;
+            } else if (cls === 'content-simpletext') {
+                document.querySelector(DOMStrings.textOptions).value = 'Simple text';
+                document.querySelector(DOMStrings.textInput).value = content;
+            } else if (cls === 'content-simpletext__bold') {
+                document.querySelector(DOMStrings.textOptions).value = 'Simple bold text';
+                document.querySelector(DOMStrings.textInput).value = content;
+            } else if (cls === 'full-screen__container') {
+                document.querySelector(DOMStrings.imgOptions).value = 'Full screen';
+                document.querySelector(DOMStrings.imgURL).value = content;
+            } else if (cls === 'centered-screen__container') {
+                document.querySelector(DOMStrings.imgOptions).value = 'Centered';
+                document.querySelector(DOMStrings.imgURL).value = content;
+            } else if (cls === 'more-details') {
+                document.querySelector(DOMStrings.linksType).value = 'More details';
+                if (lang === 'UKR') {
+                    document.querySelector(DOMStrings.linksLang).value = 'UKR'; 
+                } else if (lang === 'RUS') {
+                    document.querySelector(DOMStrings.linksLang).value = 'RUS';
+                } else if (lang === 'ENG') {
+                    document.querySelector(DOMStrings.linksLang).value = 'ENG';
+                }
+                document.querySelector(DOMStrings.linksInputDetails).value = content;
+            } else if (cls === 'download-list') {
+                document.querySelector(DOMStrings.linksType).value = 'Links to markets';
+                if (lang === 'UKR') {
+                    document.querySelector(DOMStrings.linksLang).value = 'UKR'; 
+                } else if (lang === 'RUS') {
+                    document.querySelector(DOMStrings.linksLang).value = 'RUS';
+                } else if (lang === 'ENG') {
+                    document.querySelector(DOMStrings.linksLang).value = 'ENG';
+                }
+                document.querySelector(DOMStrings.linksInputAndroid).value = urlAndroid;
+                document.querySelector(DOMStrings.linksInputios).value = urlIos;
             }
         },
 
@@ -398,7 +416,7 @@ var UIController = function () {
 }();
 
 var combiController = (function (editCtrl, UICtrl) {
-    var DOM, curID;
+    var DOM, curID, param;
     DOM = UICtrl.getDOMStrings();
 
     var setEventListeners = function() {
@@ -447,7 +465,6 @@ var combiController = (function (editCtrl, UICtrl) {
 
             
             document.querySelector(DOM.generatedContent).addEventListener('click', function(event) {
-                var param;
                 if (event.target.classList[0] === DOM.delete) {
                     param = event.target.classList[1];
                     ctrlDeleteItem(param);
@@ -457,7 +474,26 @@ var combiController = (function (editCtrl, UICtrl) {
                 }
             });
             
-            document.getElementById(DOM.saveTextButton).addEventListener('click', saveItem);
+            /*Edit function text Save Button */
+            document.getElementById(DOM.saveTextButton).addEventListener('click', function(event) {
+                if (event) {
+                    saveItem(param);
+                }
+            });
+            /*Edit function img Save Button */
+            document.getElementById(DOM.saveImgButton).addEventListener('click', function(event) {
+                if (event) {
+                    saveItem(param);
+                }
+            });
+            /*Edit function links Save Button */
+            document.getElementById(DOM.saveLinksButton).addEventListener('click', function(event) {
+                if (event) {
+                    saveItem(param);
+                }
+            });
+
+
 
             };
             
@@ -530,36 +566,127 @@ var combiController = (function (editCtrl, UICtrl) {
     };
 
     var ctrlEditItem = function(param) {
+        var cls, lang, content, el;
 
-        if (param === 'text' || param === "img") {
-            var cls, content, id;
-            curID = event.target.parentNode.parentNode.id;
-            cls = event.target.parentNode.parentNode.childNodes[0].classList[0]
-            content = event.target.parentNode.parentNode.childNodes[0].innerHTML;
+        el = event.target.parentNode.parentNode;
+        curID = el.id;
+        if (param === 'text') {
+            cls = el.childNodes[0].classList[0];
+            content = el.childNodes[0].innerHTML;
             setDisplayNone();
             UIController.displayTextCategory();
             UIController.editItem(cls, content);
             setBtnDisplayNone();
-            document.getElementById(DOM.saveTextButton).style.display = 'block';   
-        } else if (param === "links-detail" || param === "links-markets") {
-            itemValue = event.target.parentNode.parentNode.id;
+            document.getElementById(DOM.saveTextButton).style.display = 'block';
+            
+        } else if (param === "img") {
+            cls = el.childNodes[0].classList[0];
+            content = el.childNodes[0].childNodes[0].attributes.src.nodeValue;
+            setDisplayNone();
+            UIController.displayImgCategory();
+            UIController.editItem(cls, content);
+            setBtnDisplayNone();
+            document.getElementById(DOM.saveImgButton).style.display = 'block';
+
+        } else if (param === "links-detail") {
+            el = event.target.parentNode.parentNode.parentNode;
+            curID = el.id;
+            cls = el.childNodes[1].childNodes[0].classList[0];
+            lang = el.attributes.value.nodeValue;
+            content = el.childNodes[1].childNodes[0].attributes.href.nodeValue;
+            setDisplayNone();
+            UIController.displayLinksCategory();
+            UIController.displayLinkFields('More details');
+            UIController.editItem(cls, content, lang);
+            setBtnDisplayNone();
+            document.getElementById(DOM.saveLinksButton).style.display = 'block';
+            
+        } else if (param === "links-markets") {
+            cls = el.childNodes[1].classList[0];
+            lang = el.attributes.value.nodeValue;
+            urlAndroid = el.childNodes[1].childNodes[0].attributes.href.nodeValue;
+            urlIos = el.childNodes[1].childNodes[1].attributes.href.nodeValue;
+            setDisplayNone();
+            UIController.displayLinksCategory();
+            UIController.displayLinkFields('Links to markets');
+            UIController.editItem(cls, "", lang, urlAndroid, urlIos);
+            setBtnDisplayNone();
+            document.getElementById(DOM.saveLinksButton).style.display = 'block';
         }
     };
 
-    var saveItem = function() {
-        var input, type;
-        input = UICtrl.getInputTextCategory();
-        if (input.type === 'Header') {
-            type = 'content-header';
-        } else if (input.type === 'Simple text') {
-            type = 'content-simpletext';
-        } else if (input.type === 'Simple bold text') {
-            type = 'content-simpletext__bold';
-        }   
+    var saveItem = function(param) {
+        var el, input, type, saveText, saveImg, saveDetails, textValue;
 
-        document.getElementById(curID).childNodes[0].className = type;
-        document.getElementById(curID).childNodes[0].innerHTML = "";
-        document.getElementById(curID).childNodes[0].innerHTML = input.content;
+        el = document.getElementById(curID);
+        saveText = function() {
+            el.childNodes[0].className = type;
+            el.childNodes[0].innerHTML = "";
+            el.childNodes[0].innerHTML = input.content;
+        };
+
+        saveImg = function() {
+            el.childNodes[0].className = type;
+            el.childNodes[0].childNodes[0].attributes.src.nodeValue = input.content;
+        };
+
+        saveDetails = function() {
+            el.attributes.value.nodeValue = input.language;
+            if (input.language === 'UKR') {
+                textValue = 'Детальніше';
+            } else if (input.language === 'RUS') {
+                textValue = 'Детальнее';
+            } else if (input.language === 'ENG') {
+                textValue = 'More details';
+            }
+            el.childNodes[1].childNodes[0].childNodes[0].innerText = textValue;
+            el.childNodes[1].childNodes[0].attributes.href.nodeValue = input.url;
+        };
+
+        saveMarkets = function() {
+            el.attributes.value.nodeValue = input.language;
+            if (input.language === 'UKR') {
+                textValue = 'Завантажити додаток';
+            } else if (input.language === 'RUS') {
+                textValue = 'Загрузить приложение';
+            } else if (input.language === 'ENG') {
+                textValue = 'Dowload the app';
+            }
+            el.childNodes[0].innerText = textValue;
+            el.childNodes[1].childNodes[0].attributes.href.nodeValue = input.urlAndroid;
+            el.childNodes[1].childNodes[1].attributes.href.nodeValue = input.urlIos;
+        };
+
+        if (param === 'text') {
+            input = UICtrl.getInputTextCategory();
+            if (input.type === 'Header') {
+                type = 'content-header';
+                saveText();
+            } else if (input.type === 'Simple text') {
+                type = 'content-simpletext';
+                saveText();
+            } else if (input.type === 'Simple bold text') {
+                type = 'content-simpletext__bold';
+                saveText();
+            }   
+        } else if (param === 'img') {
+            input = UICtrl.getImgCategory();
+            if (input.type === 'Full screen') {
+                type = 'full-screen__container';
+                saveImg();
+            } else if (input.type === 'Centered') {
+                type = 'centered-screen__container';
+                saveImg();
+            }
+        } else if (param === 'links-detail' || param === 'links-markets') {
+            input = UIController.getLinksCategory();
+            if (input.type === 'More details') {                
+                saveDetails();
+            } else if (input.type === 'Links to markets') {
+                saveMarkets();
+            }
+            
+        } 
 
         setBtnDisplayNone();
         UICtrl.clearFields();
@@ -606,6 +733,11 @@ var combiController = (function (editCtrl, UICtrl) {
     var setBtnDisplayNone = function() {
         document.getElementById(DOM.addContentButton).style.display = 'none';
         document.getElementById(DOM.saveTextButton).style.display = 'none';
+        document.getElementById(DOM.addImgButton).style.display = 'none';
+        document.getElementById(DOM.saveImgButton).style.display = 'none';
+        document.getElementById(DOM.linksButtonMoreDet).style.display = 'none';
+        document.getElementById(DOM.linksButtonMarkets).style.display = 'none';
+        document.getElementById(DOM.saveLinksButton).style.display = 'none';
     }
 
     return {
