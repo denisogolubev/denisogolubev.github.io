@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500');
+
 
 body {
     display: grid;
@@ -54,7 +56,8 @@ main {
     grid-area: device;
     outline: none;
     color: #333;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
+    letter-spacing: -0.05rem;
     overflow-y: scroll;
 }
 
@@ -113,19 +116,18 @@ main {
 
 .content-header {
     margin: 0.5rem 1rem 1rem 1rem;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.75rem;
 }
 
 .content-simpletext {
     margin: 0.5rem 1rem 1rem 1rem;
-    font-size: 1rem;
+    font-size: 1.125rem;
 }
 
 .content-simpletext__bold {
     margin: 0.5rem 1rem 1rem 1rem;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .screen {

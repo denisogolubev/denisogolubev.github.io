@@ -764,12 +764,6 @@ var combiController = (function (editCtrl, UICtrl) {
         val = el.value;
         selection = window.getSelection().toString();
         el.value = val.slice(0, el.selectionStart) + '<strong>' + selection + '</strong>' + val.slice(el.selectionEnd);
-        
-        //selection = '<b>' + window.getSelection().toString() + '</b>';
-        //window.getSelection().clear;
-        //document.querySelector(DOM.textInput).insertAdjacentHTML('beforeend', selection);
-        //selection.insertAdjacentHTML('beforebegin', '<b>');
-        //selection.insertAdjacentHTML('afterend', '</b>');
     };
 
     var getHtmlDocument = function() {
