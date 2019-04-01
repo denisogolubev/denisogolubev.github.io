@@ -103,6 +103,11 @@ var UIController = function () {
 
     var DOMStrings = {
         textOptions: '.tools-options__text--items',
+        optionHeader:'header',
+        optionSimpText:'simple-text',
+        optionSipmSecText:'simple-secondary__text',
+        optionSimpBldText:'simple-bold__text',
+        optionFooter:'footer',
         textInput: '.tools-options__text--input',
         generatedContent: '.display-device__content',
         addContentButton: 'add_text',
@@ -135,7 +140,8 @@ var UIController = function () {
         saveLinksButton: 'save_links',
         arrowDown: 'ion-arrow-down-c',
         arrowUp: 'ion-arrow-up-c',
-        editBold: 'bold'
+        editBold: 'bold',
+        editSeparator: 'separator'
         
 
        
@@ -157,8 +163,12 @@ var UIController = function () {
                 html = '<section class="editor" id="%id%"><p class="content-header">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>';  
             } else if (type === 'Simple text') {
                 html = '<section class="editor" id="%id%"><p class="content-simpletext">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>';
+            } else if (type === 'Simple secondary text') {
+                html = '<section class="editor" id="%id%"><p class="content-simpletext__secondary">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>';
             } else if (type === 'Simple bold text') {
                 html = '<section class="editor" id="%id%"><p class="content-simpletext__bold">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>';
+            } else if (type === 'Footer') {
+                html = '<section class="editor" id="%id%"><section class="footer"><div><img src="https://cscappimg.vodafone.ua/928" class="footer-icon"></div><p class="content-simpletext__secondary">%content%</p></section><div class="buttons"><i class="ion-edit footer"></i><i class="ion-ios-trash footer"></i><i class="ion-arrow-down-c footer"></i><i class="ion-arrow-up-c footer"></i></div></section>';
             } else {
                 console.log('This type can\'t be used.');
             }
@@ -167,6 +177,16 @@ var UIController = function () {
             newHtml = newHtml.replace('%content%', obj.content);
 
             document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
+        },
+
+        addSeparator: function(obj) {
+            var html, newHtml;
+
+            html = '<section class="editor" id="%id%"><div class="single-separator"></div><div class="buttons"><i class="ion-ios-trash sep"></i><i class="ion-arrow-down-c sep"></i><i class="ion-arrow-up-c sep"></i></div></section>';
+
+            newHtml = html.replace('%id%', obj.id);
+            document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
+
         },
 
         getImgCategory: function() {
@@ -255,11 +275,11 @@ var UIController = function () {
                 }    
             } else if (type === 'Links to markets') {
                 if (lang === 'UKR') {
-                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header"><b>Завантажити додаток</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header">Завантажити додаток</p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
                 } else if (lang === 'RUS') {
-                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header"><b>Загрузить приложение</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header">Загрузить приложение</p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
                 } else if (lang === 'ENG') {
-                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header"><b>Dowload the app</b></p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header">Dowload the app</p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
                 }    
             } else {
                 console.log('This type can\'t be used.');
@@ -335,8 +355,14 @@ var UIController = function () {
             } else if (cls === 'content-simpletext') {
                 document.querySelector(DOMStrings.textOptions).value = 'Simple text';
                 document.querySelector(DOMStrings.textInput).value = content;
+            } else if (cls === 'content-simpletext__secondary') {
+                document.querySelector(DOMStrings.textOptions).value = 'Simple secondary text';
+                document.querySelector(DOMStrings.textInput).value = content;
             } else if (cls === 'content-simpletext__bold') {
                 document.querySelector(DOMStrings.textOptions).value = 'Simple bold text';
+                document.querySelector(DOMStrings.textInput).value = content;
+            } else if (cls === 'footer') {
+                document.querySelector(DOMStrings.textOptions).value = 'Footer';
                 document.querySelector(DOMStrings.textInput).value = content;
             } else if (cls === 'full-screen__container') {
                 document.querySelector(DOMStrings.imgOptions).value = 'Full screen';
@@ -507,6 +533,8 @@ var combiController = (function (editCtrl, UICtrl) {
                 editOptions(el);
             });
 
+            document.getElementById(DOM.editSeparator).addEventListener('click', ctrlAddSeparatorItem);
+
 
 
             };
@@ -530,6 +558,15 @@ var combiController = (function (editCtrl, UICtrl) {
             console.log('Please, input your content');
         }
                 
+    };
+
+    var ctrlAddSeparatorItem = function() {
+        var newPageElement;
+
+        newPageElement = editorController.addPageElement('Separator');
+        UIController.addSeparator(newPageElement);
+        console.log('Separator added')
+          
     };
 
     var ctrlAddImgItem = function() {
@@ -592,7 +629,18 @@ var combiController = (function (editCtrl, UICtrl) {
             UIController.editItem(cls, content);
             setBtnDisplayNone();
             document.getElementById(DOM.saveTextButton).style.display = 'block';
-            
+        } else if (param === 'footer') {
+            cls = el.childNodes[0].classList[0];
+            content = el.childNodes[0].childNodes[1].innerHTML;
+            setDisplayNone();
+            UIController.displayTextCategory();
+            UIController.editItem(cls, content);
+            setBtnDisplayNone();
+            document.getElementById(DOM.saveTextButton).style.display = 'block';
+            document.getElementById(DOM.optionHeader).setAttribute('disabled', 'disabled');
+            document.getElementById(DOM.optionSimpText).setAttribute('disabled', 'disabled');
+            document.getElementById(DOM.optionSipmSecText).setAttribute('disabled', 'disabled');
+            document.getElementById(DOM.optionSimpBldText).setAttribute('disabled', 'disabled');
         } else if (param === "img") {
             cls = el.childNodes[0].classList[0];
             content = el.childNodes[0].childNodes[0].attributes.src.nodeValue;
@@ -642,6 +690,16 @@ var combiController = (function (editCtrl, UICtrl) {
             el.childNodes[0].innerHTML = input.content;
         };
 
+        saveFooter = function() {
+            el.childNodes[0].className = type;
+            el.childNodes[0].childNodes[1].innerHTML = "";
+            el.childNodes[0].childNodes[1].innerHTML = input.content;
+            document.getElementById(DOM.optionHeader).removeAttribute('disabled', 'disabled');
+            document.getElementById(DOM.optionSimpText).removeAttribute('disabled', 'disabled');
+            document.getElementById(DOM.optionSipmSecText).removeAttribute('disabled', 'disabled');
+            document.getElementById(DOM.optionSimpBldText).removeAttribute('disabled', 'disabled');
+        };
+
         saveImg = function() {
             el.childNodes[0].className = type;
             el.childNodes[0].childNodes[0].attributes.src.nodeValue = input.content;
@@ -682,10 +740,19 @@ var combiController = (function (editCtrl, UICtrl) {
             } else if (input.type === 'Simple text') {
                 type = 'content-simpletext';
                 saveText();
+            } else if (input.type === 'Simple secondary text') {
+                type = 'content-simpletext__secondary';
+                saveText();
             } else if (input.type === 'Simple bold text') {
                 type = 'content-simpletext__bold';
                 saveText();
-            }   
+            }  
+        } else if (param === 'footer') {
+            input = UICtrl.getInputTextCategory(); 
+            if (input.type === 'Footer') {
+            type = 'footer';
+            saveFooter();
+            }
         } else if (param === 'img') {
             input = UICtrl.getImgCategory();
             if (input.type === 'Full screen') {
@@ -718,7 +785,7 @@ var combiController = (function (editCtrl, UICtrl) {
     var ctrlDeleteItem = function(param) {
         var itemID, ID;
             
-        if (param === 'text' || param === "img" || param === "links-markets") {
+        if (param === 'text' || param === 'img' || param === 'links-markets' || param === 'sep' || param === 'footer') {
             itemID = event.target.parentNode.parentNode.id;
         } else if (param === "links-detail") {
             itemID = event.target.parentNode.parentNode.parentNode.id;
@@ -736,7 +803,7 @@ var combiController = (function (editCtrl, UICtrl) {
         var el, curID, currRowEl;
         
 
-        if (param === 'text' || param === "img" || param === "links-markets") {
+        if (param === 'text' || param === "img" || param === "links-markets" || param === 'sep'  || param === 'footer') {
             curID = event.target.parentNode.parentNode.id;
         } else if (param === "links-detail") {
             curID = event.target.parentNode.parentNode.parentNode.id;

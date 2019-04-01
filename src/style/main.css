@@ -71,6 +71,14 @@ main {
     border-radius: 1rem;
 }
 
+.display-device__content {
+    background-color: #FFFFFF;
+    margin: 0.9375rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+    padding: 0.9375rem;
+
+}
+
 .editor {
     display: block;
 }
@@ -114,20 +122,44 @@ main {
 
 /*Классы для выгрузки НАЧАЛО*/
 
+
+
 .content-header {
-    margin: 0.5rem 1rem 1rem 1rem;
-    font-size: 1.75rem;
+    margin: 0.9375rem 0;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
 }
 
 .content-simpletext {
-    margin: 0.5rem 1rem 1rem 1rem;
+    margin: 0.9375rem 0;
     font-size: 1.125rem;
+    line-height: 1.4rem;
+}
+
+.content-simpletext__secondary {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.3rem;
 }
 
 .content-simpletext__bold {
-    margin: 0.5rem 1rem 1rem 1rem;
-    font-size: 1rem;
-    font-weight: 600;
+    margin: 0.9375rem 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+strong {
+    font-weight: 500;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: 11% 89%;
+    align-items: center;
+}
+
+.footer-icon {
+    width: 1.5rem;
 }
 
 .screen {
@@ -149,21 +181,31 @@ main {
 }
 
 .separator {
-    border-top: 0.06rem solid #333;
-    margin: 0 16px;
+    border-top: 0.1rem solid #CCCCCC;
+    margin: 0;
+}
+
+.single-separator {
+    border-top: 0.1rem solid #CCCCCC;
+    margin: 1.25rem 0;
 }
 
 .more-details {
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
     align-items: center;
     text-decoration: none;
 }
 
+.more-details svg {
+    justify-self: right;
+}
+
 .more-details__link {
-    margin: 0 16px;
+    margin: 0;
     padding: 10px 0;
     color: #333;
-    font-size: 16px;
+    font-size: 1.125rem;
 }
 
 .download-list {
@@ -175,8 +217,8 @@ main {
 }
 
 .dwn-header {
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.125rem;
+    font-weight: 500;
     text-align: center;
 
 }
@@ -314,8 +356,8 @@ select:hover {
 
 .edit-buttons {
     padding: 0 0.5rem;
-    height: 2rem;
-    width: 2rem;
+    min-height: 2rem;
+    min-width: 2rem;
     border: 0.05rem solid #e9e8e8;
     border-radius: 0.2rem;
     background-color: #0e1621;
@@ -324,13 +366,13 @@ select:hover {
     outline: none;
     transition: 300ms;
     cursor: pointer;
-    display: block;
+    display: inline-block;
 }
 
 .edit-buttons:hover {
     background-color: #2b5278;
     border-color: #e9e8e8;
-    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
 }
 
 textarea {

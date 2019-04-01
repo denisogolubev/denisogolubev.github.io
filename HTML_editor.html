@@ -45,12 +45,15 @@
             <section class="tools-options">
                 <section class="tools-options__text">
                     <select class="tools-options__text--items">
-                        <option value="Header">Header</option>
-                        <option value="Simple text" selected>Simple text</option>
-                        <option value="Simple bold text">Simple bold text</option>
+                        <option value="Header" id="header">Header</option>
+                        <option value="Simple text" id="simple-text" selected>Simple text</option>
+                        <option value="Simple secondary text" id="simple-secondary__text">Simple secondary text</option>
+                        <option value="Simple bold text" id="simple-bold__text">Simple bold text</option>
+                        <option value="Footer" id="footer">Footer</option>
                     </select>
                     <section class="tools-options__text--options">
-                        <button class="edit-buttons" id="bold">B</button>
+                        <button class="edit-buttons" id="bold">Bold</button>
+                        <button class="edit-buttons" id="separator">Separator</button>
                     </section>    
                     <textarea class="tools-options__text--input" type="text"  placeholder="Type or paste your text"></textarea>
                     <button class="tools-options__button" id="add_text">Add</button>
