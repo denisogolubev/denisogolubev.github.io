@@ -275,11 +275,11 @@ var UIController = function () {
                 }    
             } else if (type === 'Links to markets') {
                 if (lang === 'UKR') {
-                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header">Завантажити додаток</p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><section class="download-list"><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1630" alt="ios-badge" class="ios-badge"></a><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1634" alt="android-badge" class="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
                 } else if (lang === 'RUS') {
-                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header">Загрузить приложение</p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><section class="download-list"><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1629" alt="ios-badge" class="ios-badge"></a><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1633" alt="android-badge" class="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
                 } else if (lang === 'ENG') {
-                    html = '<section class="editor" id="%id%" value="%lang%"><p class="dwn-header">Dowload the app</p><section class="download-list"><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1621" alt="android-badge"></a><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1620" alt="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
+                    html = '<section class="editor" id="%id%" value="%lang%"><section class="download-list"><a href="%url-ios%"><img src="https://cscappimg.vodafone.ua/1631" alt="ios-badge" class="ios-badge"></a><a href="%url-android%"><img src="https://cscappimg.vodafone.ua/1632" alt="android-badge" class="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>'; 
                 }    
             } else {
                 console.log('This type can\'t be used.');
@@ -308,10 +308,10 @@ var UIController = function () {
         downloadDoc: function() {
             var startHtml, styleHtml, endHtml, file;
     
-            startHtml = '<html><head><meta charset="UTF-8"><meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"><link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">';
+            startHtml = '<html><head><meta charset="UTF-8"><meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"><link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500" rel="stylesheet">';
     
-            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "Roboto", sans-serif; margin: 0;line-height: 1.5rem;color: #333;} .content-header {margin: 0.5rem 1rem 1rem 1rem;font-size: 1.2rem;font-weight: 700;}.content-simpletext {margin: 0.5rem 1rem 1rem 1rem;font-size: 1rem;}.content-simpletext__bold {margin: 0.5rem 1rem 1rem 1rem;font-size: 1rem;font-weight: 700;}.screen {width: 100%;}.full-screen__container {display: block;margin: 0 auto;padding: 0;width: 100%;}.centered-screen__container {display: block;margin: 0 auto;padding: 0;width: 50%;}.separator {border-top: 0.06rem solid #333;margin: 0 16px;}.more-details {display: flex;align-items: center;text-decoration: none;}.more-details__link {margin: 0 16px;padding: 10px 0;color: #333;font-size: 16px;}.download-list {display: flex;list-style: none;justify-content: center;align-items: center;padding: 0;}.dwn-header {font-size: 1rem;font-weight: bold;text-align: center;}.download-list a {padding: 0;margin: 0;line-height: 0;}.download-list a img {padding: 0.3rem 1rem;width: 9.5rem;}.buttons {display: none;}</style><body>';
-            endHtml = '</body></html>';
+            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "IBM Plex Sans", sans-serif; margin: 0;color: #333;} .white-background { background-color: #FFFFFF; margin: 0.9375rem; box-shadow: 0 2px 4px rgba(0,0,0,0.35); padding: 0.9375rem;} </style><body><section class="white-background">';
+            endHtml = '</section></body></html>';
     
             file = new Blob([startHtml, styleHtml, document.querySelector(DOMStrings.generatedContent).innerHTML, endHtml], {type: "text/plain;charset=utf-8"});
             if (window.navigator.msSaveOrOpenBlob) {
@@ -665,10 +665,10 @@ var combiController = (function (editCtrl, UICtrl) {
             document.getElementById(DOM.linksItemMarket).setAttribute('disabled', 'disabled');
             
         } else if (param === "links-markets") {
-            cls = el.childNodes[1].classList[0];
+            cls = el.childNodes[0].classList[0];
             lang = el.attributes.value.nodeValue;
-            urlAndroid = el.childNodes[1].childNodes[0].attributes.href.nodeValue;
-            urlIos = el.childNodes[1].childNodes[1].attributes.href.nodeValue;
+            urlAndroid = el.childNodes[0].childNodes[0].attributes.href.nodeValue;
+            urlIos = el.childNodes[0].childNodes[1].attributes.href.nodeValue;
             setDisplayNone();
             UIController.displayLinksCategory();
             UIController.displayLinkFields('Links to markets');
@@ -720,16 +720,8 @@ var combiController = (function (editCtrl, UICtrl) {
 
         saveMarkets = function() {
             el.attributes.value.nodeValue = input.language;
-            if (input.language === 'UKR') {
-                textValue = 'Завантажити додаток';
-            } else if (input.language === 'RUS') {
-                textValue = 'Загрузить приложение';
-            } else if (input.language === 'ENG') {
-                textValue = 'Dowload the app';
-            }
-            el.childNodes[0].innerText = textValue;
-            el.childNodes[1].childNodes[0].attributes.href.nodeValue = input.urlAndroid;
-            el.childNodes[1].childNodes[1].attributes.href.nodeValue = input.urlIos;
+            el.childNodes[0].childNodes[0].attributes.href.nodeValue = input.urlAndroid;
+            el.childNodes[0].childNodes[1].attributes.href.nodeValue = input.urlIos;
         };
 
         if (param === 'text') {
