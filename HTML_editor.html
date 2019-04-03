@@ -23,8 +23,8 @@
         <section class="display">
             <section class="display-size"><p>Display width<br> 375 px</p></section>
             <section class="display-device">
-                <article class="display-device__content">
-                </article>
+                <article class="display-device__content"></article>
+                <article class="display-device__buttons"></article>
             </section>
             <button class="display-button__download">Download HTML</button>
         </section>
@@ -38,7 +38,7 @@
                     <li class="tools-nav__categoryes--img">Images</li>
                     <li class="tools-nav__categoryes--option" value="Tables">Tables</li>
                     <li class="tools-nav__categoryes--links" value="Links">Links</li>
-                    <li class="tools-nav__categoryes--option" value="Icons">Icons</li>
+                    <li class="tools-nav__categoryes--buttons" value="Buttons">Buttons</li>
                     <li class="tools-nav__categoryes--option" value="Templates">Templates</li>
                 </ul>
             </nav>
@@ -73,6 +73,8 @@
                     <select class="tools-options__links--items">
                         <option value="More details" id="more-details" selected>More details</option>
                         <option value="Links to markets" id="links-to__market">Links to markets</option>
+                        <option value="Link as button" id="link-button">Link as button</option>
+                        <option value="Link as button (CTA)" id="link-buttonCTA">Link as button (CTA)</option>
                     </select>
                     <!--Language select-->
                     <select class="tools-options__links--lang">
@@ -80,8 +82,9 @@
                         <option value="RUS">RUS</option>
                         <option value="ENG">ENG</option>
                     </select>
-                    <!--Input for more datails-->    
-                    <input class="tools-options__links--details" type="text"  placeholder="Paste 'more details' URL"/>
+                    <!--Input for more datails--> 
+                    <input class="tools-options__links--name" type="text"  placeholder="Enter button name"/>   
+                    <input class="tools-options__links--details" type="text"  placeholder="Enter URL"/>
                     <!--Input for markets-->
                     <input class="tools-options__links--ios" type="text"  placeholder="URL to your app at App Store (iOS)"/>
                     <input class="tools-options__links--android" type="text"  placeholder="URL to your app at Play Market (Android)"/>

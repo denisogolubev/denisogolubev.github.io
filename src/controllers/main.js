@@ -20,6 +20,12 @@ var editorController = function () {
         this.urlIos = urlIos;
     }
 
+    var PageButtonLinksElement = function(id, content, url) {
+        this.id = id;
+        this.content = content;
+        this.url = url;
+    }
+
     var data = {
         allPageElemnts: []
     }
@@ -70,6 +76,21 @@ return {
         return newPageElement;
     },
 
+    addPageButtonLinksElement: function(content, url) {
+        var ID, newPageElement;
+
+        //Создаем ID;
+        if (data.allPageElemnts.length > 0) {
+            ID = data.allPageElemnts[data.allPageElemnts.length - 1].id + 1;
+        } else {
+            ID = 0;
+        }
+
+        newPageElement = new PageButtonLinksElement(ID, content, url);
+        data.allPageElemnts.push(newPageElement);
+        return newPageElement;
+    },
+
     deleteItemArr: function(id) {
         var ids, index;
 
@@ -110,6 +131,7 @@ var UIController = function () {
         optionFooter:'footer',
         textInput: '.tools-options__text--input',
         generatedContent: '.display-device__content',
+        generatedButtons: '.display-device__buttons',
         addContentButton: 'add_text',
         downloadHtml: '.display-button__download',
         textCategory: '.tools-options__text',
@@ -125,11 +147,15 @@ var UIController = function () {
         linksType: '.tools-options__links--items',
         linksItemMarket: 'links-to__market',
         linksItemDet: 'more-details',
+        linksItemBtnGrey: 'link-button',
+        linksItemBtnRed: 'link-buttonCTA',
+        linksinputBtnName: '.tools-options__links--name',
         linksInputDetails: '.tools-options__links--details',
         linksInputAndroid: '.tools-options__links--android',
         linksInputios: '.tools-options__links--ios',
         linksButtonMoreDet: 'add_more-details',
         linksButtonMarkets: 'add_markets',
+        linksButtonBtn: 'add-link__button',
         linksLang: '.tools-options__links--lang',
         deleteElButton: '.item__delete--btn',
         edit: 'ion-edit',
@@ -226,6 +252,7 @@ var UIController = function () {
                 document.querySelector(DOMStrings.linksInputDetails).style.display = 'none';
                 document.querySelector(DOMStrings.linksInputAndroid).style.display = 'none';
                 document.querySelector(DOMStrings.linksInputios).style.display = 'none';
+                document.querySelector(DOMStrings.linksinputBtnName).style.display = 'none';
                 document.getElementById(DOMStrings.linksButtonMoreDet).style.display = 'none';
                 document.getElementById(DOMStrings.linksButtonMarkets).style.display = 'none';
             }
@@ -234,12 +261,20 @@ var UIController = function () {
                 hideAllInputs();
                 document.querySelector(DOMStrings.linksInputDetails).style.display = 'block';
                 document.getElementById(DOMStrings.linksButtonMoreDet).style.display = 'block';
+                document.querySelector(DOMStrings.linksLang).style.display = 'block';
             } else if (type === 'Links to markets') {
                 hideAllInputs();
                 document.querySelector(DOMStrings.linksInputAndroid).style.display = 'block';
                 document.querySelector(DOMStrings.linksInputios).style.display = 'block';
                 document.getElementById(DOMStrings.linksButtonMoreDet).style.display = 'block';
-            }
+                document.querySelector(DOMStrings.linksLang).style.display = 'block';
+            } else if (type === 'Link as button' || type === 'Link as button (CTA)') {
+                hideAllInputs();
+                document.querySelector(DOMStrings.linksLang).style.display = 'none';
+                document.querySelector(DOMStrings.linksinputBtnName).style.display = 'block';
+                document.querySelector(DOMStrings.linksInputDetails).style.display = 'block';
+                document.getElementById(DOMStrings.linksButtonMoreDet).style.display = 'block';
+            } 
         },
 
         getLinksCategory: function() {
@@ -258,7 +293,13 @@ var UIController = function () {
                     urlAndroid: document.querySelector(DOMStrings.linksInputAndroid).value,
                     urlIos: document.querySelector(DOMStrings.linksInputios).value
                 }
-            };
+            } else if (param === 'Link as button' || param === 'Link as button (CTA)') {
+                return {
+                    type: document.querySelector(DOMStrings.linksType).value,
+                    content: document.querySelector(DOMStrings.linksinputBtnName).value,
+                    url: document.querySelector(DOMStrings.linksInputDetails).value
+                }
+            }
             
         },
 
@@ -304,16 +345,38 @@ var UIController = function () {
             
         },
 
+        addButtonLink: function(obj, type) {
+            var html, newHtml;
+
+            if (type === 'Link as button') {
+                html = '<section class="editor" id="%id%"><a href="%url%" class="button-link"><div class="grey-button"><p>%content%</p></div></a><div class="buttons"><i class="ion-edit links-btns"></i><i class="ion-ios-trash links-btns"></i><i class="ion-arrow-down-c links-btns"></i><i class="ion-arrow-up-c links-btns"></i></div></section>';  
+            } else if (type === 'Link as button (CTA)') {
+                html = '<section class="editor" id="%id%"><a href="%url%" class="button-linkCTA"><div class="red-button"><p>%content%</p></div></a><div class="buttons"><i class="ion-edit links-btnsCTA"></i><i class="ion-ios-trash links-btnsCTA"></i></div></section>';
+            }
+
+            newHtml = html.replace('%id%', obj.id);
+            newHtml = newHtml.replace('%url%', obj.url);
+            newHtml = newHtml.replace('%content%', obj.content);
+
+            if (type === 'Link as button') {
+                document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
+            } else if (type === 'Link as button (CTA)') {
+                document.querySelector(DOMStrings.generatedButtons).insertAdjacentHTML('beforeend', newHtml);
+            }
+        },
+
         
         downloadDoc: function() {
             var startHtml, styleHtml, endHtml, file;
     
             startHtml = '<html><head><meta charset="UTF-8"><meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"><link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500" rel="stylesheet">';
     
-            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "IBM Plex Sans", sans-serif; margin: 0;color: #333;} .white-background { background-color: #FFFFFF; margin: 0.9375rem; box-shadow: 0 2px 4px rgba(0,0,0,0.35); padding: 0.9375rem;} </style><body><section class="white-background">';
-            endHtml = '</section></body></html>';
+            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "IBM Plex Sans", sans-serif;margin: 0;color: #333;letter-spacing: -0.05rem;} .white-background { background-color: #FFFFFF; margin: 0.9375rem; box-shadow: 0 2px 4px rgba(0,0,0,0.35); padding: 0.9375rem;}.buttonsCTA {margin-top: 1.25rem;padding: 0 1.875rem 1.25rem 1.875rem;}.content-header {margin: 0.9375rem 0;font-size: 1.6rem;line-height: 1.9rem;}.content-simpletext {margin: 0.9375rem 0;font-size: 1.125rem;line-height: 1.4rem;}.content-simpletext__secondary {margin: 0.5rem 0;font-size: 1rem;line-height: 1.3rem;}.content-simpletext__bold {margin: 0.9375rem 0;font-size: 1.125rem;font-weight: 500;}strong {font-weight: 500;}.footer {display: grid;grid-template-columns: 11% 89%;align-items: center;}.footer-icon {width: 1.5rem;}.screen {width: 100%;}.full-screen__container {display: block;margin: 0 auto; padding: 0;width: 100%;}.centered-screen__container {display: block;margin: 0 auto;padding: 0;width: 50%;}.separator {border-top: 1px solid #CCCCCC;margin: 1.25rem 0;}.single-separator {border-top: 1px solid #CCCCCC;margin: 1.25rem 0;}.more-details {display: grid;grid-template-columns: 50% 50%;align-items: center;text-decoration: none;}.more-details svg {justify-self: right;}.more-details__link {margin: 0;color: #333;font-size: 1rem;}.download-list {display: flex;list-style: none;align-items: center;padding: 0;margin: 0;}.download-list a {padding: 0;margin: 0;line-height: 0;}.ios-badge {margin: 0;width: 7.375rem;}.android-badge {margin-left: 0.75rem;width: 8.3125rem;}.buttons {display: none;}.button-link, .button-linkCTA {text-decoration: none;color: #FFFFFF;font-size: 1rem;margin: 0;}.button-link p {margin: 0;}.grey-button {display: flex;background-color: #666666;width: 100%;height: 2.8125rem; align-items: center;justify-content: center;}.red-button {display: flex;background-color: #E60000;width: 100%;height: 2.8125rem;align-items: center;justify-content: center;}</style><body><section class="white-background">';
+            content = document.querySelector(DOMStrings.generatedContent).innerHTML;
+            btns = '</section><section class="buttonsCTA">' + document.querySelector(DOMStrings.generatedButtons).innerHTML + '</section>';
+            endHtml = '</body></html>';
     
-            file = new Blob([startHtml, styleHtml, document.querySelector(DOMStrings.generatedContent).innerHTML, endHtml], {type: "text/plain;charset=utf-8"});
+            file = new Blob([startHtml, styleHtml, content, btns, endHtml], {type: "text/plain;charset=utf-8"});
             if (window.navigator.msSaveOrOpenBlob) {
                 window.navigator.msSaveOrOpenBlob(file, 'HTML_template.html');
             } // IE10+
@@ -348,7 +411,7 @@ var UIController = function () {
             }
         },
 
-        editItem: function(cls, content, lang, urlAndroid, urlIos) {
+        editItem: function(cls, content, lang, urlAndroid, urlIos, url) {
             if (cls === 'content-header') {
                 document.querySelector(DOMStrings.textOptions).value = 'Header';
                 document.querySelector(DOMStrings.textInput).value = content;
@@ -391,6 +454,14 @@ var UIController = function () {
                 }
                 document.querySelector(DOMStrings.linksInputAndroid).value = urlAndroid;
                 document.querySelector(DOMStrings.linksInputios).value = urlIos;
+            } else if (cls === "button-link") { 
+                document.querySelector(DOMStrings.linksType).value = 'Link as button';
+                document.querySelector(DOMStrings.linksinputBtnName).value = content;
+                document.querySelector(DOMStrings.linksInputDetails).value = url;
+            } else if (cls === "button-linkCTA") {
+                document.querySelector(DOMStrings.linksType).value = 'Link as button (CTA)';
+                document.querySelector(DOMStrings.linksinputBtnName).value = content;
+                document.querySelector(DOMStrings.linksInputDetails).value = url;
             }
         },
 
@@ -414,7 +485,7 @@ var UIController = function () {
         clearFields: function() {
             var fields, fieldsArray;
 
-            fields = document.querySelectorAll(DOMStrings.textInput + ',' + DOMStrings.imgURL + ',' + DOMStrings.linksInputDetails + ',' + DOMStrings.linksInputAndroid + ',' + DOMStrings.linksInputios);
+            fields = document.querySelectorAll(DOMStrings.textInput + ',' + DOMStrings.imgURL + ',' + DOMStrings.linksInputDetails + ',' + DOMStrings.linksInputAndroid + ',' + DOMStrings.linksInputios + ',' + DOMStrings.linksinputBtnName);
 
             fieldsArray = Array.prototype.slice.call(fields);
 
@@ -506,6 +577,15 @@ var combiController = (function (editCtrl, UICtrl) {
                     changePosition(param, 'down');
                 } else if (event.target.classList[0] === DOM.arrowUp) {
                     changePosition(param, 'up');
+                }    
+            });
+
+            document.querySelector(DOM.generatedButtons).addEventListener('click', function(event) {
+                param = event.target.classList[1];
+                if (event.target.classList[0] === DOM.delete) {    
+                    ctrlDeleteItem(param);
+                } else if (event.target.classList[0] === DOM.edit) {
+                    ctrlEditItem(param);
                 }    
             });
             
@@ -613,6 +693,13 @@ var combiController = (function (editCtrl, UICtrl) {
                 console.log(input.type + ' added');
                 UICtrl.clearFields();
             }
+        } else if (input.type === 'Link as button' || input.type === 'Link as button (CTA)') {
+            if (input.content !== "" && input.url !== "") {
+                newPageElement = editorController.addPageButtonLinksElement(input.content, input.url);
+                UIController.addButtonLink(newPageElement, input.type);
+                console.log(input.type + ' added');
+                UICtrl.clearFields();
+            }
         }
     };
 
@@ -663,6 +750,8 @@ var combiController = (function (editCtrl, UICtrl) {
             setBtnDisplayNone();
             document.getElementById(DOM.saveLinksButton).style.display = 'block';
             document.getElementById(DOM.linksItemMarket).setAttribute('disabled', 'disabled');
+            document.getElementById(DOM.linksItemBtnGrey).setAttribute('disabled', 'disabled');
+            document.getElementById(DOM.linksItemBtnRed).setAttribute('disabled', 'disabled');
             
         } else if (param === "links-markets") {
             cls = el.childNodes[0].classList[0];
@@ -676,12 +765,33 @@ var combiController = (function (editCtrl, UICtrl) {
             setBtnDisplayNone();
             document.getElementById(DOM.saveLinksButton).style.display = 'block';
             document.getElementById(DOM.linksItemDet).setAttribute('disabled', 'disabled');
-
+            document.getElementById(DOM.linksItemBtnGrey).setAttribute('disabled', 'disabled');
+            document.getElementById(DOM.linksItemBtnRed).setAttribute('disabled', 'disabled');
+        } else if (param === "links-btns" || param=== "links-btnsCTA") {
+            cls = el.childNodes[0].classList[0];
+            url = el.childNodes[0].attributes.href.nodeValue;
+            content = el.childNodes[0].childNodes[0].childNodes[0].innerHTML;
+            setDisplayNone();
+            UIController.displayLinksCategory();
+            if (param === "links-btns") {
+                UIController.displayLinkFields('Link as button');
+                document.getElementById(DOM.linksItemMarket).setAttribute('disabled', 'disabled');
+                document.getElementById(DOM.linksItemDet).setAttribute('disabled', 'disabled');
+                document.getElementById(DOM.linksItemBtnRed).setAttribute('disabled', 'disabled');
+            } else if (param === "links-btnsCTA") {
+                UIController.displayLinkFields('Link as button (CTA)');
+                document.getElementById(DOM.linksItemMarket).setAttribute('disabled', 'disabled');
+                document.getElementById(DOM.linksItemDet).setAttribute('disabled', 'disabled');
+                document.getElementById(DOM.linksItemBtnGrey).setAttribute('disabled', 'disabled');
+            }    
+            UIController.editItem(cls, content, '', '', '', url);
+            setBtnDisplayNone();
+            document.getElementById(DOM.saveLinksButton).style.display = 'block'; 
         }
-    };
+    }; 
 
     var saveItem = function(param) {
-        var el, input, type, saveText, saveImg, saveDetails, textValue;
+        var el, input, type, saveText, saveImg, saveDetails, saveBtnLink;
 
         el = document.getElementById(curID);
         saveText = function() {
@@ -716,12 +826,29 @@ var combiController = (function (editCtrl, UICtrl) {
             }
             el.childNodes[1].childNodes[0].childNodes[0].innerText = textValue;
             el.childNodes[1].childNodes[0].attributes.href.nodeValue = input.url;
+            document.getElementById(DOM.linksItemMarket).removeAttribute('disabled', 'disabled');
         };
 
         saveMarkets = function() {
             el.attributes.value.nodeValue = input.language;
+            if (input.language === 'UKR') {
+                el.childNodes[0].childNodes[0].childNodes[0].attributes.src.nodeValue = 'https://cscappimg.vodafone.ua/1630';
+                el.childNodes[0].childNodes[1].childNodes[0].attributes.src.nodeValue = 'https://cscappimg.vodafone.ua/1634';
+            } else if (input.language === 'RUS') {
+                el.childNodes[0].childNodes[0].childNodes[0].attributes.src.nodeValue = 'https://cscappimg.vodafone.ua/1629';
+                el.childNodes[0].childNodes[1].childNodes[0].attributes.src.nodeValue = 'https://cscappimg.vodafone.ua/1633';
+            } else if (input.language === 'ENG') {
+                el.childNodes[0].childNodes[0].childNodes[0].attributes.src.nodeValue = 'https://cscappimg.vodafone.ua/1631';
+                el.childNodes[0].childNodes[1].childNodes[0].attributes.src.nodeValue = 'https://cscappimg.vodafone.ua/1632';
+            }
             el.childNodes[0].childNodes[0].attributes.href.nodeValue = input.urlAndroid;
             el.childNodes[0].childNodes[1].attributes.href.nodeValue = input.urlIos;
+            document.getElementById(DOM.linksItemDet).removeAttribute('disabled', 'disabled');
+        };
+
+        saveBtnLink = function() {
+            el.childNodes[0].attributes.href.nodeValue = input.url;
+            el.childNodes[0].childNodes[0].childNodes[0].innerHTML = input.content;
         };
 
         if (param === 'text') {
@@ -754,15 +881,16 @@ var combiController = (function (editCtrl, UICtrl) {
                 type = 'centered-screen__container';
                 saveImg();
             }
-        } else if (param === 'links-detail' || param === 'links-markets') {
+        } else if (param === 'links-detail' || param === 'links-markets' || param === 'links-btns' || param === 'links-btnsCTA') {
             input = UIController.getLinksCategory();
             if (input.type === 'More details') {                
-                saveDetails();
-                document.getElementById(DOM.linksItemMarket).removeAttribute('disabled', 'disabled');
+                saveDetails();  
             } else if (input.type === 'Links to markets') {
                 saveMarkets();
-                document.getElementById(DOM.linksItemDet).removeAttribute('disabled', 'disabled');
-            }
+            } else if (input.type === 'Link as button' || input.type === 'Link as button (CTA)') {
+                saveBtnLink();
+                remAtr();
+            } 
             
         } 
 
@@ -772,12 +900,19 @@ var combiController = (function (editCtrl, UICtrl) {
         
     };
 
+    remAtr = function() {
+        document.getElementById(DOM.linksItemMarket).removeAttribute('disabled', 'disabled');
+        document.getElementById(DOM.linksItemDet).removeAttribute('disabled', 'disabled');
+        document.getElementById(DOM.linksItemBtnGrey).removeAttribute('disabled', 'disabled');
+        document.getElementById(DOM.linksItemBtnRed).removeAttribute('disabled', 'disabled');
+    }
+
     
 
     var ctrlDeleteItem = function(param) {
         var itemID, ID;
             
-        if (param === 'text' || param === 'img' || param === 'links-markets' || param === 'sep' || param === 'footer') {
+        if (param === 'text' || param === 'img' || param === 'links-markets' || param === 'sep' || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA') {
             itemID = event.target.parentNode.parentNode.id;
         } else if (param === "links-detail") {
             itemID = event.target.parentNode.parentNode.parentNode.id;
@@ -795,7 +930,7 @@ var combiController = (function (editCtrl, UICtrl) {
         var el, curID, currRowEl;
         
 
-        if (param === 'text' || param === "img" || param === "links-markets" || param === 'sep'  || param === 'footer') {
+        if (param === 'text' || param === "img" || param === "links-markets" || param === 'sep'  || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA') {
             curID = event.target.parentNode.parentNode.id;
         } else if (param === "links-detail") {
             curID = event.target.parentNode.parentNode.parentNode.id;

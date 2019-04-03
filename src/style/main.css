@@ -79,13 +79,18 @@ main {
 
 }
 
+.display-device__buttons {
+    margin-top: 1.25rem;
+    padding: 0 1.875rem 1.25rem 1.875rem;
+}
+
 .editor {
     display: block;
 }
 
 .buttons {
     display: none;
-    margin: 0rem 1rem;
+    margin: 0;
 }
 
 .editor:hover .buttons {
@@ -115,6 +120,7 @@ main {
     text-align: center;
     align-self: center;
 }
+
 
 
 
@@ -181,12 +187,12 @@ strong {
 }
 
 .separator {
-    border-top: 0.1rem solid #CCCCCC;
-    margin: 0;
+    border-top: 1px solid #CCCCCC;
+    margin: 1.25rem 0;
 }
 
 .single-separator {
-    border-top: 0.1rem solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
     margin: 1.25rem 0;
 }
 
@@ -203,17 +209,16 @@ strong {
 
 .more-details__link {
     margin: 0;
-    padding: 10px 0;
     color: #333;
-    font-size: 1.125rem;
+    font-size: 1rem;
 }
 
 .download-list {
     display: flex;
     list-style: none;
-    justify-content: center;
     align-items: center;
     padding: 0;
+    margin: 0;
 }
 
 .download-list a {
@@ -223,17 +228,47 @@ strong {
 }
 
 .ios-badge {
-    width: 7.95rem;
-    padding: 0.3rem 1rem;
+    margin: 0;
+    width: 7.375rem;
 }
 
 .android-badge {
-    padding: 0.3rem 1rem;
-    width: 8.5rem;
+    margin-left: 0.75rem;
+    width: 8.3125rem;
 }
 
 .buttons {
     display: none;
+}
+
+.button-link, 
+.button-linkCTA {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.button-link p {
+    margin: 0;
+}
+
+.grey-button {
+    display: flex;
+    background-color: #666666;
+    width: 100%;
+    height: 2.8125rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.red-button {
+    display: flex;
+    background-color: #E60000;
+    width: 100%;
+    height: 2.8125rem;
+    align-items: center;
+    justify-content: center;
 }
 
 /*Классы для выгрузки КОНЕЦ*/
@@ -432,6 +467,7 @@ input:focus {
 
 .tools-options__links--items {
     grid-area: selection_one;
+    margin-bottom: 1rem;
     width: 20rem;
     outline: none;
     height: 2rem;
@@ -445,7 +481,7 @@ input:focus {
 
 .tools-options__links--lang {
     grid-area: selection_two;
-    margin-top: 1rem;
+    margin: 0 0 1rem 0;
     width: 20rem;
     outline: none;
     height: 2rem;
@@ -456,13 +492,21 @@ input:focus {
     padding-left: 0.5rem;
 }
 
-.tools-options__links--details {
+.tools-options__links--name {
     grid-area: input_one;
+    margin-top: 0;
+    display: none;
+}
+
+.tools-options__links--details {
+    grid-area: input_two;
+    margin-top: 0;
     display: none;
 }
 
 .tools-options__links--android {
     grid-area: input_one;
+    margin-top: 0;
     display: none;
 }
 

@@ -1,0 +1,160 @@
+body {
+    background-color: #F4F4F4; 
+    font-family: "IBM Plex Sans", sans-serif;
+    margin: 0;
+    color: #333;
+    letter-spacing: -0.05rem;
+} 
+    
+.white-background { 
+    background-color: #FFFFFF; 
+    margin: 0.9375rem; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.35); 
+    padding: 0.9375rem;
+}
+
+.buttonsCTA {
+    margin-top: 1.25rem;
+    padding: 0 1.875rem 1.25rem 1.875rem;
+}
+
+.content-header {
+    margin: 0.9375rem 0;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+}
+
+.content-simpletext {
+    margin: 0.9375rem 0;
+    font-size: 1.125rem;
+    line-height: 1.4rem;
+}
+
+.content-simpletext__secondary {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.3rem;
+}
+
+.content-simpletext__bold {
+    margin: 0.9375rem 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+strong {
+    font-weight: 500;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: 11% 89%;
+    align-items: center;
+}
+
+.footer-icon {
+    width: 1.5rem;
+}
+
+.screen {
+    width: 100%;
+}
+
+.full-screen__container {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+
+.centered-screen__container {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    width: 50%;
+}
+
+.separator {
+    border-top: 1px solid #CCCCCC;
+    margin: 1.25rem 0;
+}
+
+.single-separator {
+    border-top: 1px solid #CCCCCC;
+    margin: 1.25rem 0;
+}
+
+.more-details {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    text-decoration: none;
+}
+
+.more-details svg {
+    justify-self: right;
+}
+
+.more-details__link {
+    margin: 0;
+    color: #333;
+    font-size: 1rem;
+}
+
+.download-list {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.download-list a {
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+}
+
+.ios-badge {
+    margin: 0;
+    width: 7.375rem;
+}
+
+.android-badge {
+    margin-left: 0.75rem;
+    width: 8.3125rem;
+}
+
+.buttons {
+    display: none;
+}
+
+.button-link, 
+.button-linkCTA {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.button-link p {
+    margin: 0;
+}
+
+.grey-button {
+    display: flex;
+    background-color: #666666;
+    width: 100%;
+    height: 2.8125rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.red-button {
+    display: flex;
+    background-color: #E60000;
+    width: 100%;
+    height: 2.8125rem;
+    align-items: center;
+    justify-content: center;
+}
