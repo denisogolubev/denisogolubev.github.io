@@ -353,19 +353,9 @@ strong {
 
 }
 
-.tools-options__text--items {
-    grid-area: selection;
-    width: 20rem;
-    outline: none;
-    height: 2rem;
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    background-color: #242f3d;
-    color: #e9e8e8;
-    padding-left: 0.5rem;
-}
-
-.tools-options__img--items {
+.tools-options__text--items,
+.tools-options__img--items,
+.tools-options__buttons-items {
     grid-area: selection;
     width: 20rem;
     outline: none;
@@ -522,6 +512,19 @@ input:focus {
 
 #add_markets {
     display: none;
+}
+
+.tools-options__buttons {
+    display: none;
+    grid-area: options;
+    margin: 1rem;
+    grid-template-areas: "selection"
+                         "input"
+                         "button";
+}
+
+.tools-options__buttons--name {
+    grid-area: input;
 }
 
 .tools-options__button,

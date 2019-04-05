@@ -140,6 +140,7 @@ var UIController = function () {
         toolsCategoryesText: '.tools-nav__categoryes--text',
         toolsCategoryesImg: '.tools-nav__categoryes--img',
         toolsCategoryesLinks: '.tools-nav__categoryes--links',
+        toolsCategoryesBtn: '.tools-nav__categoryes--buttons',
         imgOptions: '.tools-options__img--items',
         imgURL: '.tools-options__img--input',
         addImgButton: 'add_img',
@@ -157,6 +158,9 @@ var UIController = function () {
         linksButtonMarkets: 'add_markets',
         linksButtonBtn: 'add-link__button',
         linksLang: '.tools-options__links--lang',
+        btnCategory: '.tools-options__buttons',
+        btnOptions: '.tools-options__buttons-items',
+        btnInputName: '.tools-options__buttons--name',
         deleteElButton: '.item__delete--btn',
         edit: 'ion-edit',
         delete: 'ion-ios-trash',
@@ -168,6 +172,7 @@ var UIController = function () {
         arrowUp: 'ion-arrow-up-c',
         editBold: 'bold',
         editSeparator: 'separator'
+
         
 
        
@@ -255,6 +260,7 @@ var UIController = function () {
                 document.querySelector(DOMStrings.linksinputBtnName).style.display = 'none';
                 document.getElementById(DOMStrings.linksButtonMoreDet).style.display = 'none';
                 document.getElementById(DOMStrings.linksButtonMarkets).style.display = 'none';
+
             }
     
             if (type === 'More details') {
@@ -363,6 +369,26 @@ var UIController = function () {
             } else if (type === 'Link as button (CTA)') {
                 document.querySelector(DOMStrings.generatedButtons).insertAdjacentHTML('beforeend', newHtml);
             }
+        },
+
+        getBtns: function () {
+            return {
+                type: document.querySelector(DOMStrings.btnOptions).value,
+                content: document.querySelector(DOMStrings.btnInputName).value
+            }
+        },
+
+        addBtn: function(obj, type) {
+            var html, newHtml;
+
+            if (type === 'Red CTA button') {
+                html = '<section class="editor" id="%id%"><a href="[*Trackable URL: ZAKAZ]" class="button-linkCTA"><div class="red-button"><p>%content%</p></div></a><div class="buttons"><i class="ion-edit links-btnsCTA"></i><i class="ion-ios-trash links-btnsCTA"></i></div></section>';
+            } 
+
+            newHtml = html.replace('%id%', obj.id);
+            newHtml = newHtml.replace('%content%', obj.content);
+
+            document.querySelector(DOMStrings.generatedButtons).insertAdjacentHTML('beforeend', newHtml);
         },
 
         
@@ -508,6 +534,10 @@ var UIController = function () {
             document.querySelector(DOMStrings.linksCategory).style.display = 'grid';
         },
 
+        displayBtnCategory: function() {
+            document.querySelector(DOMStrings.btnCategory).style.display = 'grid';
+        },
+
         getDOMStrings: function() {
             return DOMStrings;
         }
@@ -557,7 +587,12 @@ var combiController = (function (editCtrl, UICtrl) {
 
             document.querySelector(DOM.linksType).addEventListener('change', ctrlChangeLinksInt);
 
-            document.getElementById(DOM.linksButtonMoreDet).addEventListener('click', ctrlAddLinksItem)
+            document.getElementById(DOM.linksButtonMoreDet).addEventListener('click', ctrlAddLinksItem);
+
+            document.querySelector(DOM.toolsCategoryesBtn).addEventListener("click", function() {
+                setDisplayNone();
+                UIController.displayBtnCategory();
+            })
 
             document.querySelector(DOM.textInput).addEventListener('keypress', function(event) {
                 var el = document.querySelector(DOM.textInput);
@@ -970,6 +1005,7 @@ var combiController = (function (editCtrl, UICtrl) {
         document.querySelector(DOM.imgCategory).style.display = 'none';
         document.querySelector(DOM.textCategory).style.display = 'none';
         document.querySelector(DOM.linksCategory).style.display = 'none';
+        document.querySelector(DOM.btnCategory).style.display = 'none';
         
     };
 
