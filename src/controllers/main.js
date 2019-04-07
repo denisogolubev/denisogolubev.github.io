@@ -132,6 +132,7 @@ var UIController = function () {
         textInput: '.tools-options__text--input',
         generatedContent: '.display-device__content',
         generatedButtons: '.display-device__buttons',
+        clearDisplay: '.display-clear',
         addContentButton: 'add_text',
         downloadHtml: '.display-button__download',
         textCategory: '.tools-options__text',
@@ -161,6 +162,8 @@ var UIController = function () {
         btnCategory: '.tools-options__buttons',
         btnOptions: '.tools-options__buttons-items',
         btnInputName: '.tools-options__buttons--name',
+        btnAdd: 'add-cta-button', 
+        btnSave: 'save_cta-button',
         deleteElButton: '.item__delete--btn',
         edit: 'ion-edit',
         delete: 'ion-ios-trash',
@@ -382,7 +385,7 @@ var UIController = function () {
             var html, newHtml;
 
             if (type === 'Red CTA button') {
-                html = '<section class="editor" id="%id%"><a href="[*Trackable URL: ZAKAZ]" class="button-linkCTA"><div class="red-button"><p>%content%</p></div></a><div class="buttons"><i class="ion-edit links-btnsCTA"></i><i class="ion-ios-trash links-btnsCTA"></i></div></section>';
+                html = '<section class="editor" id="%id%"><a href="[*Trackable URL: ZAKAZ]" class="button-CTA"><div class="red-button"><p>%content%</p></div></a><div class="buttons"><i class="ion-edit btn-CTA"></i><i class="ion-ios-trash btn-CTA"></i></div></section>';
             } 
 
             newHtml = html.replace('%id%', obj.id);
@@ -488,6 +491,9 @@ var UIController = function () {
                 document.querySelector(DOMStrings.linksType).value = 'Link as button (CTA)';
                 document.querySelector(DOMStrings.linksinputBtnName).value = content;
                 document.querySelector(DOMStrings.linksInputDetails).value = url;
+            } else if (cls = "button-CTA") {
+                document.querySelector(DOMStrings.btnOptions).value = 'Red CTA button';
+                document.querySelector(DOMStrings.btnInputName).value = content;
             }
         },
 
@@ -511,7 +517,7 @@ var UIController = function () {
         clearFields: function() {
             var fields, fieldsArray;
 
-            fields = document.querySelectorAll(DOMStrings.textInput + ',' + DOMStrings.imgURL + ',' + DOMStrings.linksInputDetails + ',' + DOMStrings.linksInputAndroid + ',' + DOMStrings.linksInputios + ',' + DOMStrings.linksinputBtnName);
+            fields = document.querySelectorAll(DOMStrings.textInput + ',' + DOMStrings.imgURL + ',' + DOMStrings.linksInputDetails + ',' + DOMStrings.linksInputAndroid + ',' + DOMStrings.linksInputios + ',' + DOMStrings.linksinputBtnName + ',' + DOMStrings.btnInputName);
 
             fieldsArray = Array.prototype.slice.call(fields);
 
@@ -650,7 +656,18 @@ var combiController = (function (editCtrl, UICtrl) {
 
             document.getElementById(DOM.editSeparator).addEventListener('click', ctrlAddSeparatorItem);
 
+            document.getElementById(DOM.btnAdd).addEventListener('click', ctrlAddBtn);
 
+            document.getElementById(DOM.btnSave).addEventListener('click', function(event) {
+                if (event) {
+                    saveItem(param);
+                }
+            });
+
+            document.querySelector(DOM.clearDisplay).addEventListener('click', function() {
+                document.querySelector(DOM.generatedContent).innerHTML = '';
+                document.querySelector(DOM.generatedButtons).innerHTML = '';
+            });
 
             };
             
@@ -732,6 +749,19 @@ var combiController = (function (editCtrl, UICtrl) {
             if (input.content !== "" && input.url !== "") {
                 newPageElement = editorController.addPageButtonLinksElement(input.content, input.url);
                 UIController.addButtonLink(newPageElement, input.type);
+                console.log(input.type + ' added');
+                UICtrl.clearFields();
+            }
+        }
+    };
+
+    var ctrlAddBtn = function() {
+        var input, newPageElement;
+        input = UICtrl.getBtns();
+        if (input.type === 'Red CTA button') {
+            if (input.content !== '') {
+                newPageElement = editorController.addPageButtonLinksElement(input.content, 'zakaz');
+                UIController.addBtn(newPageElement, input.type);
                 console.log(input.type + ' added');
                 UICtrl.clearFields();
             }
@@ -822,6 +852,14 @@ var combiController = (function (editCtrl, UICtrl) {
             UIController.editItem(cls, content, '', '', '', url);
             setBtnDisplayNone();
             document.getElementById(DOM.saveLinksButton).style.display = 'block'; 
+        } else if (param = 'btn-CTA') {
+            cls = el.childNodes[0].classList[0];
+            content = el.childNodes[0].childNodes[0].childNodes[0].innerHTML;
+            setDisplayNone();
+            UIController.displayBtnCategory();
+            UIController.editItem(cls, content, '', '', '', '');
+            setBtnDisplayNone();
+            document.getElementById(DOM.btnSave).style.display = 'block'; 
         }
     }; 
 
@@ -886,6 +924,10 @@ var combiController = (function (editCtrl, UICtrl) {
             el.childNodes[0].childNodes[0].childNodes[0].innerHTML = input.content;
         };
 
+        saveBtns = function() {
+            el.childNodes[0].childNodes[0].childNodes[0].innerHTML = input.content;
+        };
+
         if (param === 'text') {
             input = UICtrl.getInputTextCategory();
             if (input.type === 'Header') {
@@ -927,7 +969,10 @@ var combiController = (function (editCtrl, UICtrl) {
                 remAtr();
             } 
             
-        } 
+        } else if (param === 'btn-CTA') {
+            input = UIController.getBtns();
+            saveBtns();
+        }
 
         setBtnDisplayNone();
         UICtrl.clearFields();
@@ -947,7 +992,7 @@ var combiController = (function (editCtrl, UICtrl) {
     var ctrlDeleteItem = function(param) {
         var itemID, ID;
             
-        if (param === 'text' || param === 'img' || param === 'links-markets' || param === 'sep' || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA') {
+        if (param === 'text' || param === 'img' || param === 'links-markets' || param === 'sep' || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA' || param === 'btn-CTA') {
             itemID = event.target.parentNode.parentNode.id;
         } else if (param === "links-detail") {
             itemID = event.target.parentNode.parentNode.parentNode.id;
@@ -1017,6 +1062,8 @@ var combiController = (function (editCtrl, UICtrl) {
         document.getElementById(DOM.linksButtonMoreDet).style.display = 'none';
         document.getElementById(DOM.linksButtonMarkets).style.display = 'none';
         document.getElementById(DOM.saveLinksButton).style.display = 'none';
+        document.getElementById(DOM.btnAdd).style.display = 'none';
+        document.getElementById(DOM.btnSave).style.display = 'none';
     }
 
     return {

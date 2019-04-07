@@ -43,12 +43,6 @@ main {
     align-items: center;
 }
 
-.display-size p {
-    text-align: center;
-    line-height: 1.5rem;
-    margin: 0;
-}
-
 .display-device {
     width: 375px;
     height: 667px;
@@ -242,7 +236,8 @@ strong {
 }
 
 .button-link, 
-.button-linkCTA {
+.button-linkCTA,
+.button-CTA {
     text-decoration: none;
     color: #FFFFFF;
     font-size: 1rem;
@@ -289,12 +284,27 @@ strong {
     cursor: pointer;
 }
 
-.display-button__download:hover {
+.display-button__download:hover,
+.display-clear:hover {
     background-color: #2b5278;
     border-color: #e9e8e8;
     height: 72%;
     padding: 0 0.7rem;
     letter-spacing: 0.05rem;
+}
+
+.display-clear {
+    grid-area: size;
+    padding: 0 0.5rem;
+    height: 70%;
+    border: 0.1rem solid #e9e8e8;
+    border-radius: 0.2rem;
+    background-color: #0e1621;
+    color: #e9e8e8;
+    font-size: 1.3rem;
+    outline: none;
+    transition: 300ms;
+    cursor: pointer;
 }
 
 .tools {
