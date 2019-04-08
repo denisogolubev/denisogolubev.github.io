@@ -512,6 +512,11 @@ var UIController = function () {
             document.getElementById(DOMStrings.addContentButton).style.display = 'block';
             document.getElementById(DOMStrings.addImgButton).style.display = 'block';
             document.getElementById(DOMStrings.linksButtonMoreDet).style.display = 'block';
+            document.getElementById(DOMStrings.btnAdd).style.display = 'block';
+            document.getElementById(DOMStrings.saveTextButton).style.display = 'none';
+            document.getElementById(DOMStrings.saveImgButton).style.display = 'none';
+            document.getElementById(DOMStrings.saveLinksButton).style.display = 'none';
+            document.getElementById(DOMStrings.btnSave).style.display = 'none';
         },
 
         clearFields: function() {
@@ -572,6 +577,9 @@ var combiController = (function (editCtrl, UICtrl) {
             document.querySelector(DOM.toolsCategoryesText).addEventListener("click", function() {
                 setDisplayNone();
                 UIController.displayTextCategory();
+                UIController.setAddBtnBlock();
+                UIController.clearFields();
+
             });
 
             document.getElementById(DOM.addContentButton).addEventListener('click', ctrlAddTextItem);
@@ -580,6 +588,8 @@ var combiController = (function (editCtrl, UICtrl) {
             document.querySelector(DOM.toolsCategoryesImg).addEventListener("click", function() {
                 setDisplayNone();        
                 UIController.displayImgCategory();
+                UIController.setAddBtnBlock();
+                UIController.clearFields();
             });
 
             document.getElementById(DOM.addImgButton).addEventListener("click", ctrlAddImgItem);    
@@ -589,6 +599,7 @@ var combiController = (function (editCtrl, UICtrl) {
                 setDisplayNone();        
                 UIController.displayLinksCategory();
                 ctrlChangeLinksInt();
+                UIController.clearFields();
             });
 
             document.querySelector(DOM.linksType).addEventListener('change', ctrlChangeLinksInt);
@@ -598,6 +609,8 @@ var combiController = (function (editCtrl, UICtrl) {
             document.querySelector(DOM.toolsCategoryesBtn).addEventListener("click", function() {
                 setDisplayNone();
                 UIController.displayBtnCategory();
+                UIController.setAddBtnBlock();
+                UIController.clearFields();
             })
 
             document.querySelector(DOM.textInput).addEventListener('keypress', function(event) {
