@@ -104,6 +104,10 @@ return {
         }
     },
 
+    clearData: function() {
+        data.allPageElemnts.length = 0;
+    },
+
 
     getData: function() {
         return {
@@ -680,6 +684,7 @@ var combiController = (function (editCtrl, UICtrl) {
             document.querySelector(DOM.clearDisplay).addEventListener('click', function() {
                 document.querySelector(DOM.generatedContent).innerHTML = '';
                 document.querySelector(DOM.generatedButtons).innerHTML = '';
+                editCtrl.clearData();
             });
 
             };
@@ -913,6 +918,8 @@ var combiController = (function (editCtrl, UICtrl) {
             el.childNodes[1].childNodes[0].childNodes[0].innerText = textValue;
             el.childNodes[1].childNodes[0].attributes.href.nodeValue = input.url;
             document.getElementById(DOM.linksItemMarket).removeAttribute('disabled', 'disabled');
+            document.getElementById(DOM.linksItemBtnGrey).removeAttribute('disabled', 'disabled');
+            document.getElementById(DOM.linksItemBtnRed).removeAttribute('disabled', 'disabled');
         };
 
         saveMarkets = function() {
@@ -930,6 +937,8 @@ var combiController = (function (editCtrl, UICtrl) {
             el.childNodes[0].childNodes[0].attributes.href.nodeValue = input.urlAndroid;
             el.childNodes[0].childNodes[1].attributes.href.nodeValue = input.urlIos;
             document.getElementById(DOM.linksItemDet).removeAttribute('disabled', 'disabled');
+            document.getElementById(DOM.linksItemBtnGrey).removeAttribute('disabled', 'disabled');
+            document.getElementById(DOM.linksItemBtnRed).removeAttribute('disabled', 'disabled');
         };
 
         saveBtnLink = function() {
@@ -1057,6 +1066,10 @@ var combiController = (function (editCtrl, UICtrl) {
         
         UICtrl.downloadDoc();
         
+    };
+
+    var ctrlCreateTemplate = function() {
+        /*Insert created template*/
     };
 
     var setDisplayNone = function() {
