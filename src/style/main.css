@@ -35,9 +35,8 @@ main {
     box-sizing: border-box;
     grid-area: display;
     display: grid;
-    grid-template-rows: 8% 82% 10%;
-    grid-template-areas: "size"
-                         "device"
+    grid-template-rows: 90% 10%;
+    grid-template-areas: "device"
                          "button";
     justify-items: center;
     align-items: center;
@@ -268,12 +267,29 @@ strong {
 
 /*Классы для выгрузки КОНЕЦ*/
 
-
+.display-buttons {
+    display: flex;
+}
 
 .display-button__download {
     grid-area: button;
-    padding: 0 0.5rem;
-    height: 70%;
+    width: 12rem;
+    margin-left: 2rem;
+    padding: 1rem 0.5rem;
+    border: 0.1rem solid #e9e8e8;
+    border-radius: 0.2rem;
+    background-color: #0e1621;
+    color: #e9e8e8;
+    font-size: 1.3rem;
+    outline: none;
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.display-clear {
+    grid-area: button;
+    padding: 1rem 0.5rem;
+    width: 12rem;
     border: 0.1rem solid #e9e8e8;
     border-radius: 0.2rem;
     background-color: #0e1621;
@@ -288,24 +304,10 @@ strong {
 .display-clear:hover {
     background-color: #2b5278;
     border-color: #e9e8e8;
-    height: 72%;
-    padding: 0 0.7rem;
+    padding: 1rem 0.7rem;
     letter-spacing: 0.05rem;
 }
 
-.display-clear {
-    grid-area: size;
-    padding: 0 0.5rem;
-    height: 70%;
-    border: 0.1rem solid #e9e8e8;
-    border-radius: 0.2rem;
-    background-color: #0e1621;
-    color: #e9e8e8;
-    font-size: 1.3rem;
-    outline: none;
-    transition: 300ms;
-    cursor: pointer;
-}
 
 .tools {
     background-color: #0e1621;
@@ -562,6 +564,21 @@ input:focus {
     background-color: #2b5278;
     border-color: #e9e8e8;
     font-size: 1.3rem;
+}
+
+.tools-options__templates {
+    display: none;
+    flex-direction: row;
+}
+
+.tools-options__templates--img {
+    margin: 1rem;
+    width: 15%;
+    cursor: pointer;
+}
+
+.img {
+    width: 100%;
 }
 
 footer {

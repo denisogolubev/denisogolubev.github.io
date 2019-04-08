@@ -146,6 +146,7 @@ var UIController = function () {
         toolsCategoryesImg: '.tools-nav__categoryes--img',
         toolsCategoryesLinks: '.tools-nav__categoryes--links',
         toolsCategoryesBtn: '.tools-nav__categoryes--buttons',
+        toolsCategoryesTemps: '.tools-nav__categoryes--temps', 
         imgOptions: '.tools-options__img--items',
         imgURL: '.tools-options__img--input',
         addImgButton: 'add_img',
@@ -168,6 +169,8 @@ var UIController = function () {
         btnInputName: '.tools-options__buttons--name',
         btnAdd: 'add-cta-button', 
         btnSave: 'save_cta-button',
+        tempCategory: '.tools-options__templates',
+        tempItem: '.tools-options__templates--img',
         deleteElButton: '.item__delete--btn',
         edit: 'ion-edit',
         delete: 'ion-ios-trash',
@@ -398,6 +401,36 @@ var UIController = function () {
             document.querySelector(DOMStrings.generatedButtons).insertAdjacentHTML('beforeend', newHtml);
         },
 
+        addTemplate: function(templateName) {
+            var html, btnHtml;
+
+            if (templateName === 'space') {
+                html = '<section class="editor" id="0"><section class="full-screen__container" id="%id%"><img src="https://cdn.wccftech.com/wp-content/uploads/2016/09/spacee-2060x1288.jpg" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="1"><p class="content-header">Philosophy of space</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><p class="content-simpletext">Galilean and Cartesian theories about space, matter and motion are at the foundation of the Scientific Revolution, which is understood to have culminated with the publication of Newton\'s Principia in 1687.[5] Newton\'s theories about space and time helped him explain the movement of objects. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="3"><p class="content-simpletext">While his theory of space is considered the most influential in Physics, it emerged from his predecessors\' ideas about the same.[6]</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="4"><a href="https://en.wikipedia.org/wiki/Space" class="button-link"><div class="grey-button"><p>More details</p></div></a><div class="buttons"><i class="ion-edit links-btns"></i><i class="ion-ios-trash links-btns"></i><i class="ion-arrow-down-c links-btns"></i><i class="ion-arrow-up-c links-btns"></i></div></section><section class="editor" id="5"><div class="single-separator"></div><div class="buttons"><i class="ion-ios-trash sep"></i><i class="ion-arrow-down-c sep"></i><i class="ion-arrow-up-c sep"></i></div></section><section class="editor" id="6"><p class="content-simpletext__secondary">As one of the pioneers of modern science, Galilei revised the established Aristotelian and Ptolemaic ideas about a geocentric cosmos. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="7"><p class="content-simpletext__secondary">He backed the Copernican theory that the universe was heliocentric, with a stationary sun at the center and the planets—including the Earth—revolving around the sun. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="8"><p class="content-simpletext__secondary">If the Earth moved, the Aristotelian belief that its natural tendency was to remain at rest was in question. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="9" value="ENG"><div class="separator"></div><section><a href="https://en.wikipedia.org/wiki/Space" class="more-details" "=""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i><i class="ion-arrow-down-c links-detail"></i><i class="ion-arrow-up-c links-detail"></i></div></section>';
+
+                document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', html);
+            } else if (templateName === 'mars') {
+                html = '<section class="editor" id="0"><section class="full-screen__container" id="%id%"><img src="https://pi.tedcdn.com/r/talkstar-assets.s3.amazonaws.com/production/playlists/playlist_414/big_deal_mars_1200x627.jpg?quality=89&amp;w=800" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="1"><p class="content-header">Geography and naming of surface features</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><p class="content-simpletext">Although better remembered for mapping the Moon, Johann Heinrich Mädler and Wilhelm Beer were the first "areographers".</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="3"><div class="single-separator"></div><div class="buttons"><i class="ion-ios-trash sep"></i><i class="ion-arrow-down-c sep"></i><i class="ion-arrow-up-c sep"></i></div></section><section class="editor" id="4"><p class="content-simpletext__secondary">Today, features on Mars are named from a variety of sources. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="5"><p class="content-simpletext__secondary">Albedo features are named for classical mythology. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="6"><p class="content-simpletext__secondary">Craters larger than 60 km are named for deceased scientists and writers and others who have contributed to the study of Mars.</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="7"><p class="content-simpletext__bold">Dowload our app:</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="8" value="ENG"><section class="download-list"><a href="https://www.google.com"><img src="https://cscappimg.vodafone.ua/1631" alt="ios-badge" class="ios-badge"></a><a href="https://www.google.com"><img src="https://cscappimg.vodafone.ua/1632" alt="android-badge" class="android-badge"></a></section><div class="buttons"><i class="ion-edit links-markets"></i><i class="ion-ios-trash links-markets"></i><i class="ion-arrow-down-c links-markets"></i><i class="ion-arrow-up-c links-markets"></i></div></section>';
+
+                btnHtml = '<section class="editor" id="9"><a href="https://www.google.com" class="button-linkCTA"><div class="red-button"><p>One way ticket</p></div></a><div class="buttons"><i class="ion-edit links-btnsCTA"></i><i class="ion-ios-trash links-btnsCTA"></i></div></section>'
+
+                document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', html);
+                document.querySelector(DOMStrings.generatedButtons).insertAdjacentHTML('beforeend', btnHtml);
+            } else if (templateName === 'moon') {
+                html = '<section class="editor" id="0"><section class="full-screen__container" id="%id%"><img src="https://i.kinja-img.com/gawker-media/image/upload/s--p_QT7xhU--/c_scale,f_auto,fl_progressive,q_80,w_800/wmmg6jvazg87tklpgm0g.jpg" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="1"><p class="content-header">History, observation and exploration</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><p class="content-simpletext">During the late 1950s at the height of the Cold War, the United States Army conducted a classified feasibility study that proposed </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="3"><p class="content-simpletext">the construction of a manned military outpost on the Moon called Project Horizon with the potential to conduct a wide range of missions from scientific research to nuclear Earth bombardment. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="4" value="ENG"><div class="separator"></div><section><a href="https://en.wikipedia.org/wiki/Moon" class="more-details" "=""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i><i class="ion-arrow-down-c links-detail"></i><i class="ion-arrow-up-c links-detail"></i></div></section>';
+
+                btnHtml = '<section class="editor" id="5"><a href="https://www.google.com/search?rlz=1C1NHXL_ruUA799UA799&amp;tbm=isch&amp;sa=1&amp;ei=YMurXJ3DA9LorgSX_aywBA&amp;q=moon&amp;oq=moon&amp;gs_l=img.3...0.0..286156...0.0..0.0.0.......1......gws-wiz-img.uAZ23v79koc" class="button-linkCTA"><div class="red-button"><p>More Moon photos</p></div></a><div class="buttons"><i class="ion-edit links-btnsCTA"></i><i class="ion-ios-trash links-btnsCTA"></i></div></section>';
+
+                document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', html);
+                document.querySelector(DOMStrings.generatedButtons).insertAdjacentHTML('beforeend', btnHtml);
+            } else if (templateName === 'saturn') {
+                html = '<section class="editor" id="0"><p class="content-header">Modern NASA and ESA probes</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="1"><p class="content-simpletext">Pioneer 11 made the first flyby of Saturn in September 1979, when it passed within 20,000 km of the planet\'s cloud tops.</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><section class="centered-screen__container" id="%id%"><img src="https://www.pngarts.com/files/4/Saturn-PNG-High-Quality-Image.png" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="3"><p class="content-simpletext">Images were taken of the planet and a few of its moons, although their resolution was too low to discern surface detail.</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="4"><section class="centered-screen__container" id="%id%"><img src="http://www.stickpng.com/assets/images/580b585b2edbce24c47b270d.png" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="5"><p class="content-simpletext">The spacecraft also studied Saturn\'s rings, revealing the thin F-ring and the fact that dark gaps in the rings are bright when viewed at high phase angle (towards the Sun), meaning that they contain fine light-scattering material ❤️</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>'
+
+                document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', html);
+            }
+
+            
+        },
+
         
         downloadDoc: function() {
             var startHtml, styleHtml, endHtml, file;
@@ -553,6 +586,10 @@ var UIController = function () {
             document.querySelector(DOMStrings.btnCategory).style.display = 'grid';
         },
 
+        displayTempsCategory: function() {
+            document.querySelector(DOMStrings.tempCategory).style.display = 'flex';
+        },
+
         getDOMStrings: function() {
             return DOMStrings;
         }
@@ -615,7 +652,21 @@ var combiController = (function (editCtrl, UICtrl) {
                 UIController.displayBtnCategory();
                 UIController.setAddBtnBlock();
                 UIController.clearFields();
-            })
+            });
+
+            document.querySelector(DOM.toolsCategoryesTemps).addEventListener('click', function() {
+                setDisplayNone();
+                UIController.displayTempsCategory();
+                UIController.setAddBtnBlock();
+                UIController.clearFields();
+            });
+
+            document.querySelector(DOM.tempCategory).addEventListener('click', function(event) {
+                var tmp;
+                tmp = event.target.id;
+                clearDislayResult();
+                ctrlCreateTemplate(tmp);
+            });
 
             document.querySelector(DOM.textInput).addEventListener('keypress', function(event) {
                 var el = document.querySelector(DOM.textInput);
@@ -681,11 +732,7 @@ var combiController = (function (editCtrl, UICtrl) {
                 }
             });
 
-            document.querySelector(DOM.clearDisplay).addEventListener('click', function() {
-                document.querySelector(DOM.generatedContent).innerHTML = '';
-                document.querySelector(DOM.generatedButtons).innerHTML = '';
-                editCtrl.clearData();
-            });
+            document.querySelector(DOM.clearDisplay).addEventListener('click', clearDislayResult);
 
             };
             
@@ -1068,8 +1115,30 @@ var combiController = (function (editCtrl, UICtrl) {
         
     };
 
-    var ctrlCreateTemplate = function() {
-        /*Insert created template*/
+    var ctrlCreateTemplate = function(templateName) {
+        var rowCounter;
+        
+        UIController.setAddBtnBlock();
+        UIController.clearFields();
+        editCtrl.clearData();
+
+        if (templateName === 'space' || templateName === 'mars') {
+            rowCounter = 10;
+        } else if (templateName === 'moon' || templateName === 'saturn') {
+            rowCounter = 6;
+        } 
+
+        for (var i = 0; i < rowCounter; i++) {
+            editCtrl.addPageElement('template row');
+        }
+
+        UIController.addTemplate(templateName);
+    };
+
+    var clearDislayResult = function () {
+        document.querySelector(DOM.generatedContent).innerHTML = '';
+        document.querySelector(DOM.generatedButtons).innerHTML = '';
+        editCtrl.clearData();
     };
 
     var setDisplayNone = function() {
@@ -1077,6 +1146,7 @@ var combiController = (function (editCtrl, UICtrl) {
         document.querySelector(DOM.textCategory).style.display = 'none';
         document.querySelector(DOM.linksCategory).style.display = 'none';
         document.querySelector(DOM.btnCategory).style.display = 'none';
+        document.querySelector(DOM.tempCategory).style.display = 'none';
         
     };
 

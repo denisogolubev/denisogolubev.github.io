@@ -21,12 +21,14 @@
     <main>
         <!--Display section start-->
         <section class="display">
-            <button class="display-clear">Clear result</button>
             <section class="display-device">
                 <article class="display-device__content"></article>
                 <article class="display-device__buttons"></article>
             </section>
-            <button class="display-button__download">Download HTML</button>
+            <section class="display-buttons">
+                <button class="display-clear">Clear result</button>
+                <button class="display-button__download">Download HTML</button>
+            </section>           
         </section>
         <!--Display section end-->
 
@@ -39,7 +41,7 @@
                     <li class="tools-nav__categoryes--option" value="Tables">Tables</li>
                     <li class="tools-nav__categoryes--links" value="Links">Links</li>
                     <li class="tools-nav__categoryes--buttons" value="Buttons">Buttons</li>
-                    <li class="tools-nav__categoryes--option" value="Templates">Templates</li>
+                    <li class="tools-nav__categoryes--temps" value="Templates">Templates</li>
                 </ul>
             </nav>
             <section class="tools-options">
@@ -101,6 +103,20 @@
                     <input class="tools-options__buttons--name" type="text" placeholder="Enter button name"/>
                     <button class="tools-options__button" id="add-cta-button">Add</button>
                     <button class="tools-options__button--save" id="save_cta-button">Save</button>
+                </section>
+                <section class="tools-options__templates">
+                    <section class="tools-options__templates--img">
+                        <img src="src/img/Space.jpg" alt="Space" class="img" id="space">
+                    </section>
+                    <section class="tools-options__templates--img">
+                        <img src="src/img/Mars.jpg" alt="Mars" class="img" id="mars">
+                    </section>        
+                    <section class="tools-options__templates--img">
+                        <img src="src/img/Moon.jpg" alt="Moon" class="img" id="moon">
+                    </section>        
+                    <section class="tools-options__templates--img">
+                        <img src="src/img/Saturn.jpg" alt="Saturn" class="img" id="saturn">
+                    </section>                           
                 </section>
             </section>
         </section>
