@@ -38,7 +38,7 @@
                 <ul class="tools-nav__categoryes">
                     <li class="tools-nav__categoryes--text">Text</li>
                     <li class="tools-nav__categoryes--img">Images</li>
-                    <li class="tools-nav__categoryes--option" value="Tables">Tables</li>
+                    <li class="tools-nav__categoryes--tables" value="Tables">Tables</li>
                     <li class="tools-nav__categoryes--links" value="Links">Links</li>
                     <li class="tools-nav__categoryes--buttons" value="Buttons">Buttons</li>
                     <li class="tools-nav__categoryes--temps" value="Templates">Templates</li>
@@ -56,7 +56,8 @@
                     <section class="tools-options__text--options">
                         <button class="edit-buttons" id="bold">Bold</button>
                         <button class="edit-buttons" id="separator">Separator</button>
-                    </section>    
+                    </section>
+                    <input class="tools-options__text--footerUrl" type="text"  placeholder="Paste URL to footer image"/>    
                     <textarea class="tools-options__text--input" type="text"  placeholder="Type or paste your text"></textarea>
                     <button class="tools-options__button" id="add_text">Add</button>
                     <button class="tools-options__button--save" id="save_text">Save</button>
@@ -69,6 +70,25 @@
                     <input class="tools-options__img--input" type="text"  placeholder="Paste URL to your image"/>
                     <button class="tools-options__button" id="add_img">Add</button>
                     <button class="tools-options__button--save" id="save_img">Save</button>
+                </section>
+                <section class="tools-options__tables">
+                    <section class="tools-options__tables--type">
+                        <select name="" id="">
+                            <option value="2 columns">2 columns</option>
+                            <option value="3 columns">3 columns</option>
+                        </select>
+                    </section>
+                    <section class="tools-options__tables--fields">
+                        <section>
+                            <input type="text">
+                            <input type="text">
+                        </section>
+                        <!--<section>
+                            <input type="text">
+                            <input type="text">
+                            <input type="text">
+                        </section>-->
+                    </section>
                 </section>
                 <section class="tools-options__links">
                     <!--Links type select-->

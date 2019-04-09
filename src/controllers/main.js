@@ -134,6 +134,7 @@ var UIController = function () {
         optionSimpBldText:'simple-bold__text',
         optionFooter:'footer',
         textInput: '.tools-options__text--input',
+        textFooterUrl: '.tools-options__text--footerUrl',
         generatedContent: '.display-device__content',
         generatedButtons: '.display-device__buttons',
         clearDisplay: '.display-clear',
@@ -147,9 +148,11 @@ var UIController = function () {
         toolsCategoryesLinks: '.tools-nav__categoryes--links',
         toolsCategoryesBtn: '.tools-nav__categoryes--buttons',
         toolsCategoryesTemps: '.tools-nav__categoryes--temps', 
+        toolsCategoryesTables: '.tools-nav__categoryes--tables',
         imgOptions: '.tools-options__img--items',
         imgURL: '.tools-options__img--input',
         addImgButton: 'add_img',
+        tablesCategory: '.tools-options__tables',
         linksCategory: '.tools-options__links',
         linksType: '.tools-options__links--items',
         linksItemMarket: 'links-to__market',
@@ -191,10 +194,20 @@ var UIController = function () {
     return {
 
         getInputTextCategory: function() {
-            return {
-                type: document.querySelector(DOMStrings.textOptions).value,
-                content: document.querySelector(DOMStrings.textInput).value
-            };
+            var val = document.querySelector(DOMStrings.textOptions).value;
+            if (val === 'Footer') {
+                return {
+                    type: document.querySelector(DOMStrings.textOptions).value,
+                    url: document.querySelector(DOMStrings.textFooterUrl).value,
+                    content: document.querySelector(DOMStrings.textInput).value
+                }
+            } else {
+                return {
+                    type: document.querySelector(DOMStrings.textOptions).value,
+                    content: document.querySelector(DOMStrings.textInput).value
+                }
+            }
+            
         },
 
         addTextItem: function(obj, type) {
@@ -209,13 +222,20 @@ var UIController = function () {
             } else if (type === 'Simple bold text') {
                 html = '<section class="editor" id="%id%"><p class="content-simpletext__bold">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>';
             } else if (type === 'Footer') {
-                html = '<section class="editor" id="%id%"><section class="footer"><div><img src="https://cscappimg.vodafone.ua/928" class="footer-icon"></div><p class="content-simpletext__secondary">%content%</p></section><div class="buttons"><i class="ion-edit footer"></i><i class="ion-ios-trash footer"></i><i class="ion-arrow-down-c footer"></i><i class="ion-arrow-up-c footer"></i></div></section>';
+                html = '<section class="editor" id="%id%"><section class="footer"><div><img src="%url%" class="footer-icon"></div><p class="content-simpletext__secondary">%content%</p></section><div class="buttons"><i class="ion-edit footer"></i><i class="ion-ios-trash footer"></i><i class="ion-arrow-down-c footer"></i><i class="ion-arrow-up-c footer"></i></div></section>';
             } else {
                 console.log('This type can\'t be used.');
             }
 
-            newHtml = html.replace('%id%', obj.id);
-            newHtml = newHtml.replace('%content%', obj.content);
+            if (type === 'Footer') {
+                newHtml = html.replace('%id%', obj.id);
+                newHtml = newHtml.replace('%url%', obj.url)
+                newHtml = newHtml.replace('%content%', obj.content);
+            } else {
+                newHtml = html.replace('%id%', obj.id);
+                newHtml = newHtml.replace('%content%', obj.content);
+            }
+            
 
             document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
         },
@@ -405,7 +425,7 @@ var UIController = function () {
             var html, btnHtml;
 
             if (templateName === 'space') {
-                html = '<section class="editor" id="0"><section class="full-screen__container" id="%id%"><img src="https://cdn.wccftech.com/wp-content/uploads/2016/09/spacee-2060x1288.jpg" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="1"><p class="content-header">Philosophy of space</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><p class="content-simpletext">Galilean and Cartesian theories about space, matter and motion are at the foundation of the Scientific Revolution, which is understood to have culminated with the publication of Newton\'s Principia in 1687.[5] Newton\'s theories about space and time helped him explain the movement of objects. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="3"><p class="content-simpletext">While his theory of space is considered the most influential in Physics, it emerged from his predecessors\' ideas about the same.[6]</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="4"><a href="https://en.wikipedia.org/wiki/Space" class="button-link"><div class="grey-button"><p>More details</p></div></a><div class="buttons"><i class="ion-edit links-btns"></i><i class="ion-ios-trash links-btns"></i><i class="ion-arrow-down-c links-btns"></i><i class="ion-arrow-up-c links-btns"></i></div></section><section class="editor" id="5"><div class="single-separator"></div><div class="buttons"><i class="ion-ios-trash sep"></i><i class="ion-arrow-down-c sep"></i><i class="ion-arrow-up-c sep"></i></div></section><section class="editor" id="6"><p class="content-simpletext__secondary">As one of the pioneers of modern science, Galilei revised the established Aristotelian and Ptolemaic ideas about a geocentric cosmos. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="7"><p class="content-simpletext__secondary">He backed the Copernican theory that the universe was heliocentric, with a stationary sun at the center and the planets—including the Earth—revolving around the sun. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="8"><p class="content-simpletext__secondary">If the Earth moved, the Aristotelian belief that its natural tendency was to remain at rest was in question. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="9" value="ENG"><div class="separator"></div><section><a href="https://en.wikipedia.org/wiki/Space" class="more-details" "=""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i><i class="ion-arrow-down-c links-detail"></i><i class="ion-arrow-up-c links-detail"></i></div></section>';
+                html = '<section class="editor" id="0"><section class="full-screen__container" id="%id%"><img src="https://cdn.wccftech.com/wp-content/uploads/2016/09/spacee-2060x1288.jpg" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="1"><p class="content-header">Philosophy of space</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><p class="content-simpletext">Galilean and Cartesian theories about space, matter and motion are at the foundation of the Scientific Revolution, which is understood to have culminated with the publication of Newton\'s Principia in 1687.[5] Newton\'s theories about space and time helped him explain the movement of objects. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="3"><p class="content-simpletext">While his theory of space is considered the most influential in Physics, it emerged from his predecessors\' ideas about the same.[6]</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="4"><a href="https://en.wikipedia.org/wiki/Space" class="button-link"><div class="grey-button"><p>About Space</p></div></a><div class="buttons"><i class="ion-edit links-btns"></i><i class="ion-ios-trash links-btns"></i><i class="ion-arrow-down-c links-btns"></i><i class="ion-arrow-up-c links-btns"></i></div></section><section class="editor" id="5"><div class="single-separator"></div><div class="buttons"><i class="ion-ios-trash sep"></i><i class="ion-arrow-down-c sep"></i><i class="ion-arrow-up-c sep"></i></div></section><section class="editor" id="6"><p class="content-simpletext__secondary">As one of the pioneers of modern science, Galilei revised the established Aristotelian and Ptolemaic ideas about a geocentric cosmos. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="7"><p class="content-simpletext__secondary">He backed the Copernican theory that the universe was heliocentric, with a stationary sun at the center and the planets—including the Earth—revolving around the sun. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="8"><p class="content-simpletext__secondary">If the Earth moved, the Aristotelian belief that its natural tendency was to remain at rest was in question. </p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="9" value="ENG"><div class="separator"></div><section><a href="https://en.wikipedia.org/wiki/Space" class="more-details" "=""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i><i class="ion-arrow-down-c links-detail"></i><i class="ion-arrow-up-c links-detail"></i></div></section>';
 
                 document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', html);
             } else if (templateName === 'mars') {
@@ -492,6 +512,7 @@ var UIController = function () {
                 document.querySelector(DOMStrings.textInput).value = content;
             } else if (cls === 'footer') {
                 document.querySelector(DOMStrings.textOptions).value = 'Footer';
+                document.querySelector(DOMStrings.textFooterUrl).value = url;
                 document.querySelector(DOMStrings.textInput).value = content;
             } else if (cls === 'full-screen__container') {
                 document.querySelector(DOMStrings.imgOptions).value = 'Full screen';
@@ -559,7 +580,7 @@ var UIController = function () {
         clearFields: function() {
             var fields, fieldsArray;
 
-            fields = document.querySelectorAll(DOMStrings.textInput + ',' + DOMStrings.imgURL + ',' + DOMStrings.linksInputDetails + ',' + DOMStrings.linksInputAndroid + ',' + DOMStrings.linksInputios + ',' + DOMStrings.linksinputBtnName + ',' + DOMStrings.btnInputName);
+            fields = document.querySelectorAll(DOMStrings.textInput + ',' + DOMStrings.imgURL + ',' + DOMStrings.linksInputDetails + ',' + DOMStrings.linksInputAndroid + ',' + DOMStrings.linksInputios + ',' + DOMStrings.linksinputBtnName + ',' + DOMStrings.btnInputName + ',' + DOMStrings.textFooterUrl);
 
             fieldsArray = Array.prototype.slice.call(fields);
 
@@ -576,6 +597,10 @@ var UIController = function () {
 
         displayImgCategory: function() {
             document.querySelector(DOMStrings.imgCategory).style.display = 'grid';
+        },
+
+        displayTablesCategory: function() {
+            document.querySelector(DOMStrings.tablesCategory).style.display = 'grid';
         },
 
         displayLinksCategory: function() {
@@ -623,6 +648,15 @@ var combiController = (function (editCtrl, UICtrl) {
 
             });
 
+            document.querySelector(DOM.textOptions).addEventListener('change', function() {
+                var val = document.querySelector(DOM.textOptions).value;
+                if (val === 'Footer') {
+                    document.querySelector(DOM.textFooterUrl).style.display = 'block';
+                } else {
+                    document.querySelector(DOM.textFooterUrl).style.display = 'none';
+                }
+            });
+
             document.getElementById(DOM.addContentButton).addEventListener('click', ctrlAddTextItem);
 
             /*Tools options for image category*/
@@ -647,6 +681,13 @@ var combiController = (function (editCtrl, UICtrl) {
 
             document.getElementById(DOM.linksButtonMoreDet).addEventListener('click', ctrlAddLinksItem);
 
+            /*Tables category*/
+            document.querySelector(DOM.toolsCategoryesTables).addEventListener('click', function() {
+                setDisplayNone(); 
+                UIController.displayTablesCategory();
+            });
+
+            /*Buttons category*/
             document.querySelector(DOM.toolsCategoryesBtn).addEventListener("click", function() {
                 setDisplayNone();
                 UIController.displayBtnCategory();
@@ -654,6 +695,8 @@ var combiController = (function (editCtrl, UICtrl) {
                 UIController.clearFields();
             });
 
+
+            /*Template category*/
             document.querySelector(DOM.toolsCategoryesTemps).addEventListener('click', function() {
                 setDisplayNone();
                 UIController.displayTempsCategory();
@@ -664,8 +707,11 @@ var combiController = (function (editCtrl, UICtrl) {
             document.querySelector(DOM.tempCategory).addEventListener('click', function(event) {
                 var tmp;
                 tmp = event.target.id;
-                clearDislayResult();
-                ctrlCreateTemplate(tmp);
+                if (tmp) {
+                    clearDislayResult();
+                    ctrlCreateTemplate(tmp);
+                }
+                
             });
 
             document.querySelector(DOM.textInput).addEventListener('keypress', function(event) {
@@ -746,13 +792,24 @@ var combiController = (function (editCtrl, UICtrl) {
 
         input = UICtrl.getInputTextCategory();
 
-        if (input.content !== "") {
-            newPageElement = editorController.addPageElement(input.content);
-            UIController.addTextItem(newPageElement, input.type);
-            console.log(input.type + ' added')
-            UICtrl.clearFields();
+        if (input.type === 'Footer') {
+            if (input.content !== "" && input.url !== "") {
+                newPageElement = editorController.addPageButtonLinksElement(input.content, input.url);
+                UIController.addTextItem(newPageElement, input.type);
+                console.log(input.type + ' added')
+                UICtrl.clearFields();
+            } else {
+                console.log('Please, input your content');
+            }
         } else {
-            console.log('Please, input your content');
+            if (input.content !== "") {
+                newPageElement = editorController.addPageElement(input.content);
+                UIController.addTextItem(newPageElement, input.type);
+                console.log(input.type + ' added')
+                UICtrl.clearFields();
+            } else {
+                console.log('Please, input your content');
+            }
         }
                 
     };
@@ -834,7 +891,7 @@ var combiController = (function (editCtrl, UICtrl) {
     };
 
     var ctrlEditItem = function(param) {
-        var cls, lang, content, el;
+        var cls, lang, content, el, url;
 
         el = event.target.parentNode.parentNode;
         curID = el.id;
@@ -848,10 +905,11 @@ var combiController = (function (editCtrl, UICtrl) {
             document.getElementById(DOM.saveTextButton).style.display = 'block';
         } else if (param === 'footer') {
             cls = el.childNodes[0].classList[0];
+            url = el.childNodes[0].childNodes[0].childNodes[0].attributes.src.nodeValue;
             content = el.childNodes[0].childNodes[1].innerHTML;
             setDisplayNone();
             UIController.displayTextCategory();
-            UIController.editItem(cls, content);
+            UIController.editItem(cls, content, '', '', '', url);
             setBtnDisplayNone();
             document.getElementById(DOM.saveTextButton).style.display = 'block';
             document.getElementById(DOM.optionHeader).setAttribute('disabled', 'disabled');
@@ -941,6 +999,7 @@ var combiController = (function (editCtrl, UICtrl) {
         saveFooter = function() {
             el.childNodes[0].className = type;
             el.childNodes[0].childNodes[1].innerHTML = "";
+            el.childNodes[0].childNodes[0].childNodes[0].attributes.src.nodeValue = input.url;
             el.childNodes[0].childNodes[1].innerHTML = input.content;
             document.getElementById(DOM.optionHeader).removeAttribute('disabled', 'disabled');
             document.getElementById(DOM.optionSimpText).removeAttribute('disabled', 'disabled');
@@ -1147,6 +1206,7 @@ var combiController = (function (editCtrl, UICtrl) {
         document.querySelector(DOM.linksCategory).style.display = 'none';
         document.querySelector(DOM.btnCategory).style.display = 'none';
         document.querySelector(DOM.tempCategory).style.display = 'none';
+        document.querySelector(DOM.tablesCategory).style.display = 'none';
         
     };
 

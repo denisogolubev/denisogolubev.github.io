@@ -360,9 +360,16 @@ strong {
     margin: 1rem;
     grid-template-areas: "selection"
                          "options"
+                         "url"
                          "textarea"
                          "button";
 
+}
+
+.tools-options__text--footerUrl {
+    display: none;
+    grid-area: url;
+    margin-bottom: 0;
 }
 
 .tools-options__text--items,
@@ -524,6 +531,20 @@ input:focus {
 
 #add_markets {
     display: none;
+}
+
+.tools-options__tables{
+    display: none;
+    grid-template-areas: "type"
+                         "inputs"
+}
+
+.tools-options__tables--type {
+    grid-area: type;
+}
+
+.tools-options__tables--fields {
+    grid-area: inputs;
 }
 
 .tools-options__buttons {
