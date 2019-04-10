@@ -5,30 +5,35 @@ var editorController = function () {
     var PageElement = function (id, content) {
         this.id = id;
         this.content = content;
-    }
+    };
 
     var PageDetailLinksElement = function(id, language, url) {
         this.id = id;
         this.language = language;
         this.url = url;
-    }
+    };
 
     var PageMarketLinksElement = function(id, language, urlAndroid, urlIos) {
         this.id = id;
         this.language = language;
         this.urlAndroid = urlAndroid;
         this.urlIos = urlIos;
-    }
+    };
 
     var PageButtonLinksElement = function(id, content, url) {
         this.id = id;
         this.content = content;
         this.url = url;
-    }
+    };
+
+    var PageTableElement = function() {
+        
+    };
 
     var data = {
-        allPageElemnts: []
-    }
+        allPageElemnts: [],
+        tables:[]
+    };
 
 return {
     addPageElement: function (cont) {
