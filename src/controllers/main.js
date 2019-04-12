@@ -26,8 +26,17 @@ var editorController = function () {
         this.url = url;
     };
 
-    var PageTableElement = function() {
-        
+    var PageTwoRowTableElement = function(id, url, content) {
+        this.id = id;
+        this.url = url;
+        this.content = content;
+    };
+
+    var PageThreeRowTableElement = function(id, url, content, quantity) {
+        this.id = id;
+        this.url = url;
+        this.content = content;
+        this.quantity = quantity;
     };
 
     var data = {
@@ -35,16 +44,19 @@ var editorController = function () {
         tables:[]
     };
 
+    var generateID = function () {
+    
+        return data.allPageElemnts.length > 0
+            ? data.allPageElemnts[data.allPageElemnts.length - 1].id + 1
+            : 0;
+    }
+
 return {
     addPageElement: function (cont) {
         var ID, newPageElement;
 
         //Создаем ID;
-        if (data.allPageElemnts.length > 0) {
-            ID = data.allPageElemnts[data.allPageElemnts.length - 1].id + 1;
-        } else {
-            ID = 0;
-        }
+        ID = generateID();
 
         newPageElement = new PageElement(ID, cont);
         data.allPageElemnts.push(newPageElement);
@@ -55,11 +67,7 @@ return {
         var ID, newPageElement;
 
         //Создаем ID;
-        if (data.allPageElemnts.length > 0) {
-            ID = data.allPageElemnts[data.allPageElemnts.length - 1].id + 1;
-        } else {
-            ID = 0;
-        }
+        ID = generateID();
 
         newPageElement = new PageDetailLinksElement(ID, lang, url);
         data.allPageElemnts.push(newPageElement);
@@ -70,11 +78,7 @@ return {
         var ID, newPageElement;
 
         //Создаем ID;
-        if (data.allPageElemnts.length > 0) {
-            ID = data.allPageElemnts[data.allPageElemnts.length - 1].id + 1;
-        } else {
-            ID = 0;
-        }
+        ID = generateID();
 
         newPageElement = new PageMarketLinksElement(ID, lang, urlAnd, urlApp);
         data.allPageElemnts.push(newPageElement);
@@ -85,15 +89,20 @@ return {
         var ID, newPageElement;
 
         //Создаем ID;
-        if (data.allPageElemnts.length > 0) {
+        /*if (data.allPageElemnts.length > 0) {
             ID = data.allPageElemnts[data.allPageElemnts.length - 1].id + 1;
         } else {
             ID = 0;
-        }
+        }*/
+        ID = generateID();
 
         newPageElement = new PageButtonLinksElement(ID, content, url);
         data.allPageElemnts.push(newPageElement);
         return newPageElement;
+    },
+
+    addPageTableElement: function(id, url, content, quantity) {
+
     },
 
     deleteItemArr: function(id) {
@@ -218,6 +227,8 @@ var UIController = function () {
         addTextItem: function(obj, type) {
             var html, newHtml;
 
+            /*console.log(obj, type);*/
+
             if (type === 'Header') {
                 html = '<section class="editor" id="%id%"><p class="content-header">%content%</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>';  
             } else if (type === 'Simple text') {
@@ -240,8 +251,9 @@ var UIController = function () {
                 newHtml = html.replace('%id%', obj.id);
                 newHtml = newHtml.replace('%content%', obj.content);
             }
-            
-
+            /*
+            localStorage.setItem('Text', JSON.stringify({obj: obj, type: type}));
+            */
             document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
         },
 
@@ -811,6 +823,7 @@ var combiController = (function (editCtrl, UICtrl) {
                 newPageElement = editorController.addPageElement(input.content);
                 UIController.addTextItem(newPageElement, input.type);
                 console.log(input.type + ' added')
+                
                 UICtrl.clearFields();
             } else {
                 console.log('Please, input your content');
@@ -1231,6 +1244,15 @@ var combiController = (function (editCtrl, UICtrl) {
         init: function () {
             console.log('Application has started.');
             setEventListeners();
+            /*
+            setTimeout(() => {
+                let textData = localStorage.getItem('Text') || null;
+
+                if (textData) {
+                    textData = JSON.parse(textData);
+                    UIController.addTextItem(textData.obj, textData.type);
+                }
+            }, 0);*/
         },
         
     };
