@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>HTML constructor</title>
-    <link rel="icon" type="image/png" href="">
+    <link rel="icon" type="image/png" href="src/img/header-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" media="screen" href="src/style/main.css">
@@ -22,6 +22,15 @@
     <main>
         <!--Display section start-->
         <section class="display">
+            <section class="display-backdrop">
+                <section class="display-backdrop__msg">
+                    <p>Are you really want to delete this template?</p>
+                    <section class="display-backdrop__msg--btns">
+                        <button class="display-backdrop__msg--btn" id="msg-no">No</button>
+                        <button class="display-backdrop__msg--btn" id="msg-yes">Yes</button>
+                    </section>    
+                </section>
+            </section>    
             <section class="display-device">
                 <article class="display-device__content"></article>
                 <article class="display-device__buttons"></article>
@@ -29,7 +38,7 @@
             <section class="display-buttons">
                 <button class="display-clear">Clear result</button>
                 <button class="display-button__download">Download HTML</button>
-            </section>           
+            </section>             
         </section>
         <!--Display section end-->
 
@@ -58,7 +67,7 @@
                         <button class="edit-buttons" id="bold">Bold</button>
                         <button class="edit-buttons" id="separator">Separator</button>
                     </section>
-                    <input class="tools-options__text--footerUrl" type="text"  placeholder="Paste URL to footer image"/>    
+                    <input class="input-field tools-options__text--footerUrl" type="text"  placeholder="Paste URL to footer image"/>    
                     <textarea class="tools-options__text--input" type="text"  placeholder="Type or paste your text"></textarea>
                     <button class="tools-options__button" id="add_text">Add</button>
                     <button class="tools-options__button--save" id="save_text">Save</button>
@@ -68,30 +77,41 @@
                         <option value="Full screen" selected>Full screen</option>
                         <option value="Centered">Centered</option>
                     </select>    
-                    <input class="tools-options__img--input" type="text"  placeholder="Paste URL to your image"/>
+                    <input class="input-field tools-options__img--input" type="text"  placeholder="Paste URL to your image"/>
                     <button class="tools-options__button" id="add_img">Add</button>
                     <button class="tools-options__button--save" id="save_img">Save</button>
                 </section>
                 <section class="tools-options__tables">
-                    <section class="tools-options__tables--type">
-                        <select name="" id="">
+                    <section>
+                        <select class="tools-options__tables--type">
                             <option value="2 columns">2 columns</option>
                             <option value="3 columns">3 columns</option>
                         </select>
                     </section>
+                    <section class="tools-options__tables--clmnames">
+                        <p class="clm-names" id="clmnames-first">Img url</p>
+                        <p class="clm-names" id="clmnames-second">Description</p>
+                        <p class="clm-names" id="clmnames-third">Cost</p>
+                    </section>
                     <section class="tools-options__tables--fields">
-                        <section>
-                            <input type="text">
-                            <input type="text">
+                        <section class="row" id="0">
+                            <input type="text" class="input-field__table table-img">
+                            <input type="text" class="input-field__table table-content">
                         </section>
-                        <!--<section>
-                            <input type="text">
-                            <input type="text">
-                            <input type="text">
-                        </section>-->
+                        <!--<section class="row" id="0">
+                            <input type="text" class="input-field__table table-img">
+                            <input type="text" class="input-field__table table-content">
+                            <input type="text" class="input-field__table table-cost">
+                        </section> -->
                     </section>
                     <section class="tools-options__tables--btns"> 
-                        
+                        <section class="tools-options__tables--rowBtns">
+                            <button class="tools-options__tables--btn" id="add-row">Add row</button>
+                            <button class="tools-options__tables--btn" id="remove-row">Remove row</button>
+                        </section>
+                        <section>
+                            <button class="tools-options__button" id="add-table">Add</button>
+                        </section>
                     </section>
                 </section>
                 <section class="tools-options__links">
@@ -109,11 +129,11 @@
                         <option value="ENG">ENG</option>
                     </select>
                     <!--Input for more datails--> 
-                    <input class="tools-options__links--name" type="text"  placeholder="Enter button name"/>   
-                    <input class="tools-options__links--details" type="text"  placeholder="Enter URL"/>
+                    <input class="input-field tools-options__links--name" type="text"  placeholder="Enter button name"/>   
+                    <input class="input-field tools-options__links--details" type="text"  placeholder="Enter URL"/>
                     <!--Input for markets-->
-                    <input class="tools-options__links--ios" type="text"  placeholder="URL to your app at App Store (iOS)"/>
-                    <input class="tools-options__links--android" type="text"  placeholder="URL to your app at Play Market (Android)"/>
+                    <input class="input-field tools-options__links--ios" type="text"  placeholder="URL to your app at App Store (iOS)"/>
+                    <input class="input-field tools-options__links--android" type="text"  placeholder="URL to your app at Play Market (Android)"/>
                     <!--Button for more datails-->
                     <button class="tools-options__button" id="add_more-details">Add</button>
                     <!--Button for markets-->
@@ -124,7 +144,7 @@
                     <select class="tools-options__buttons-items">
                         <option value="Red CTA button" id="CRM-red-btn">Red CTA button</option>
                     </select>
-                    <input class="tools-options__buttons--name" type="text" placeholder="Enter button name"/>
+                    <input class="input-field tools-options__buttons--name" type="text" placeholder="Enter button name"/>
                     <button class="tools-options__button" id="add-cta-button">Add</button>
                     <button class="tools-options__button--save" id="save_cta-button">Save</button>
                 </section>

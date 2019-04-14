@@ -159,3 +159,40 @@ strong {
     align-items: center;
     justify-content: center;
 }
+
+.table {
+    margin: 0.625rem 0;
+}
+
+.table-row__two {
+    display: grid;
+    grid-template-columns: 10% 90%;
+    align-items: center;
+    margin: 0.782rem 0;
+}
+
+.table-row__three {
+    display: grid;
+    grid-template-columns: 10% 65% 25%;
+    align-items: center;
+}
+
+.table-row__img {
+    display: flex;
+    width: 1.5rem;
+    justify-self: center;
+    align-self: center;
+}
+
+.table-row__text {
+    margin: 0 10px;
+    font-size: 0.875rem;
+}
+
+.table-row__items {
+    display: flex;
+    white-space: nowrap;
+    justify-self: right;
+    font-size: 0.875rem;
+    font-weight: bold;
+}

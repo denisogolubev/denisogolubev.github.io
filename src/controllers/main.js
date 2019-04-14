@@ -26,22 +26,13 @@ var editorController = function () {
         this.url = url;
     };
 
-    var PageTwoRowTableElement = function(id, url, content) {
+    var PageTableElement = function(id, arr) {
         this.id = id;
-        this.url = url;
-        this.content = content;
-    };
-
-    var PageThreeRowTableElement = function(id, url, content, quantity) {
-        this.id = id;
-        this.url = url;
-        this.content = content;
-        this.quantity = quantity;
+        this.arr = arr;
     };
 
     var data = {
         allPageElemnts: [],
-        tables:[]
     };
 
     var generateID = function () {
@@ -88,12 +79,6 @@ return {
     addPageButtonLinksElement: function(content, url) {
         var ID, newPageElement;
 
-        //Создаем ID;
-        /*if (data.allPageElemnts.length > 0) {
-            ID = data.allPageElemnts[data.allPageElemnts.length - 1].id + 1;
-        } else {
-            ID = 0;
-        }*/
         ID = generateID();
 
         newPageElement = new PageButtonLinksElement(ID, content, url);
@@ -101,8 +86,13 @@ return {
         return newPageElement;
     },
 
-    addPageTableElement: function(id, url, content, quantity) {
+    addPageTableElement: function(arr) {
+        var ID, newPageElement;
 
+        ID = generateID();
+        newPageElement = new PageTableElement(ID, arr);
+        data.allPageElemnts.push(newPageElement);
+        return newPageElement;
     },
 
     deleteItemArr: function(id) {
@@ -167,6 +157,12 @@ var UIController = function () {
         imgURL: '.tools-options__img--input',
         addImgButton: 'add_img',
         tablesCategory: '.tools-options__tables',
+        tablesInputFields: '.tools-options__tables--fields',
+        tablesThirdClmnName: 'clmnames-third',
+        tablesType: '.tools-options__tables--type',
+        tablesAddRowBtn: 'add-row',
+        tablesRemoveRowBtn: 'remove-row',
+        tableAddBtn: 'add-table',
         linksCategory: '.tools-options__links',
         linksType: '.tools-options__links--items',
         linksItemMarket: 'links-to__market',
@@ -198,11 +194,11 @@ var UIController = function () {
         arrowDown: 'ion-arrow-down-c',
         arrowUp: 'ion-arrow-up-c',
         editBold: 'bold',
-        editSeparator: 'separator'
-
-        
-
-       
+        editSeparator: 'separator',
+        displayBackdrop: '.display-backdrop',
+        displayBackdropBtns: '.display-backdrop__msg--btns',
+        displayMsgNo: 'msg-no',
+        displayMsgYes: 'msg-yes'
     };
 
     return {
@@ -290,6 +286,76 @@ var UIController = function () {
 
             document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', newHtml);
 
+        },
+
+        getTableType: function() {
+            return {
+                type: document.querySelector(DOMStrings.tablesType).value
+            }
+        },
+
+        displayTableFields: function(type) {
+            var html;
+            document.querySelector(DOMStrings.tablesInputFields).innerHTML = '';
+            if (type === '2 columns') {
+                document.getElementById(DOMStrings.tablesThirdClmnName).style.display = 'none';
+                html = '<section class="row"><input type="text" class="input-field__table table-img"><input type="text" class="input-field__table table-content"></section>';
+            } else if (type === '3 columns') {
+                document.getElementById(DOMStrings.tablesThirdClmnName).style.display = 'block';
+                html = '<section class="row"><input type="text" class="input-field__table table-img"><input type="text" class="input-field__table table-content"><input type="text" class="input-field__table table-cost"></section>';
+            }
+
+            document.querySelector(DOMStrings.tablesInputFields).insertAdjacentHTML('beforeend', html);
+        },
+
+        addTableRow: function(type) {
+            var html;
+            if (type === '2 columns') {
+                html = '<section class="row"><input type="text" class="input-field__table table-img"><input type="text" class="input-field__table table-content"></section>';
+            } else if (type === '3 columns') {
+                html = '<section class="row"><input type="text" class="input-field__table table-img"><input type="text" class="input-field__table table-content"><input type="text" class="input-field__table table-cost"></section>';
+            }
+
+            document.querySelector(DOMStrings.tablesInputFields).insertAdjacentHTML('beforeend', html);
+        },
+
+        getTableInputs: function() {
+
+        },
+
+        addTableItem: function(obj, type, quantity) {
+            var startHtml, newStartHtml, html, newHtml, endHtml, tableHtml, htmlArr, rowsHtml;
+            htmlArr = [];
+            rowsHtml = '';
+            startHtml = '<section class="editor" id="%id%"><section class="table">';
+            newStartHtml = startHtml.replace('%id%', obj.id);
+            if (type === '2 columns') {
+                for (var i = 0; i < quantity; i++) {
+                    html = '<section class="table-row__two"><img src="%url%" alt="image" class="table-row__img"><p class="table-row__text">%content%</p></section>';
+
+                    newHtml = html.replace('%url%', obj.arr[i][0]);
+                    newHtml = newHtml.replace('%content%', obj.arr[i][1]);
+                    htmlArr.push(newHtml);
+                }
+                
+            } else if (type === '3 columns') {
+                for (var i = 0; i < quantity; i++) {
+                    html = '<section class="table-row__three"><img src="%url%" alt="image" class="table-row__img"><p class="table-row__text">%content%</p><p class="table-row__items">%cost%</p></section>';
+
+                    newHtml = html.replace('%url%', obj.arr[i][0]);
+                    newHtml = newHtml.replace('%content%', obj.arr[i][1]);
+                    newHtml = newHtml.replace('%cost%', obj.arr[i][2]);
+                    htmlArr.push(newHtml);
+                }
+            }
+
+            endHtml = '</section><div class="buttons"><i class="ion-edit table"></i><i class="ion-ios-trash table"></i><i class="ion-arrow-down-c table"></i><i class="ion-arrow-up-c table"></i></div></section>';
+
+            for (var i = 0; i < htmlArr.length; i++) {
+                rowsHtml += htmlArr[i];
+            }
+            tableHtml = newStartHtml + rowsHtml + endHtml;
+            document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', tableHtml);
         },
 
         getLinksType: function () {
@@ -474,7 +540,7 @@ var UIController = function () {
     
             startHtml = '<html><head><meta charset="UTF-8"><meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"><link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500" rel="stylesheet">';
     
-            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "IBM Plex Sans", sans-serif;margin: 0;color: #333;letter-spacing: -0.05rem;} .white-background { background-color: #FFFFFF; margin: 0.9375rem; box-shadow: 0 2px 4px rgba(0,0,0,0.35); padding: 0.9375rem;}.buttonsCTA {margin-top: 1.25rem;padding: 0 1.875rem 1.25rem 1.875rem;}.content-header {margin: 0.9375rem 0;font-size: 1.6rem;line-height: 1.9rem;}.content-simpletext {margin: 0.9375rem 0;font-size: 1.125rem;line-height: 1.4rem;}.content-simpletext__secondary {margin: 0.5rem 0;font-size: 1rem;line-height: 1.3rem;}.content-simpletext__bold {margin: 0.9375rem 0;font-size: 1.125rem;font-weight: 500;}strong {font-weight: 500;}.footer {display: grid;grid-template-columns: 11% 89%;align-items: center;}.footer-icon {width: 1.5rem;}.screen {width: 100%;}.full-screen__container {display: block;margin: 0 auto; padding: 0;width: 100%;}.centered-screen__container {display: block;margin: 0 auto;padding: 0;width: 50%;}.separator {border-top: 1px solid #CCCCCC;margin: 1.25rem 0;}.single-separator {border-top: 1px solid #CCCCCC;margin: 1.25rem 0;}.more-details {display: grid;grid-template-columns: 50% 50%;align-items: center;text-decoration: none;}.more-details svg {justify-self: right;}.more-details__link {margin: 0;color: #333;font-size: 1rem;}.download-list {display: flex;list-style: none;align-items: center;padding: 0;margin: 0;}.download-list a {padding: 0;margin: 0;line-height: 0;}.ios-badge {margin: 0;width: 7.375rem;}.android-badge {margin-left: 0.75rem;width: 8.3125rem;}.buttons {display: none;}.button-link, .button-linkCTA, .button-CTA {text-decoration: none;color: #FFFFFF;font-size: 1rem;margin: 0;}.button-link p {margin: 0;}.grey-button {display: flex;background-color: #666666;width: 100%;height: 2.8125rem; align-items: center;justify-content: center;}.red-button {display: flex;background-color: #E60000;width: 100%;height: 2.8125rem;align-items: center;justify-content: center;}</style><body><section class="white-background">';
+            styleHtml = '<style>body {background-color: #F4F4F4; font-family: "IBM Plex Sans", sans-serif;margin: 0;color: #333;letter-spacing: -0.05rem;} .white-background { background-color: #FFFFFF; margin: 0.9375rem; box-shadow: 0 2px 4px rgba(0,0,0,0.35); padding: 0.9375rem;}.buttonsCTA {margin-top: 1.25rem;padding: 0 1.875rem 1.25rem 1.875rem;}.content-header {margin: 0.9375rem 0;font-size: 1.6rem;line-height: 1.9rem;}.content-simpletext {margin: 0.9375rem 0;font-size: 1.125rem;line-height: 1.4rem;}.content-simpletext__secondary {margin: 0.5rem 0;font-size: 1rem;line-height: 1.3rem;}.content-simpletext__bold {margin: 0.9375rem 0;font-size: 1.125rem;font-weight: 500;}strong {font-weight: 500;}.footer {display: grid;grid-template-columns: 11% 89%;align-items: center;}.footer-icon {width: 1.5rem;}.screen {width: 100%;}.full-screen__container {display: block;margin: 0 auto; padding: 0;width: 100%;}.centered-screen__container {display: block;margin: 0 auto;padding: 0;width: 50%;}.separator {border-top: 1px solid #CCCCCC;margin: 1.25rem 0;}.single-separator {border-top: 1px solid #CCCCCC;margin: 1.25rem 0;}.more-details {display: grid;grid-template-columns: 50% 50%;align-items: center;text-decoration: none;}.more-details svg {justify-self: right;}.more-details__link {margin: 0;color: #333;font-size: 1rem;}.download-list {display: flex;list-style: none;align-items: center;padding: 0;margin: 0;}.download-list a {padding: 0;margin: 0;line-height: 0;}.ios-badge {margin: 0;width: 7.375rem;}.android-badge {margin-left: 0.75rem;width: 8.3125rem;}.buttons {display: none;}.button-link, .button-linkCTA, .button-CTA {text-decoration: none;color: #FFFFFF;font-size: 1rem;margin: 0;}.button-link p {margin: 0;}.grey-button {display: flex;background-color: #666666;width: 100%;height: 2.8125rem; align-items: center;justify-content: center;}.red-button {display: flex;background-color: #E60000;width: 100%;height: 2.8125rem;align-items: center;justify-content: center;}.table {margin: 0.625rem 0;}.table-row__two {display: grid;grid-template-columns: 10% 90%;align-items: center;margin: 0.782rem 0;}.table-row__three {display: grid;grid-template-columns: 10% 65% 25%;align-items: center;}.table-row__img {display: flex;width: 1.5rem;justify-self: center;align-self: center;}.table-row__text {margin: 0 10px;font-size: 0.875rem;}.table-row__items {display: flex;white-space: nowrap;justify-self: right;font-size: 0.875rem;font-weight: bold;}</style><body><section class="white-background">';
             content = document.querySelector(DOMStrings.generatedContent).innerHTML;
             btns = '</section><section class="buttonsCTA">' + document.querySelector(DOMStrings.generatedButtons).innerHTML + '</section>';
             endHtml = '</body></html>';
@@ -704,6 +770,24 @@ var combiController = (function (editCtrl, UICtrl) {
                 UIController.displayTablesCategory();
             });
 
+            document.querySelector(DOM.tablesType).addEventListener('change', ctrlTableInputs);
+
+            document.getElementById(DOM.tablesAddRowBtn).addEventListener('click', ctrlAddTableInputs);
+
+            document.getElementById(DOM.tablesRemoveRowBtn).addEventListener('click', function(event) {
+                var quantity;
+                quantity = event.target.parentNode.parentNode.parentNode.childNodes[5].children.length;
+                ctrlRemoveTableRow(quantity);
+            });
+
+            document.getElementById(DOM.tableAddBtn).addEventListener('click', function(event){
+                var quantity, type;
+                quantity = event.target.parentNode.parentNode.parentNode.childNodes[5].children.length;
+                type = UIController.getTableType();
+                ctrlAddTable(type.type, quantity);
+            });
+            
+
             /*Buttons category*/
             document.querySelector(DOM.toolsCategoryesBtn).addEventListener("click", function() {
                 setDisplayNone();
@@ -795,7 +879,17 @@ var combiController = (function (editCtrl, UICtrl) {
                 }
             });
 
-            document.querySelector(DOM.clearDisplay).addEventListener('click', clearDislayResult);
+            document.querySelector(DOM.clearDisplay).addEventListener('click', function() {
+                document.querySelector(DOM.displayBackdrop).style.display = 'grid';
+                document.querySelector(DOM.displayBackdropBtns).addEventListener('click', function(event) {
+                    if (event.target.id === DOM.displayMsgYes) {
+                        clearDislayResult();
+                        document.querySelector(DOM.displayBackdrop).style.display = 'none';
+                    } else if (event.target.id === DOM.displayMsgNo) {
+                        document.querySelector(DOM.displayBackdrop).style.display = 'none';
+                    }
+                });
+            });
 
             };
             
@@ -856,6 +950,53 @@ var combiController = (function (editCtrl, UICtrl) {
         }
 
     };
+
+    var ctrlTableInputs = function() {
+        var type;
+        type = UIController.getTableType();
+        UIController.displayTableFields(type.type);
+    };
+
+    var ctrlAddTableInputs = function() {
+        var type;
+        type = UIController.getTableType();
+        UIController.addTableRow(type.type);
+    };
+
+    var ctrlRemoveTableRow = function(quantity) {
+        var item;
+        item = quantity - 1;
+        if (item !== 0) {
+            document.querySelector(DOM.tablesInputFields).children[item].outerHTML = '';
+        }
+        
+    };
+
+    var ctrlAddTable = function(type, quantity) {
+        var arr, values, quantity;
+        arr = [];
+        el = document.querySelector(DOM.tablesInputFields);
+        if (type === '2 columns') {
+            for (var i = 0; i < quantity; i++) {
+                values = [el.children[i].children[0].value, el.children[i].children[1].value];
+                arr.push(values);
+            }
+        } else if (type === '3 columns') {
+            for (var i = 0; i < quantity; i++) {
+                values = [el.children[i].children[0].value, el.children[i].children[1].value, el.children[i].children[2].value];
+                arr.push(values);
+            }
+        }
+        quantity = arr.length;
+        newPageElement = editorController.addPageTableElement(arr);
+        UIController.addTableItem(newPageElement, type, quantity);
+        console.log(type + ' table added');
+        UICtrl.displayTableFields(type);
+
+
+            
+        };
+    
 
     var ctrlChangeLinksInt = function() {
         var input;
@@ -1138,7 +1279,7 @@ var combiController = (function (editCtrl, UICtrl) {
     var ctrlDeleteItem = function(param) {
         var itemID, ID;
             
-        if (param === 'text' || param === 'img' || param === 'links-markets' || param === 'sep' || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA' || param === 'btn-CTA') {
+        if (param === 'text' || param === 'img' || param === 'links-markets' || param === 'sep' || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA' || param === 'btn-CTA' || param === 'table') {
             itemID = event.target.parentNode.parentNode.id;
         } else if (param === "links-detail") {
             itemID = event.target.parentNode.parentNode.parentNode.id;
@@ -1156,7 +1297,7 @@ var combiController = (function (editCtrl, UICtrl) {
         var el, curID, currRowEl;
         
 
-        if (param === 'text' || param === "img" || param === "links-markets" || param === 'sep'  || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA') {
+        if (param === 'text' || param === "img" || param === "links-markets" || param === 'sep'  || param === 'footer' || param === 'links-btns' || param === 'links-btnsCTA' || param === 'table') {
             curID = event.target.parentNode.parentNode.id;
         } else if (param === "links-detail") {
             curID = event.target.parentNode.parentNode.parentNode.id;
