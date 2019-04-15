@@ -163,6 +163,7 @@ var UIController = function () {
         tablesAddRowBtn: 'add-row',
         tablesRemoveRowBtn: 'remove-row',
         tableAddBtn: 'add-table',
+        tableSaveBtn: 'save-table',
         tableGetContent: '.table',
         linksCategory: '.tools-options__links',
         linksType: '.tools-options__links--items',
@@ -318,10 +319,6 @@ var UIController = function () {
             }
 
             document.querySelector(DOMStrings.tablesInputFields).insertAdjacentHTML('beforeend', html);
-        },
-
-        getTableInputs: function() {
-
         },
 
         addTableItem: function(obj, type, quantity) {
@@ -639,8 +636,25 @@ var UIController = function () {
             }
         },
 
-        editTable: function() {
-
+        editTable: function(quantity, arr) {
+            var arrLength, el, inputsLenght;
+            arrLength = arr.length;
+            el = document.querySelector(DOMStrings.tablesInputFields);
+            el.innerHTML = '';
+            if (quantity === 2) {
+                for (var i = 0; i < arrLength; i++) {
+                    UIController.addTableRow('2 columns');
+                    el.children[i].children[0].value = arr[i][0];
+                    el.children[i].children[1].value = arr[i][1];
+                }
+            } else if (quantity === 3) {
+                for (var i = 0; i < arrLength; i++) {
+                    UIController.addTableRow('3 columns');
+                    el.children[i].children[0].value = arr[i][0];
+                    el.children[i].children[1].value = arr[i][1];
+                    el.children[i].children[2].value = arr[i][2];
+                }    
+            }
         },
 
         getDeleteButtonID: function () {
@@ -790,6 +804,12 @@ var combiController = (function (editCtrl, UICtrl) {
                 quantity = event.target.parentNode.parentNode.parentNode.childNodes[5].children.length;
                 type = UIController.getTableType();
                 ctrlAddTable(type.type, quantity);
+            });
+
+            document.getElementById(DOM.tableSaveBtn).addEventListener('click', function(event){
+                if (event) {
+                    saveItem(param);
+                }
             });
             
 
@@ -1090,6 +1110,33 @@ var combiController = (function (editCtrl, UICtrl) {
             setBtnDisplayNone();
             document.getElementById(DOM.saveImgButton).style.display = 'block';
 
+        } else if (param === 'table') {
+            var el, arr, values, quantity, times;
+            arr = [];
+            el = el.children[0];
+            quantity = el.children[0].children.length;
+            times = el.children.length;
+            setDisplayNone();
+            UIController.displayTablesCategory();
+            if (quantity === 2) {
+                document.querySelector(DOM.tablesType).value = '2 columns';
+                UIController.displayTableFields('2 columns');
+                for (var i = 0; i < times; i++) {
+                    values = [el.children[i].children[0].attributes.src.nodeValue, el.children[i].children[1].innerHTML];
+                    arr.push(values);
+                }
+            } else if (quantity === 3) {
+                document.querySelector(DOM.tablesType).value = '3 columns';
+                UIController.displayTableFields('3 columns');
+                for (var i = 0; i < times; i++) {
+                    values = [el.children[i].children[0].attributes.src.nodeValue, el.children[i].children[1].innerHTML, el.children[i].children[2].innerHTML];
+                    arr.push(values);
+                }
+            }
+            UIController.editTable(quantity, arr);
+            setBtnDisplayNone();
+            document.getElementById(DOM.tableAddBtn).style.display = 'none';  
+            document.getElementById(DOM.tableSaveBtn).style.display = 'block';    
         } else if (param === "links-detail") {
             el = event.target.parentNode.parentNode.parentNode;
             curID = el.id;
@@ -1152,7 +1199,7 @@ var combiController = (function (editCtrl, UICtrl) {
     }; 
 
     var saveItem = function(param) {
-        var el, input, type, saveText, saveImg, saveDetails, saveBtnLink;
+        var el, input, type, saveText, saveImg, saveDetails, saveBtnLink, saveTable;
 
         el = document.getElementById(curID);
         saveText = function() {
@@ -1221,6 +1268,66 @@ var combiController = (function (editCtrl, UICtrl) {
             el.childNodes[0].childNodes[0].childNodes[0].innerHTML = input.content;
         };
 
+        saveTable = function() {
+            var elFields, arr, values, quantity, eldisplay, currTableLength, newTableLength, html;
+            arr = [];
+            elFields = document.querySelector(DOM.tablesInputFields);
+            quantityFields = event.target.parentNode.parentNode.parentNode.childNodes[5].children.length;
+            type = UIController.getTableType();
+            if (type.type === '2 columns') {
+                for (var i = 0; i < quantityFields; i++) {
+                    values = [elFields.children[i].children[0].value, elFields.children[i].children[1].value];
+                    arr.push(values);
+                }
+            } else if (type.type === '3 columns') {
+                for (var i = 0; i < quantityFields; i++) {
+                    values = [elFields.children[i].children[0].value, elFields.children[i].children[1].value, elFields.children[i].children[2].value];
+                    arr.push(values);
+                }
+            }
+            quantity = arr.length;
+            eldisplay = el.children[0];
+            currTableLength = eldisplay.children.length;
+            newTableLength = quantity - currTableLength;
+            if (newTableLength < 0) {
+                newTableLength = newTableLength * (-1);
+                for (var i = 0; i < newTableLength; i++) {
+                    eldisplay.children[eldisplay.children.length - 1].outerHTML = '';
+                }
+            } else if (newTableLength > 0) {
+                if (type.type === '2 columns') {
+                    for (var i = 0; i < newTableLength; i++) {
+                        html = '<section class="table-row__two"><img src="" alt="image" class="table-row__img"><p class="table-row__text"></p></section>';
+                        eldisplay.insertAdjacentHTML('beforeend', html);
+                    }
+                } else if (type.type === '3 columns') {
+                    for (var i = 0; i < newTableLength; i++) {
+                        html = '<section class="table-row__three"><img src="" alt="image" class="table-row__img"><p class="table-row__text"></p><p class="table-row__items"></p></section>';
+                        eldisplay.insertAdjacentHTML('beforeend', html);
+                    }
+                }
+                
+            }
+
+            if (type.type === '2 columns') {
+                UIController.displayTableFields('2 columns');
+                for (var i = 0; i < quantity; i++) {
+                    eldisplay.children[i].children[0].attributes.src.nodeValue = arr[i][0]; 
+                    eldisplay.children[i].children[1].innerHTML = arr[i][1];
+                }
+            } else if (type.type === '3 columns') {
+                UIController.displayTableFields('3 columns');
+                for (var i = 0; i < quantity; i++) {
+                    eldisplay.children[i].children[0].attributes.src.nodeValue = arr[i][0]; 
+                    eldisplay.children[i].children[1].innerHTML = arr[i][1];
+                    eldisplay.children[i].children[2].innerHTML = arr[i][2];
+                }
+            }
+            document.getElementById(DOM.tableAddBtn).style.display = 'block';  
+            document.getElementById(DOM.tableSaveBtn).style.display = 'none'; 
+            UICtrl.displayTableFields(type.type); 
+        };
+
         if (param === 'text') {
             input = UICtrl.getInputTextCategory();
             if (input.type === 'Header') {
@@ -1265,6 +1372,8 @@ var combiController = (function (editCtrl, UICtrl) {
         } else if (param === 'btn-CTA') {
             input = UIController.getBtns();
             saveBtns();
+        } else if (param === 'table') {
+            saveTable();
         }
 
         setBtnDisplayNone();
@@ -1272,25 +1381,6 @@ var combiController = (function (editCtrl, UICtrl) {
         
         
     };
-
-    var ctrlEditTable = function(type, quantity) {
-            var el, arr, values, quantity;
-            arr = [];
-            el = document.querySelector(DOM.tableGetContent);
-            if (type === '2 columns') {
-                for (var i = 0; i < quantity; i++) {
-                    values = [el.children[i].children[0].attributes.src.nodeValue, el.children[i].children[1].innerHTML];
-                    arr.push(values);
-                }
-            } else if (type === '3 columns') {
-                for (var i = 0; i < quantity; i++) {
-                    values = [el.children[i].children[0].attributes.src.nodeValue, el.children[i].children[1].innerHTML, el.children[i].children[3].innerHTML];
-                    arr.push(values);
-                }
-                quantity = arr.length;
-                UIController.editTable(type, quantity)
-            }
-    }
 
     remAtr = function() {
         document.getElementById(DOM.linksItemMarket).removeAttribute('disabled', 'disabled');
