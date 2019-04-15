@@ -163,6 +163,7 @@ var UIController = function () {
         tablesAddRowBtn: 'add-row',
         tablesRemoveRowBtn: 'remove-row',
         tableAddBtn: 'add-table',
+        tableGetContent: '.table',
         linksCategory: '.tools-options__links',
         linksType: '.tools-options__links--items',
         linksItemMarket: 'links-to__market',
@@ -638,6 +639,10 @@ var UIController = function () {
             }
         },
 
+        editTable: function() {
+
+        },
+
         getDeleteButtonID: function () {
             return {
                 id: document.querySelector(DOMStrings.deleteElButton).id
@@ -973,7 +978,7 @@ var combiController = (function (editCtrl, UICtrl) {
     };
 
     var ctrlAddTable = function(type, quantity) {
-        var arr, values, quantity;
+        var el, arr, values, quantity;
         arr = [];
         el = document.querySelector(DOM.tablesInputFields);
         if (type === '2 columns') {
@@ -1267,6 +1272,25 @@ var combiController = (function (editCtrl, UICtrl) {
         
         
     };
+
+    var ctrlEditTable = function(type, quantity) {
+            var el, arr, values, quantity;
+            arr = [];
+            el = document.querySelector(DOM.tableGetContent);
+            if (type === '2 columns') {
+                for (var i = 0; i < quantity; i++) {
+                    values = [el.children[i].children[0].attributes.src.nodeValue, el.children[i].children[1].innerHTML];
+                    arr.push(values);
+                }
+            } else if (type === '3 columns') {
+                for (var i = 0; i < quantity; i++) {
+                    values = [el.children[i].children[0].attributes.src.nodeValue, el.children[i].children[1].innerHTML, el.children[i].children[3].innerHTML];
+                    arr.push(values);
+                }
+                quantity = arr.length;
+                UIController.editTable(type, quantity)
+            }
+    }
 
     remAtr = function() {
         document.getElementById(DOM.linksItemMarket).removeAttribute('disabled', 'disabled');
