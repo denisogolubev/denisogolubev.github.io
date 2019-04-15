@@ -453,12 +453,6 @@ strong {
 
 }
 
-.tools-options__text--footerUrl {
-    display: none;
-    grid-area: url;
-    margin-bottom: 0;
-}
-
 .tools-options__text--items,
 .tools-options__img--items,
 .tools-options__buttons-items,
@@ -549,6 +543,12 @@ textarea:focus {
     outline-color: #e9e8e8;
     border: 0.05rem solid #2b5278;
     outline: none;
+}
+
+.tools-options__text--footerUrl {
+    display: none;
+    grid-area: url;
+    margin-bottom: 0;
 }
 
 #clmnames-third {
