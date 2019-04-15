@@ -702,6 +702,10 @@ textarea:focus {
     outline: none;
 }
 
+.tools-options {
+    width: 100%;
+}
+
 .tools-options__buttons {
     display: none;
     grid-area: options;

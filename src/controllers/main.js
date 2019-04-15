@@ -1068,6 +1068,7 @@ var combiController = (function (editCtrl, UICtrl) {
             content = el.childNodes[0].childNodes[1].innerHTML;
             setDisplayNone();
             UIController.displayTextCategory();
+            document.querySelector(DOM.textFooterUrl).style.display = 'block';
             UIController.editItem(cls, content, '', '', '', url);
             setBtnDisplayNone();
             document.getElementById(DOM.saveTextButton).style.display = 'block';
