@@ -6,7 +6,7 @@
     <title>HTML constructor</title>
     <link rel="icon" type="image/png" href="src/img/header-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">    
     <link rel="stylesheet" type="text/css" media="screen" href="src/style/main.css">
     <script src="src/controllers/main.js"></script>
 </head>
@@ -24,10 +24,11 @@
         <section class="display">
             <section class="display-backdrop">
                 <section class="display-backdrop__msg">
-                    <p>Are you really want to delete this template?</p>
+                    <p id="msg">This template was copied. Next time you open the HTML editor or if you refresh the page, this template will be loaded with the page.</p>
                     <section class="display-backdrop__msg--btns">
                         <button class="display-backdrop__msg--btn" id="msg-no">No</button>
                         <button class="display-backdrop__msg--btn" id="msg-yes">Yes</button>
+                        <button class="display-backdrop__msg--btn" id="msg-ok">Got it</button>
                     </section>    
                 </section>
             </section>    
@@ -36,10 +37,9 @@
                 <article class="display-device__buttons"></article>
             </section>
             <section class="display-buttons">
-                <button class="display-clear">Clear result</button>
-                <button class="display-save">Save to LS</button>
-                <button class="display-button__download">Download HTML</button>
-
+                <ion-icon class="ion-ios-trash-outline"></ion-icon>
+                <ion-icon class="ion-ios-copy-outline"></ion-icon>  
+                <ion-icon class="ion-ios-download-outline"></ion-icon>
             </section>             
         </section>
         <!--Display section end-->
@@ -158,7 +158,10 @@
                     </section>        
                     <section class="tools-options__templates--img">
                         <img src="src/img/Saturn.jpg" alt="Saturn" class="img" id="saturn">
-                    </section>                           
+                    </section>  
+                    <section class="tools-options__templates--img">
+                        <img src="src/img/WB.jpg" alt="Saturn" class="img" id="wb">
+                    </section>                         
                 </section>
             </section>
         </section>

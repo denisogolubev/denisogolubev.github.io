@@ -47,6 +47,7 @@ main {
     display: none;
     position: absolute;
     background-color: hsla(214, 26%, 19%, 0.8);
+    max-width: 28rem;
     width: 100%;
     height: 100%;
     justify-items: center;
@@ -356,58 +357,39 @@ strong {
 
 .display-buttons {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.display-button__download {
+.ion-ios-trash-outline,
+.ion-ios-copy-outline,
+.ion-ios-download-outline {
     grid-area: button;
-    width: 12rem;
-    padding: 1rem 0.5rem;
+    width: 6rem;
+    margin: 0.5rem;
+    height: 3rem;
     border: 0.1rem solid #e9e8e8;
     border-radius: 0.2rem;
     background-color: #0e1621;
     color: #e9e8e8;
-    font-size: 1.3rem;
+    font-size: 2rem;
     outline: none;
     transition: 300ms;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.display-clear {
-    grid-area: button;
-    padding: 1rem 0.5rem;
-    width: 10rem;
-    border: 0.1rem solid #e9e8e8;
-    border-radius: 0.2rem;
-    background-color: #0e1621;
-    color: #e9e8e8;
-    font-size: 1.3rem;
-    outline: none;
-    transition: 300ms;
-    cursor: pointer;
-}
-
-.display-save {
-    grid-area: button;
-    padding: 1rem 0.5rem;
-    margin: 0 0.5rem;
-    width: 10rem;
-    border: 0.1rem solid #e9e8e8;
-    border-radius: 0.2rem;
-    background-color: #0e1621;
-    color: #e9e8e8;
-    font-size: 1.3rem;
-    outline: none;
-    transition: 300ms;
-    cursor: pointer;
-}
-
-.display-button__download:hover,
-.display-clear:hover,
-.display-save:hover {
+.ion-ios-trash-outline:hover,
+.ion-ios-copy-outline:hover,
+.ion-ios-download-outline:hover {
     background-color: #2b5278;
     border-color: #e9e8e8;
-    padding: 1rem 0.7rem;
+    font-size: 2.5rem;
     letter-spacing: 0.05rem;
+    height: 3.5rem;
+    width: 6.5rem;
 }
 
 

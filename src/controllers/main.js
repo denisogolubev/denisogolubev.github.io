@@ -141,9 +141,9 @@ var UIController = function () {
         textFooterUrl: '.tools-options__text--footerUrl',
         generatedContent: '.display-device__content',
         generatedButtons: '.display-device__buttons',
-        clearDisplay: '.display-clear',
+        clearDisplay: '.ion-ios-trash-outline',
         addContentButton: 'add_text',
-        downloadHtml: '.display-button__download',
+        downloadHtml: '.ion-ios-download-outline',
         textCategory: '.tools-options__text',
         imgCategory: '.tools-options__images',
         toolsCategoryes: '.tools-nav__categoryes',
@@ -201,7 +201,10 @@ var UIController = function () {
         displayBackdropBtns: '.display-backdrop__msg--btns',
         displayMsgNo: 'msg-no',
         displayMsgYes: 'msg-yes',
-        saveToLoacalStorege: '.display-save'
+        displayMsgOk: 'msg-ok',
+        displayMsg: 'msg',
+        savedAreaLS: '.display-device',
+        saveToLoacalStorege: '.ion-ios-copy-outline'
     };
 
     return {
@@ -528,6 +531,13 @@ var UIController = function () {
                 html = '<section class="editor" id="0"><p class="content-header">Modern NASA and ESA probes</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="1"><p class="content-simpletext">Pioneer 11 made the first flyby of Saturn in September 1979, when it passed within 20,000 km of the planet\'s cloud tops.</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><section class="centered-screen__container" id="%id%"><img src="https://www.pngarts.com/files/4/Saturn-PNG-High-Quality-Image.png" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="3"><p class="content-simpletext">Images were taken of the planet and a few of its moons, although their resolution was too low to discern surface detail.</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="4"><section class="centered-screen__container" id="%id%"><img src="http://www.stickpng.com/assets/images/580b585b2edbce24c47b270d.png" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="5"><p class="content-simpletext">The spacecraft also studied Saturn\'s rings, revealing the thin F-ring and the fact that dark gaps in the rings are bright when viewed at high phase angle (towards the Sun), meaning that they contain fine light-scattering material ❤️</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section>'
 
                 document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', html);
+            } else if (templateName === 'wb') {
+                html = '<section class="editor" id="0"><section class="full-screen__container" id="%id%"><img src="https://c.ststat.net/content/EntImg/GoldenToursProduct/warner-bros-studio-tour-london-the-making-of-harry-potter-with-return-transportation-264937447-1000x584.jpg" alt="screen" class="screen"></section><div class="buttons"><i class="ion-edit img"></i><i class="ion-ios-trash img"></i><i class="ion-arrow-down-c img"></i><i class="ion-arrow-up-c img"></i></div></section><section class="editor" id="1"><p class="content-header">Warner Bros. Studio</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="2"><p class="content-simpletext">Warner Bros. Studio Tour London provides an amazing new opportunity to explore the magic of the Harry Potter™ films – the most successful film series of all time.</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="3"><p class="content-simpletext__bold">Highlights</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="4"><section class="table"><section class="table-row__two"><img src="https://cscappimg.vodafone.ua/1367" alt="image" class="table-row__img"><p class="table-row__text">Preferred Partners with Warner Bros. Studio Tour London</p></section><section class="table-row__two"><img src="https://cscappimg.vodafone.ua/1367" alt="image" class="table-row__img"><p class="table-row__text">Stay entertained on board with screens showing the first Harry Potter movie</p></section><section class="table-row__two"><img src="https://cscappimg.vodafone.ua/1367" alt="image" class="table-row__img"><p class="table-row__text">Return transportation from Central London</p></section><section class="table-row__two"><img src="https://cscappimg.vodafone.ua/1367" alt="image" class="table-row__img"><p class="table-row__text">Stay entertained on board with screens showing the first Harry Potter movie</p></section></section><div class="buttons"><i class="ion-edit table"></i><i class="ion-ios-trash table"></i><i class="ion-arrow-down-c table"></i><i class="ion-arrow-up-c table"></i></div></section><section class="editor" id="5"><p class="content-simpletext__bold">Tickets info</p><div class="buttons"><i class="ion-edit text"></i><i class="ion-ios-trash text"></i><i class="ion-arrow-down-c text"></i><i class="ion-arrow-up-c text"></i></div></section><section class="editor" id="6"><section class="table"><section class="table-row__three"><img src="https://cscappimg.vodafone.ua/1312" alt="image" class="table-row__img"><p class="table-row__text">Cost</p><p class="table-row__items">from £85.00</p></section><section class="table-row__three"><img src="https://cscappimg.vodafone.ua/1095" alt="image" class="table-row__img"><p class="table-row__text">Period</p><p class="table-row__items">1 day</p></section></section><div class="buttons"><i class="ion-edit table"></i><i class="ion-ios-trash table"></i><i class="ion-arrow-down-c table"></i><i class="ion-arrow-up-c table"></i></div></section><section class="editor" id="7" value="ENG"><div class="separator"></div><section><a href="https://tickets.london/gt/tour/warner-bros-studio-tour-london-the-making-of-harry-potter-with-return-transportation/321" class="more-details" "=""><p class="more-details__link">More details</p><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs></defs><g id="SCREENS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="01-2-VF-UA_Your-tariffs" transform="translate(-321.000000, -676.000000)"><g id="Row-plan-details-Copy-3" transform="translate(30.000000, 666.000000)"><g id="Group" transform="translate(291.000000, 10.000000)"><polygon id="Shape" fill-opacity="0" fill="#D8D8D8" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " points="0 0 24 0 24 24 0 24"></polygon><polyline id="Shape" stroke="#E60000" stroke-linecap="round" stroke-linejoin="round" points="8.5 3.5 17 12 8.5 20.5"></polyline></g></g></g></g></svg></a></section><section><div class="buttons"><i class="ion-edit links-detail"></i><i class="ion-ios-trash links-detail"></i><i class="ion-arrow-down-c links-detail"></i><i class="ion-arrow-up-c links-detail"></i></div></section>';
+
+                btnHtml = '<section class="editor" id="8"><a href="https://tickets.london/gt/event/warner-bros-studio-tour-london-the-making-of-harry-potter-with-return-transportation/-/321-20190516" class="button-linkCTA"><div class="red-button"><p>Buy ticket</p></div></a><div class="buttons"><i class="ion-edit links-btnsCTA"></i><i class="ion-ios-trash links-btnsCTA"></i></div></section>';
+
+                document.querySelector(DOMStrings.generatedContent).insertAdjacentHTML('beforeend', html);
+                document.querySelector(DOMStrings.generatedButtons).insertAdjacentHTML('beforeend', btnHtml);
             }
 
             
@@ -678,6 +688,7 @@ var UIController = function () {
             document.getElementById(DOMStrings.saveImgButton).style.display = 'none';
             document.getElementById(DOMStrings.saveLinksButton).style.display = 'none';
             document.getElementById(DOMStrings.btnSave).style.display = 'none';
+            document.getElementById(DOMStrings.tableAddBtn).style.display = 'block';
         },
 
         clearFields: function() {
@@ -907,19 +918,60 @@ var combiController = (function (editCtrl, UICtrl) {
 
             document.querySelector(DOM.clearDisplay).addEventListener('click', function() {
                 document.querySelector(DOM.displayBackdrop).style.display = 'grid';
+                document.getElementById(DOM.displayMsgOk).style.display = 'none';
+                document.getElementById(DOM.displayMsg).innerHTML = 'Are you really want to delete this template?';
                 document.querySelector(DOM.displayBackdropBtns).addEventListener('click', function(event) {
                     if (event.target.id === DOM.displayMsgYes) {
                         clearDislayResult();
                         document.querySelector(DOM.displayBackdrop).style.display = 'none';
+                        document.getElementById(DOM.displayMsgOk).style.display = 'block';
                     } else if (event.target.id === DOM.displayMsgNo) {
                         document.querySelector(DOM.displayBackdrop).style.display = 'none';
+                        document.getElementById(DOM.displayMsgOk).style.display = 'block';
                     }
                 });
+                
             });
 
+            document.querySelector(DOM.saveToLoacalStorege).addEventListener('click', function(event) {
+                if (localStorage.getItem('savedContent') !== null) {
+                    document.querySelector(DOM.displayBackdrop).style.display = 'grid';
+                    document.getElementById(DOM.displayMsgOk).style.display = 'none';
+                    document.getElementById(DOM.displayMsg).innerHTML = 'Previous saved template will be deleted. Are you sure that you want to save this template?';
+                document.querySelector(DOM.displayBackdropBtns).addEventListener('click', function(event) {    
+                    if (event.target.id === DOM.displayMsgYes) {
+                        saveToLoacalStorege();
+                        document.querySelector(DOM.displayBackdrop).style.display = 'none';
+                        document.getElementById(DOM.displayMsgOk).style.display = 'block';
+                    } else if (event.target.id === DOM.displayMsgNo) {
+                        document.querySelector(DOM.displayBackdrop).style.display = 'none';
+                        document.getElementById(DOM.displayMsgOk).style.display = 'block';
+                    }
+                });
+                } else {
+                    saveToLoacalStorege();
+                    document.querySelector(DOM.displayBackdrop).style.display = 'grid';
+                    document.getElementById(DOM.displayMsg).innerHTML = 'This template was copied. Next time you open the HTML editor or if you refresh the page, this template will be loaded with the page.';
+                    document.getElementById(DOM.displayMsgNo).style.display = 'none';
+                    document.getElementById(DOM.displayMsgYes).style.display = 'none';
+                    document.querySelector(DOM.displayBackdropBtns).addEventListener('click', function(event) {
+                        if (event.target.id === DOM.displayMsgOk) {
+                            document.querySelector(DOM.displayBackdrop).style.display = 'none';
+                            document.getElementById(DOM.displayMsgNo).style.display = 'block';
+                            document.getElementById(DOM.displayMsgYes).style.display = 'block';
+                }
+                });
+                }
+                
+            });
+
+            
+            returnLocalStoregeContent();
+            
+            
             };
 
-            document.querySelector(DOM.saveToLoacalStorege).addEventListener('click', saveToLoacalStorege);
+            
             
         
         
@@ -1453,41 +1505,55 @@ var combiController = (function (editCtrl, UICtrl) {
         
     };
 
-    var ctrlCreateTemplate = function(templateName) {
-        var rowCounter;
-        
-        UIController.setAddBtnBlock();
-        UIController.clearFields();
-        editCtrl.clearData();
-
-        if (templateName === 'space' || templateName === 'mars') {
-            rowCounter = 10;
-        } else if (templateName === 'moon' || templateName === 'saturn') {
-            rowCounter = 6;
-        } 
+    var ctrlGenerateTemplID = function () {
+        var rowCounter, contentLength, btnsLength;
+        contentLength = document.querySelector(DOM.generatedContent).children.length;
+        btnsLength = document.querySelector(DOM.generatedButtons).children.length;
+        rowCounter = contentLength + btnsLength;
 
         for (var i = 0; i < rowCounter; i++) {
             editCtrl.addPageElement('template row');
         }
+    }
 
+    var ctrlCreateTemplate = function(templateName) {
+        
+        
+        UIController.setAddBtnBlock();
+        UIController.clearFields();
+        editCtrl.clearData();
         UIController.addTemplate(templateName);
+        ctrlGenerateTemplID();
+        
     };
 
     var clearDislayResult = function () {
         document.querySelector(DOM.generatedContent).innerHTML = '';
         document.querySelector(DOM.generatedButtons).innerHTML = '';
         editCtrl.clearData();
+        setBtnDisplayNone();
+        UIController.setAddBtnBlock();
     };
 
     var saveToLoacalStorege = function() {
         var obj;
-        obj = document.querySelector(DOM.generatedContent).innerHTML;
+        content = document.querySelector(DOM.generatedContent).innerHTML;
+        buttons = document.querySelector(DOM.generatedButtons).innerHTML;
         localStorage.clear();
-        localStorage.setItem('savedHTML', obj);
+        localStorage.setItem('savedContent', content);
+        localStorage.setItem('savedButtons', buttons);
     };
 
     var returnLocalStoregeContent = function() {
-        document.querySelector(DOM.generatedContent).innerHTML = localStorage.getItem('savedHTML');
+        if(localStorage.getItem('savedContent') !== null) {
+            document.querySelector(DOM.generatedContent).innerHTML = localStorage.getItem('savedContent');
+            document.querySelector(DOM.generatedButtons).innerHTML = localStorage.getItem('savedButtons');
+            ctrlGenerateTemplID();
+        } else {
+            console.log('There are no saved tempaltes');
+        }
+        
+        
     };
 
     var setDisplayNone = function() {
@@ -1510,13 +1576,15 @@ var combiController = (function (editCtrl, UICtrl) {
         document.getElementById(DOM.saveLinksButton).style.display = 'none';
         document.getElementById(DOM.btnAdd).style.display = 'none';
         document.getElementById(DOM.btnSave).style.display = 'none';
+        document.getElementById(DOM.tableAddBtn).style.display = 'none';
+        document.getElementById(DOM.tableSaveBtn).style.display = 'none';
+
     }
 
     return {
         init: function () {
             console.log('Application has started.');
             setEventListeners();
-            returnLocalStoregeContent();
             /*
             setTimeout(() => {
                 let textData = localStorage.getItem('Text') || null;
