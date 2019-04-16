@@ -980,6 +980,8 @@ var combiController = (function (editCtrl, UICtrl) {
         var type;
         type = UIController.getTableType();
         UIController.displayTableFields(type.type);
+        document.getElementById(DOM.tableAddBtn).style.display = 'block';  
+        document.getElementById(DOM.tableSaveBtn).style.display = 'none';
     };
 
     var ctrlAddTableInputs = function() {
