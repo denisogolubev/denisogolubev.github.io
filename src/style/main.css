@@ -361,7 +361,6 @@ strong {
 .display-button__download {
     grid-area: button;
     width: 12rem;
-    margin-left: 2rem;
     padding: 1rem 0.5rem;
     border: 0.1rem solid #e9e8e8;
     border-radius: 0.2rem;
@@ -376,7 +375,22 @@ strong {
 .display-clear {
     grid-area: button;
     padding: 1rem 0.5rem;
-    width: 12rem;
+    width: 10rem;
+    border: 0.1rem solid #e9e8e8;
+    border-radius: 0.2rem;
+    background-color: #0e1621;
+    color: #e9e8e8;
+    font-size: 1.3rem;
+    outline: none;
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.display-save {
+    grid-area: button;
+    padding: 1rem 0.5rem;
+    margin: 0 0.5rem;
+    width: 10rem;
     border: 0.1rem solid #e9e8e8;
     border-radius: 0.2rem;
     background-color: #0e1621;
@@ -388,7 +402,8 @@ strong {
 }
 
 .display-button__download:hover,
-.display-clear:hover {
+.display-clear:hover,
+.display-save:hover {
     background-color: #2b5278;
     border-color: #e9e8e8;
     padding: 1rem 0.7rem;

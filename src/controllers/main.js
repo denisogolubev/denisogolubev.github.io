@@ -200,7 +200,8 @@ var UIController = function () {
         displayBackdrop: '.display-backdrop',
         displayBackdropBtns: '.display-backdrop__msg--btns',
         displayMsgNo: 'msg-no',
-        displayMsgYes: 'msg-yes'
+        displayMsgYes: 'msg-yes',
+        saveToLoacalStorege: '.display-save'
     };
 
     return {
@@ -917,6 +918,8 @@ var combiController = (function (editCtrl, UICtrl) {
             });
 
             };
+
+            document.querySelector(DOM.saveToLoacalStorege).addEventListener('click', saveToLoacalStorege);
             
         
         
@@ -1476,6 +1479,17 @@ var combiController = (function (editCtrl, UICtrl) {
         editCtrl.clearData();
     };
 
+    var saveToLoacalStorege = function() {
+        var obj;
+        obj = document.querySelector(DOM.generatedContent).innerHTML;
+        localStorage.clear();
+        localStorage.setItem('savedHTML', obj);
+    };
+
+    var returnLocalStoregeContent = function() {
+        document.querySelector(DOM.generatedContent).innerHTML = localStorage.getItem('savedHTML');
+    };
+
     var setDisplayNone = function() {
         document.querySelector(DOM.imgCategory).style.display = 'none';
         document.querySelector(DOM.textCategory).style.display = 'none';
@@ -1502,6 +1516,7 @@ var combiController = (function (editCtrl, UICtrl) {
         init: function () {
             console.log('Application has started.');
             setEventListeners();
+            returnLocalStoregeContent();
             /*
             setTimeout(() => {
                 let textData = localStorage.getItem('Text') || null;
