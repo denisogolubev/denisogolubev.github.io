@@ -37,11 +37,29 @@ main {
     grid-area: display;
     display: grid;
     grid-template-rows: 90% 10%;
-    grid-template-areas: "device"
+    grid-template-areas: 
+                         "device"
                          "button";
     justify-items: center;
     align-items: center;
 }
+
+/* .design-type {
+    grid-area: design-type;
+    display: flex;
+    align-items: center;
+}
+
+.design-type > div {
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.design-active {
+    background-color: #2b5278;
+    border: 1px solid #e9e8e8;
+    border-radius: 4px;
+} */
 
 .display-backdrop {
     display: none;
@@ -96,7 +114,8 @@ main {
 .display-device {
     width: 375px;
     height: 667px;
-    background-color: #F4F4F4;
+    /* background-color: #F4F4F4; */
+    background-color: #FFFFFF;
     grid-area: device;
     outline: none;
     color: #333;
@@ -117,15 +136,15 @@ main {
 
 .display-device__content {
     background-color: #FFFFFF;
-    margin: 0.9375rem;
+    /* margin: 0.9375rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.35);
-    padding: 0.9375rem;
+    padding: 0.9375rem; */
 
 }
 
 .display-device__buttons {
-    margin-top: 1.25rem;
-    padding: 0 1.875rem 1.25rem 1.875rem;
+    margin-top: 1.5rem;
+    /* padding: 0 1.875rem 1.25rem 1.875rem; */
 }
 
 .editor {
@@ -173,6 +192,16 @@ main {
 /*Классы для выгрузки НАЧАЛО*/
 
 
+.content-header,
+.content-simpletext,
+.content-simpletext__secondary,
+.content-simpletext__bold,
+.footer,
+.more-details,
+.download-list,
+.table {
+    padding: 0 0.9375rem;
+}
 
 .content-header {
     margin: 0.9375rem 0;
@@ -190,6 +219,7 @@ main {
     margin: 0.5rem 0;
     font-size: 1rem;
     line-height: 1.3rem;
+    color: #666666;
 }
 
 .content-simpletext__bold {
@@ -232,12 +262,12 @@ strong {
 
 .separator {
     border-top: 1px solid #CCCCCC;
-    margin: 1.25rem 0;
+    margin: 1.25rem 0.9375rem;
 }
 
 .single-separator {
     border-top: 1px solid #CCCCCC;
-    margin: 1.25rem 0;
+    margin: 1.25rem 0.9375rem;
 }
 
 .more-details {
@@ -261,7 +291,7 @@ strong {
     display: flex;
     list-style: none;
     align-items: center;
-    padding: 0;
+    /* padding: 0; */
     margin: 0;
 }
 
@@ -299,21 +329,38 @@ strong {
 }
 
 .grey-button {
+    margin: 0 0.9375rem;
     display: flex;
     background-color: #666666;
-    width: 100%;
     height: 2.8125rem;
     align-items: center;
     justify-content: center;
+    border-radius: 6px;
+    font-size: 18px;
 }
 
 .red-button {
+    margin: 0 0.9375rem;
     display: flex;
     background-color: #E60000;
-    width: 100%;
     height: 2.8125rem;
     align-items: center;
     justify-content: center;
+    border-radius: 6px;
+    font-size: 18px;
+}
+
+.tertiary-button {
+    color: #333;
+    margin: 0 0.9375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    height: 2.8125rem;
+    border: 1px solid #999;
+    border-radius: 6px;
+    font-size: 18px;
 }
 
 .table {
@@ -354,6 +401,17 @@ strong {
 }
 
 /*Классы для выгрузки КОНЕЦ*/
+
+/* .new-design {
+    background-color: #FFFFFF;
+}
+
+.new-design .display-device__content {
+    margin: 0;
+    box-shadow: none;
+    padding: 0;
+    height: 100%;
+} */
 
 .display-buttons {
     display: flex;
